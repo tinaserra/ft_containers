@@ -12,7 +12,7 @@ Les containers C++, tout simplement
 * [enable_if](https://www.cplusplus.com/reference/type_traits/enable_if/?kw=enable_if)
 * [is_integral](https://www.cplusplus.com/reference/type_traits/is_integral/?kw=is_integral)
 * [equal](https://www.cplusplus.com/reference/algorithm/equal/?kw=equal) et/ou [lexicographical_compare](https://www.cplusplus.com/reference/algorithm/lexicographical_compare/?kw=lexicographical_compare)
-* [std::pair](https://www.cplusplus.com/reference/utility/pair/pair/)
+* std::pair [exemple](https://www.cplusplus.com/reference/utility/pair/pair/) | [utility](https://www.cplusplus.com/reference/utility/pair/?kw=pair)
 * [std::make_pair](https://www.cplusplus.com/reference/utility/make_pair/?kw=make_pair)
 
 ## Tester
