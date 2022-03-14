@@ -8,12 +8,12 @@ Les containers C++, tout simplement
 * [stack]
 
 * [iterators_traits](https://www.cplusplus.com/reference/iterator/iterator_traits/)
-* [reverse_iterator]
-* [enable_if]
-* [is_integral]
-* [equal] et/ou [lexicographical_compare]
+* [reverse_iterator](https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator)
+* [enable_if](https://www.cplusplus.com/reference/type_traits/enable_if/?kw=enable_if)
+* [is_integral](https://www.cplusplus.com/reference/type_traits/is_integral/?kw=is_integral)
+* [equal](https://www.cplusplus.com/reference/algorithm/equal/?kw=equal) et/ou [lexicographical_compare](https://www.cplusplus.com/reference/algorithm/lexicographical_compare/?kw=lexicographical_compare)
 * [std::pair](https://www.cplusplus.com/reference/utility/pair/pair/)
-* [std::make_pair]
+* [std::make_pair](https://www.cplusplus.com/reference/utility/make_pair/?kw=make_pair)
 
 ## Tester
 
