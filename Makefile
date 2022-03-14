@@ -6,19 +6,27 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/03/14 17:07:14 by vserra           ###   ########.fr        #
+#    Updated: 2022/03/14 17:58:28 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.cpp
+SRC =	main.cpp \
+		iterator_traits.cpp \
+		reverse_iterator.cpp \
+		enable_if.cpp \
+		is_integral.cpp \
+		equal.cpp \
+		lexicographical_compare.cpp \
+		pair.cpp \
+		make_pair.cpp
 
 NAME = ft_containers
 
 # override -> permet de reecrire la suite de la variable
-override CXXFLAGS += -std=c++98 -Wall -Wextra -Werror -MMD
+override CXXFLAGS += -Wall -Wextra -Werror -MMD -std=c++11
 
 OBJ_DIR = obj
-SRC_DIR = .
+SRC_DIR = _main_test
 INC_DIR = .
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))
