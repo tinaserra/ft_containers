@@ -7,6 +7,7 @@ Les containers C++, tout simplement
 * [map]
 * [stack]
 
+utils :
 * [iterator_traits](https://www.cplusplus.com/reference/iterator/iterator_traits/)
 * [reverse_iterator](https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator)
 * [enable_if](https://www.cplusplus.com/reference/type_traits/enable_if/?kw=enable_if)
@@ -19,3 +20,78 @@ Les containers C++, tout simplement
 ## Tester
 
 [mli](https://github.com/mli42/containers_test)
+
+## 1. commencer avec les utils
+
+### 1.1 is_integral
+
+On demarre par `is_integral`. Il permet d'identifier si T est un type intégral:
+```
+bool
+char
+char16_t
+char32_t
+wchar_t
+signed char
+short int
+int
+long int
+long long int
+unsigned char
+unsigned short int
+unsigned int
+unsigned long int
+unsigned long long int
+```
+
+* Ensuite on fait enable_if.
+
+### ```enable_if```
+
+on peut envoyer une condition dans enable_if qui va verifier le type d'un parametre envoye a une fonction, si cette condition est respectee, enable_if set une valeur a true.
+
+#### SFINAE
+
+```SFINAE``` *(Substitution Failure Is Not An Error)* est un mécanisme du compilateur pour ignorer certaines instanciations de fonction ou de classe qui ne compilent pas, sans pour autant émettre une erreur de compilation.
+
+exemple :
+```c++
+#include <iostream>
+#include <type_traits>
+#include "enable_if.hpp"
+
+// 1. the return type (bool) is only valid if T is an integral type:
+template <class T>
+typename std::enable_if<std::is_integral<T>::value,bool>::type
+  is_odd (T i) {return bool(i%2);}
+
+// 2. the second template argument is only valid if T is an integral type:
+template < class T,
+           class = typename std::enable_if<std::is_integral<T>::value>::type>
+bool is_even (T i) {return !bool(i%2);}
+
+class Woowoo {
+  public:
+    Woowoo() {};
+};
+
+int enable_if() {
+
+  short int i = 1;    // code does not compile if type of i is not integral
+  
+  Woowoo charles;
+
+  std::cout << std::boolalpha;
+  std::cout << "i is odd: " << is_odd(charles) << std::endl;
+  std::cout << "i is even: " << is_even(i) << std::endl;
+  return 0;
+}
+```
+
+on obtient le message :
+```sh
+ note: candidate template ignored: requirement 'std::is_integral<Woowoo>::value' was not satisfied [with T = Woowoo]
+```
+### 1.4 `iterator_traits`
+
+Permet de connaitre les propritetes d'un iterateur.
