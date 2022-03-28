@@ -71,7 +71,7 @@ Les containers C++, tout simplement
 * Utils <br/>
 | container                 | description | plus |
 | :------------------------ | :-- | :---- |
-| `iterator_traits`         | www | [iterator_traits](https://www.cplusplus.com/reference/iterator/iterator_traits/) |
+| `iterator_traits`         | wwwwwwwwwww | [iterator_traits](https://www.cplusplus.com/reference/iterator/iterator_traits/) |
 | `reverse_iterator`        | www | [reverse_iterator](https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator) |
 | `enable_if`               | www | [enable_if](https://www.cplusplus.com/reference/type_traits/enable_if/?kw=enable_if) |
 | `is_integral`             | www | [is_integral](https://www.cplusplus.com/reference/type_traits/is_integral/?kw=is_integral) |
