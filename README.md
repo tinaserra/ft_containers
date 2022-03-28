@@ -1,25 +1,77 @@
 # ft_containers
 Les containers C++, tout simplement
 
-## Sujet
-
-* [vector]
-* [map]
-* [stack]
-
-utils :
-* [iterator_traits](https://www.cplusplus.com/reference/iterator/iterator_traits/)
-* [reverse_iterator](https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator)
-* [enable_if](https://www.cplusplus.com/reference/type_traits/enable_if/?kw=enable_if)
-* [is_integral](https://www.cplusplus.com/reference/type_traits/is_integral/?kw=is_integral)
-* [equal](https://www.cplusplus.com/reference/algorithm/equal/?kw=equal) 
-* [lexicographical_compare](https://www.cplusplus.com/reference/algorithm/lexicographical_compare/?kw=lexicographical_compare)
-* std::pair [exemple](https://www.cplusplus.com/reference/utility/pair/pair/) | [utility](https://www.cplusplus.com/reference/utility/pair/?kw=pair)
-* [std::make_pair](https://www.cplusplus.com/reference/utility/make_pair/?kw=make_pair)
-
 ## Tester
 
 [mli](https://github.com/mli42/containers_test)
+
+## Sujet
+
+* [Vector]
+- [ ] Default constructor
+- [ ] Fill constructor
+- [ ] Range constructor
+- [ ] Copy constructor
+- [ ] Destructor
+  /* iterators */
+- [ ] `operator=`
+- [ ] `iterator begin`
+- [ ] `const_iterator begin`
+- [ ] `iterator end`
+- [ ] `const_iterator end`
+- [ ] `reverse_iterator rbegin`
+- [ ] `const_reverse_iterator rbegin`
+- [ ] `reverse_iterator rend`
+- [ ] `const_reverse_iterator rend`
+  /* capacity */
+- [ ] Function `size`
+- [ ] Function `max_size`
+- [ ] Function `resize`
+- [ ] Function `capacity`
+- [ ] Function `empty`
+- [ ] Function `reserve`
+  /* elemen access functions */
+- [ ] reference `operator[]`
+- [ ] const_reference `operator[]`
+- [ ] reference `at`
+- [ ] const_reference `at`
+- [ ] reference `front`
+- [ ] const_reference `front`
+- [ ] reference `back`
+- [ ] const_reference `back`
+  /* modifiers functions */
+- [ ] Range `assign`
+- [ ] Fill `assign`
+- [ ] `push_back`
+- [ ] `pop_back`
+- [ ] single element `insert`
+- [ ] fill `insert`
+- [ ] range `insert`
+- [ ] iterator `erase`
+- [ ] range `erase`
+- [ ] `swap`
+- [ ] `clear`
+  /* Acccessors */
+- [ ] get_allocator
+  /* operators */
+- [ ] `Operator ==`
+- [ ] `Operator !=`
+- [ ] `Operator <`
+- [ ] `Operator <=`
+- [ ] `Operator >`
+- [ ] `Operator >=`
+- [ ] No member Swap overload
+
+* Stack
+- [ ] 
+
+* Map
+- [ ] 
+
+* Utils
+| [iterator_traits](https://www.cplusplus.com/reference/iterator/iterator_traits/) | [reverse_iterator](https://www.cplusplus.com/reference/iterator/reverse_iterator/?kw=reverse_iterator) | [enable_if](https://www.cplusplus.com/reference/type_traits/enable_if/?kw=enable_if) | [is_integral](https://www.cplusplus.com/reference/type_traits/is_integral/?kw=is_integral) | [equal](https://www.cplusplus.com/reference/algorithm/equal/?kw=equal) | et/ou [lexicographical_compare](https://www.cplusplus.com/reference/algorithm/lexicographical_compare/?kw=lexicographical_compare) | std::pair [exemple](https://www.cplusplus.com/reference/utility/pair/pair/)  & [utility](https://www.cplusplus.com/reference/utility/pair/?kw=pair) | [std::make_pair](https://www.cplusplus.com/reference/utility/make_pair/?kw=make_pair) |
+| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
+| - [ ] | - [ ] | - [ ] | - [ ] | - [ ] | - [ ] | - [ ] | - [ ] |
 
 ## 1. commencer avec les utils
 
@@ -95,3 +147,6 @@ on obtient le message :
 ### 1.4 `iterator_traits`
 
 Permet de connaitre les propritetes d'un iterateur.
+
+
+## 2. Vector
