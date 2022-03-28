@@ -7,14 +7,15 @@ Les containers C++, tout simplement
 
 ## Sujet
 
-* [Vector]
-- [ ] Default constructor
-- [ ] Fill constructor
-- [ ] Range constructor
-- [ ] Copy constructor
-- [ ] Destructor
-  /* iterators */
-- [ ] `operator=`
+### Vector
+  /* Member functions */ [constructor](https://cplusplus.com/reference/vector/vector/vector/)
+- [x] Default constructor 
+- [x] Fill constructor
+- [x] Range constructor
+- [x] Copy constructor
+- [x] Destructor
+- [x] `operator=`
+  /* Iterators */
 - [ ] `iterator begin`
 - [ ] `const_iterator begin`
 - [ ] `iterator end`
@@ -23,14 +24,14 @@ Les containers C++, tout simplement
 - [ ] `const_reverse_iterator rbegin`
 - [ ] `reverse_iterator rend`
 - [ ] `const_reverse_iterator rend`
-  /* capacity */
+  /* Capacity */
 - [ ] Function `size`
 - [ ] Function `max_size`
 - [ ] Function `resize`
 - [ ] Function `capacity`
 - [ ] Function `empty`
 - [ ] Function `reserve`
-  /* elemen access functions */
+  /* Element access */
 - [ ] reference `operator[]`
 - [ ] const_reference `operator[]`
 - [ ] reference `at`
@@ -39,7 +40,7 @@ Les containers C++, tout simplement
 - [ ] const_reference `front`
 - [ ] reference `back`
 - [ ] const_reference `back`
-  /* modifiers functions */
+  /* Modifiers */
 - [ ] Range `assign`
 - [ ] Fill `assign`
 - [ ] `push_back`
@@ -50,10 +51,10 @@ Les containers C++, tout simplement
 - [ ] iterator `erase`
 - [ ] range `erase`
 - [ ] `swap`
-- [ ] `clear`
-  /* Acccessors */
+- [x] `clear`
+  /* Allocator */
 - [ ] get_allocator
-  /* operators */
+  /* Non-member function overloads */
 - [ ] `Operator ==`
 - [ ] `Operator !=`
 - [ ] `Operator <`
@@ -62,13 +63,13 @@ Les containers C++, tout simplement
 - [ ] `Operator >=`
 - [ ] No member Swap overload
 
-* Stack
+### Stack
 - [ ] une belle pile
 
-* Map
+### Map
 - [ ] une belle carte
 
-* Utils <br/>
+### Utils
 
 | container                 | description | plus |
 | :------------------------ | :---------- | :--- |
