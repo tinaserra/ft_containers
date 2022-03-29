@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/29 19:07:00 by vserra           ###   ########.fr       */
+/*   Updated: 2022/03/29 20:03:55 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ class vector
 		}
 
 		// Range constructor
-		template <class InputIterator>
-		vector (InputIterator first, InputIterator last,
+		template <class inputIterator>
+		vector (inputIterator first, inputIterator last,
 				const allocator_type& alloc = allocator_type(),
-				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+				typename ft::enable_if<!ft::is_integral<inputIterator>::value, inputIterator>::type* = NULL)
 		{
 			_alloc = alloc;
 			_size = ft::itDiff(first, last);
@@ -120,7 +120,7 @@ class vector
 			_alloc.deallocate(_start, _capacity);
 		}
 
-		// Operator=
+		// Assignation operator
 		vector &operator=(const vector& rhs)
 		{
 			if (*this == rhs)
@@ -129,7 +129,8 @@ class vector
 			this->insert(this->end(), rhs.begin(), rhs.end());
 			return *this;
 		}
-		
+
+
 		/* ------------------------------------------------------------------ */
 		/* ITERATORS                                                          */
 		/* ------------------------------------------------------------------ */
@@ -150,6 +151,7 @@ class vector
 		
 		const_reverse_iterator	rend() { return const_reverse_iterator(_start); }
 
+
 		/* ------------------------------------------------------------------ */
 		/* CAPACITY                                                           */
 		/* ------------------------------------------------------------------ */
@@ -163,6 +165,37 @@ class vector
 		/* ------------------------------------------------------------------ */
 		/* ELEMENT ACCESS                                                     */
 		/* ------------------------------------------------------------------ */
+
+		reference		operator[] (size_type n) { return (_start[n]); }
+
+		const_reference	operator[] (size_type n) const { return (_start[n]); }
+
+		reference		at (size_type n) {
+
+			if (n >= this->size()) {
+
+				throw std::out_of_range("Error : [at] out of range error");
+			}
+			return (_start[n]);
+		}
+
+		const_reference	at (size_type n) const
+		{
+			if (n >= this->size())
+			{
+				throw std::out_of_range("Error : [at] out of range error");
+			}
+			return (_start[n]);
+		}
+
+		reference		front() { return (*(_start)); }
+
+		const_reference	front() const { return (*(_start)); }
+
+		reference		back() { return (*(_end - 1)); }
+
+		const_reference	back() const { return (*(_end - 1)); }
+
 
 		/* ------------------------------------------------------------------ */
 		/* MODIFIERS                                                          */
@@ -180,6 +213,7 @@ class vector
 			_size = 0;
 		}
 
+	
 		/* ------------------------------------------------------------------ */
 		/* ALLOCATOR                                                          */
 		/* ------------------------------------------------------------------ */
