@@ -9,40 +9,32 @@ Les containers C++, tout simplement
 
 ### Iterators
 
-| Categorie                    | Operation | Descrition |
-| :--------------------------- | :-------- | :--------- |
-| `input_iterator_tag`         | `X b(a);`<br/>`a = b;`<br/>elem == rhs <br/>elem != rhs<br/>\*elem <br/>&elem<br/>++elem| constructible par copie, assignable par copie et destructible. |
-| `forward_iterator_tag`       | ++elem<br/>elem++<br/>\*elem++| |
-| `bidirectional_iterator_tag` | --elem<br/>elem--<br/>\*elem--| |
-| `random_access_iterator_tag` | iter + iter<br/>iter - iter<br/>elem + rhs<br/>rhs + elem<br/>elem - rhs<br/>rhs - elem<br/>elem < rhs<br/>elem > rhs<br/>elem <= rhs<br/>elem >= rhs<br/>elem += rhs<br/>elem -= rhs<br/>elem[]| |
-
 | Categorie                    | Operation   | Prototype  |
 | :--------------------------- | :---------- | :--------- |
-| `input_iterator_tag`         | `X b(a);`   | |
-|                              | `a = b`     | `vectorIterator &operator=(const vectorIterator& rhs)`|
-|                              | elem == rhs | `friend bool	operator==(vectorIterator const & lhs, vectorIterator const & rhs)`|
-|                              | elem != rhs | `friend bool	operator!=(vectorIterator const & lhs, vectorIterator const & rhs)`|
+| `input_iterator_tag`         | `X b(a);`   | constructeur par copie |
+|                              | `a = b`     | constructeur par assignation |
+|                              | elem = rhs     | `classIterator &operator=(const classIterator& rhs)`|
+|                              | elem == rhs | `friend bool	operator==(classIterator const & lhs, classIterator const & rhs)`|
+|                              | elem != rhs | `friend bool	operator!=(classIterator const & lhs, classIterator const & rhs)`|
 |                              | \*elem      | `reference	operator*(void) const` |
 |                              | &elem       | `pointer		operator->(void) const` |
-| `forward_iterator_tag`       | `X a;`      | |
-|                              | ++elem      | `vectorIterator	operator++(void)`|
-|                              | elem++      | `vectorIterator	operator++(int)`|
-|                              | \*elem++    | |
-| `bidirectional_iterator_tag` | --elem      | `vectorIterator&	operator--(void)`|
-|                              |elem--       | `vectorIterator	operator--(int)`|
-|                              | \*elem--    | |
-| `random_access_iterator_tag` | iter + iter | `friend difference_type	operator+(vectorIterator const &lhs, vectorIterator const &rhs)`|
-|                              | elem + rhs  | `vectorIterator	operator+(difference_type const & rhs) const`|
-|                              | rhs + elem  | `friend vectorIterator	operator+(difference_type n, vectorIterator const &rhs)` |
-|                              | iter - iter | `ffriend difference_type	operator-(vectorIterator const &lhs, vectorIterator const &rhs)`|
+| `forward_iterator_tag`       | `X a;`      | constructeur par defaut |
+|                              | ++elem      | `classIterator	operator++(void)`|
+|                              | elem++      | `classIterator	operator++(int)`|
+| `bidirectional_iterator_tag` | --elem      | `classIterator&	operator--(void)`|
+|                              |elem--       | `classIterator	operator--(int)`|
+| `random_access_iterator_tag` | iter + iter | `friend difference_type	operator+(classIterator const &lhs, classIterator const &rhs)`|
+|                              | elem + rhs  | `classIterator	operator+(difference_type const & rhs) const`|
+|                              | rhs + elem  | `friend classIterator	operator+(difference_type n, classIterator const &rhs)` |
+|                              | iter - iter | `ffriend difference_type	operator-(classIterator const &lhs, classIterator const &rhs)`|
 |                              | elem - rhs  | `difference_type		operator-(randomIterator b)` |
-|                              | rhs - elem  | `friend vectorIterator	operator-(difference_type n, vectorIterator const &rhs)`|
-|                              | elem < rhs  | `friend bool	operator<(vectorIterator const & lhs, vectorIterator const & rhs)`|
-|                              | elem > rhs  | `friend bool	operator>(vectorIterator const & lhs, vectorIterator const & rhs)`|
-|                              | elem <= rhs | `friend bool	operator<=(vectorIterator const & lhs, vectorIterator const & rhs)`|
-|                              | elem >= rhs | `friend bool	operator>=(vectorIterator const & lhs, vectorIterator const & rhs)`|
-|                              | elem += rhs | `vectorIterator			operator+=(difference_type rhs)`|
-|                              | elem -= rhs | `vectorIterator			operator-=(difference_type const & rhs)`|
+|                              | rhs - elem  | `friend classIterator	operator-(difference_type n, classIterator const &rhs)`|
+|                              | elem < rhs  | `friend bool	operator<(classIterator const & lhs, classIterator const & rhs)`|
+|                              | elem > rhs  | `friend bool	operator>(classIterator const & lhs, classIterator const & rhs)`|
+|                              | elem <= rhs | `friend bool	operator<=(classIterator const & lhs, classIterator const & rhs)`|
+|                              | elem >= rhs | `friend bool	operator>=(classIterator const & lhs, classIterator const & rhs)`|
+|                              | elem += rhs | `classIterator			operator+=(difference_type rhs)`|
+|                              | elem -= rhs | `classIterator			operator-=(difference_type const & rhs)`|
 |                              | elem[]      | `reference	operator[](difference_type value) const` |
 
 ### Vector
