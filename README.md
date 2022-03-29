@@ -36,14 +36,14 @@ Les containers C++, tout simplement
 - [ ] Function `reserve`
 
 #### Element access
-- [ ] reference `operator[]`
-- [ ] const_reference `operator[]`
-- [ ] reference `at`
-- [ ] const_reference `at`
-- [ ] reference `front`
-- [ ] const_reference `front`
-- [ ] reference `back`
-- [ ] const_reference `back`
+- [x] reference `operator[]`
+- [x] const_reference `operator[]`
+- [x] reference `at`
+- [x] const_reference `at`
+- [x] reference `front`
+- [x] const_reference `front`
+- [x] reference `back`
+- [x] const_reference `back`
 
 #### Modifiers
 - [ ] Range `assign`
@@ -119,3 +119,18 @@ Les containers C++, tout simplement
 |                              | elem -= rhs | `classIterator			operator-=(difference_type const & rhs)`|
 |                              | elem[]      | `reference	operator[](difference_type value) const` |
 
+### reverse iterator
+
+| member functions | non-member overloads |
+| :--------------- | :------------------- |
+| reverse_iterator::base | operator== |
+| reverse_iterator::operator* | operator!= |
+| reverse_iterator::operator+ | operator< |
+| reverse_iterator::operator++ | operator<= |
+| reverse_iterator::operator+= | operator> |
+| reverse_iterator::operator- | operator>= |
+| reverse_iterator::operator-- | operator- |
+| reverse_iterator::operator-= | operator+ |
+| reverse_iterator::operator-> | |
+| reverse_iterator::operator= | |
+| reverse_iterator::operator[] | |
