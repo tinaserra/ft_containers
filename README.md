@@ -16,6 +16,34 @@ Les containers C++, tout simplement
 | `bidirectional_iterator_tag` | --elem<br/>elem--<br/>\*elem--| |
 | `random_access_iterator_tag` | iter + iter<br/>iter - iter<br/>elem + rhs<br/>rhs + elem<br/>elem - rhs<br/>rhs - elem<br/>elem < rhs<br/>elem > rhs<br/>elem <= rhs<br/>elem >= rhs<br/>elem += rhs<br/>elem -= rhs<br/>elem[]| |
 
+| Categorie                    | Operation   | Descrition |
+| :--------------------------- | :---------- | :--------- |
+| `input_iterator_tag`         | `X b(a);`<br/>`a = b;`| constructible par copie, assignable par copie et destructible. |
+|                              | elem == rhs | |
+|                              | elem != rhs | |
+|                              | \*elem      | |
+|                              | &elem       | |
+|                              | ++elem      | |
+| `forward_iterator_tag`       | `X a;`      | constructible par defaut. |
+|                              | ++elem      | |
+|                              | elem++      | |
+|                              | \*elem++    | |
+| `bidirectional_iterator_tag` | --elem      | |
+|                              |elem--       | |
+|                              | \*elem--    | |
+| `random_access_iterator_tag` | iter + iter | |
+|                              | elem + rhs  | |
+|                              | rhs + elem  | |
+|                              | iter - iter | |
+|                              | elem - rhs  | |
+|                              | rhs - elem  | |
+|                              | elem < rhs  | |
+|                              | elem > rhs  | |
+|                              | elem <= rhs | |
+|                              | elem >= rhs | |
+|                              | elem += rhs | |
+|                              | elem -= rhs | |
+|                              | elem[]      | |
 
 a == b
 a != b
