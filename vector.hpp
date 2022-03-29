@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/28 18:11:39 by vserra           ###   ########.fr       */
+/*   Updated: 2022/03/29 19:07:00 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,19 +124,41 @@ class vector
 		vector &operator=(const vector& rhs)
 		{
 			if (*this == rhs)
-				return (*this);
+				return *this;
 			this->clear();
 			this->insert(this->end(), rhs.begin(), rhs.end());
-			return (*this);
+			return *this;
 		}
 		
 		/* ------------------------------------------------------------------ */
 		/* ITERATORS                                                          */
 		/* ------------------------------------------------------------------ */
 
+		iterator				begin() { return iterator(_start); }
+
+		const_iterator			begin() const { return const_iterator(_start); }
+
+		iterator				end() { return iterator(_end); }
+
+		const_iterator			end() const { return const_iterator(_end); }
+
+		reverse_iterator		rbegin() { return reverse_iterator(_end); }
+
+		const_reverse_iterator	rbegin() { return const_reverse_iterator(_end); }
+
+		reverse_iterator		rend() { return reverse_iterator(_start); }
+		
+		const_reverse_iterator	rend() { return const_reverse_iterator(_start); }
+
 		/* ------------------------------------------------------------------ */
 		/* CAPACITY                                                           */
 		/* ------------------------------------------------------------------ */
+
+		size_type	size() const { return _size; }
+
+		size_type	max_size() const { return _alloc.max_size(); }
+
+		
 
 		/* ------------------------------------------------------------------ */
 		/* ELEMENT ACCESS                                                     */
