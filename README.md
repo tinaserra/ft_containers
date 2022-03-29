@@ -7,15 +7,34 @@ Les containers C++, tout simplement
 
 ## Sujet
 
+### Iterators
+
+| Categorie                    | Operation | Descrition |
+| :--------------------------- | :-------- | :--------- |
+| `input_iterator_tag`         | `X b(a);`<br/>`a = b;`<br/>elem == rhs <br/>elem != rhs<br/>\*elem <br/>&elem<br/>++elem| constructible par copie, assignable par copie et destructible. |
+| `forward_iterator_tag`       | ++elem<br/>elem++<br/>\*elem++| |
+| `bidirectional_iterator_tag` | --elem<br/>elem--<br/>\*elem--| |
+| `random_access_iterator_tag` | iter + iter<br/>iter - iter<br/>elem + rhs<br/>rhs + elem<br/>elem - rhs<br/>rhs - elem<br/>elem < rhs<br/>elem > rhs<br/>elem <= rhs<br/>elem >= rhs<br/>elem += rhs<br/>elem -= rhs<br/>elem[]| |
+
+
+a == b
+a != b
+*a
+a->m
+++a
+(void)a++
+*a++
+
 ### Vector
-  /* Member functions */ [constructor](https://cplusplus.com/reference/vector/vector/vector/)
+#### Member functions [constructor](https://cplusplus.com/reference/vector/vector/vector/)
 - [x] Default constructor 
 - [x] Fill constructor
 - [x] Range constructor
 - [x] Copy constructor
 - [x] Destructor
 - [x] `operator=`
-  /* Iterators */
+
+#### Iterators
 - [ ] `iterator begin`
 - [ ] `const_iterator begin`
 - [ ] `iterator end`
@@ -24,14 +43,16 @@ Les containers C++, tout simplement
 - [ ] `const_reverse_iterator rbegin`
 - [ ] `reverse_iterator rend`
 - [ ] `const_reverse_iterator rend`
-  /* Capacity */
+
+#### Capacity
 - [ ] Function `size`
 - [ ] Function `max_size`
 - [ ] Function `resize`
 - [ ] Function `capacity`
 - [ ] Function `empty`
 - [ ] Function `reserve`
-  /* Element access */
+
+#### Element access
 - [ ] reference `operator[]`
 - [ ] const_reference `operator[]`
 - [ ] reference `at`
@@ -40,7 +61,8 @@ Les containers C++, tout simplement
 - [ ] const_reference `front`
 - [ ] reference `back`
 - [ ] const_reference `back`
-  /* Modifiers */
+
+#### Modifiers
 - [ ] Range `assign`
 - [ ] Fill `assign`
 - [ ] `push_back`
@@ -52,9 +74,11 @@ Les containers C++, tout simplement
 - [ ] range `erase`
 - [ ] `swap`
 - [x] `clear`
-  /* Allocator */
+
+#### Allocator
 - [ ] get_allocator
-  /* Non-member function overloads */
+
+#### Non-member function overloads
 - [ ] `Operator ==`
 - [ ] `Operator !=`
 - [ ] `Operator <`
