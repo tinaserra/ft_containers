@@ -16,42 +16,34 @@ Les containers C++, tout simplement
 | `bidirectional_iterator_tag` | --elem<br/>elem--<br/>\*elem--| |
 | `random_access_iterator_tag` | iter + iter<br/>iter - iter<br/>elem + rhs<br/>rhs + elem<br/>elem - rhs<br/>rhs - elem<br/>elem < rhs<br/>elem > rhs<br/>elem <= rhs<br/>elem >= rhs<br/>elem += rhs<br/>elem -= rhs<br/>elem[]| |
 
-| Categorie                    | Operation   | Descrition |
+| Categorie                    | Operation   | Prototype  |
 | :--------------------------- | :---------- | :--------- |
-| `input_iterator_tag`         | `X b(a);`<br/>`a = b;`| constructible par copie, assignable par copie et destructible. |
-|                              | elem == rhs | |
-|                              | elem != rhs | |
-|                              | \*elem      | |
-|                              | &elem       | |
-|                              | ++elem      | |
-| `forward_iterator_tag`       | `X a;`      | constructible par defaut. |
-|                              | ++elem      | |
-|                              | elem++      | |
+| `input_iterator_tag`         | `X b(a);`   | |
+|                              | `a = b`     | `vectorIterator &operator=(const vectorIterator& rhs)`|
+|                              | elem == rhs | `friend bool	operator==(vectorIterator const & lhs, vectorIterator const & rhs)`|
+|                              | elem != rhs | `friend bool	operator!=(vectorIterator const & lhs, vectorIterator const & rhs)`|
+|                              | \*elem      | `reference	operator*(void) const` |
+|                              | &elem       | `pointer		operator->(void) const` |
+| `forward_iterator_tag`       | `X a;`      | |
+|                              | ++elem      | `vectorIterator	operator++(void)`|
+|                              | elem++      | `vectorIterator	operator++(int)`|
 |                              | \*elem++    | |
-| `bidirectional_iterator_tag` | --elem      | |
-|                              |elem--       | |
+| `bidirectional_iterator_tag` | --elem      | `vectorIterator&	operator--(void)`|
+|                              |elem--       | `vectorIterator	operator--(int)`|
 |                              | \*elem--    | |
-| `random_access_iterator_tag` | iter + iter | |
-|                              | elem + rhs  | |
-|                              | rhs + elem  | |
-|                              | iter - iter | |
-|                              | elem - rhs  | |
-|                              | rhs - elem  | |
-|                              | elem < rhs  | |
-|                              | elem > rhs  | |
-|                              | elem <= rhs | |
-|                              | elem >= rhs | |
-|                              | elem += rhs | |
-|                              | elem -= rhs | |
-|                              | elem[]      | |
-
-a == b
-a != b
-*a
-a->m
-++a
-(void)a++
-*a++
+| `random_access_iterator_tag` | iter + iter | `friend difference_type	operator+(vectorIterator const &lhs, vectorIterator const &rhs)`|
+|                              | elem + rhs  | `vectorIterator	operator+(difference_type const & rhs) const`|
+|                              | rhs + elem  | `friend vectorIterator	operator+(difference_type n, vectorIterator const &rhs)` |
+|                              | iter - iter | `ffriend difference_type	operator-(vectorIterator const &lhs, vectorIterator const &rhs)`|
+|                              | elem - rhs  | `difference_type		operator-(randomIterator b)` |
+|                              | rhs - elem  | `friend vectorIterator	operator-(difference_type n, vectorIterator const &rhs)`|
+|                              | elem < rhs  | `friend bool	operator<(vectorIterator const & lhs, vectorIterator const & rhs)`|
+|                              | elem > rhs  | `friend bool	operator>(vectorIterator const & lhs, vectorIterator const & rhs)`|
+|                              | elem <= rhs | `friend bool	operator<=(vectorIterator const & lhs, vectorIterator const & rhs)`|
+|                              | elem >= rhs | `friend bool	operator>=(vectorIterator const & lhs, vectorIterator const & rhs)`|
+|                              | elem += rhs | `vectorIterator			operator+=(difference_type rhs)`|
+|                              | elem -= rhs | `vectorIterator			operator-=(difference_type const & rhs)`|
+|                              | elem[]      | `reference	operator[](difference_type value) const` |
 
 ### Vector
 #### Member functions [constructor](https://cplusplus.com/reference/vector/vector/vector/)
