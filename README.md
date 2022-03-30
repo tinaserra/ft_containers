@@ -121,7 +121,7 @@ Les containers C++, tout simplement
 
 ### reverse iterator
 
-c'est un peu l'inverse d'un iterator classique, mais attention il y a quelques subtilites, lis bien le man : [reverse_iterator](http://www.cplusplus.com/reference/iterator/reverse_iterator/reverse_iterator/).
+c'est un peu l'inverse d'un iterator classique, mais attention il y a quelques subtilites, lis bien le man : [reverse_iterator](http://www.cplusplus.com/reference/iterator/reverse_iterator/).
 
 **les fonctions a implementer:**
 | member functions | non-member overloads |
