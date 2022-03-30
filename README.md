@@ -126,16 +126,16 @@ c'est un peu l'inverse d'un iterator classique, mais attention il y a quelques s
 **les fonctions a implementer:**
 | member functions | non-member overloads |
 | :--------------- | :------------------- |
-| reverse_iterator::base | operator== |
-| reverse_iterator::operator* | operator!= |
-| reverse_iterator::operator+ | operator< |
-| reverse_iterator::operator++ | operator<= |
-| reverse_iterator::operator+= | operator> |
-| reverse_iterator::operator- | operator>= |
-| reverse_iterator::operator-- | operator- |
-| reverse_iterator::operator-= | operator+ |
-| reverse_iterator::operator-> | |
-| reverse_iterator::operator= | |
-| reverse_iterator::operator[] | |
+| [reverse_iterator::base](http://www.cplusplus.com/reference/iterator/reverse_iterator/base/) | [operator==] |
+| [reverse_iterator::operator*](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator*/) | [operator!=] |
+| [reverse_iterator::operator+](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator+/) | [operator<] |
+| [reverse_iterator::operator++](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator++/) (1) & (2) | [operator<=] |
+| [reverse_iterator::operator+=](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator+=/) | [operator>] |
+| [reverse_iterator::operator-](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator-/) | [operator>=] |
+| [reverse_iterator::operator--](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator--/) | [operator-] |
+| [reverse_iterator::operator-=](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator+-=/) | [operator+] |
+| [reverse_iterator::operator->](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator-%3E/) | |
+| [reverse_iterator::operator=](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator=/) | |
+| [reverse_iterator::operator[]](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator[]/) | |
 
 **les cas tricky :**

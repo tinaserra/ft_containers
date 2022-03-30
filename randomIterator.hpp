@@ -30,7 +30,7 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 
 		operator	randomIterator<const value_type>() const
 		{
-			return (randomIterator<const value_type>(this->_elem));
+			return (randomIterator<const value_type>(_elem));
 		};
 
 		/* ------------------------------------------------------------------ */
@@ -43,35 +43,35 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 			if (this == &rhs)
 				return (*this);
 			_elem = rhs._elem;
-			return (*this);
+			return *this;
 		}
 
 		/* elem == rhs */
 		friend bool	operator==(randomIterator const & lhs, randomIterator const & rhs)
 		{
 			if (lhs._elem == rhs._elem)
-				return (true);
-			return (false);
+				return true;
+			return false;
 		}
 
 		/* elem != rhs */
 		friend bool	operator!=(randomIterator const & lhs, randomIterator const & rhs)
 		{
 			if (lhs._elem != rhs._elem)
-				return (true);
-			return (false);
+				return true;
+			return false;
 		}
 
 		/* *elem */
 		reference	operator*(void) const
 		{
-			return (*_elem);
+			return *_elem;
 		}
 
 		/* &elem */
 		pointer		operator->(void) const
 		{
-			return (->_elem);
+			return ->_elem;
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -79,18 +79,18 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		/* ------------------------------------------------------------------ */
 
 		/* ++elem */
-		randomIterator	operator++(void)
+		randomIterator	operator++(void) // pre-incrementation
 		{
 			++(_elem);
-			return (*this);
+			return *this;
 		}
 
 		/* elem++ */
-		randomIterator	operator++(int)
+		randomIterator	operator++(int) // post-incrementation
 		{
 			randomIterator	tmp = (*this);
 			++(*this);
-			return (tmp);
+			return tmp;
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -98,18 +98,18 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		/* ------------------------------------------------------------------ */
 
 		/* --elem */
-		randomIterator&	operator--(void)
+		randomIterator&	operator--(void) // pre-decrementation
 		{
 			_elem--;
-			return (*this);
+			return *this;
 		}
 
 		/* elem-- */
-		randomIterator	operator--(int)
+		randomIterator	operator--(int) // post-decrementation
 		{
 			randomIterator	tmp = (*this);
 			--(*this);
-			return (tmp);
+			return tmp;
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -119,14 +119,14 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		/* Iter + Iter */
 		friend difference_type	operator+(randomIterator const &lhs, randomIterator const &rhs)
 		{
-			return (lhs._elem + rhs._elem);
+			return (lhs._elem + rhs._elem;)
 		};
 
 
 		/* elem + rhs */
 		randomIterator	operator+(difference_type const & rhs) const
 		{
-			return (this->_elem + rhs);
+			return (_elem + rhs);
 		}
 
 		/* rhs(Integral) + elem */
@@ -144,7 +144,7 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		/* elem - rhs */
 		randomIterator	operator-(difference_type const & rhs) const
 		{
-			return (this->_elem - rhs);
+			return (_elem - rhs);
 		}
 
 		/* rhs(Integral) - elem*/ 
@@ -157,62 +157,62 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		friend bool	operator<(randomIterator const & lhs, randomIterator const & rhs)
 		{
 			if (lhs._elem < rhs._elem)
-				return (true);
-			return (false);
+				return true;
+			return false;
 		}
 
 		/* elem > rhs */
 		friend bool	operator>(randomIterator const & lhs, randomIterator const & rhs)
 		{
 			if (lhs._elem > rhs._elem)
-				return (true);
-			return (false);
+				return true;
+			return false;
 		}
 
 		/* elem <= rhs */
 		friend bool	operator<=(randomIterator const & lhs, randomIterator const & rhs)
 		{
 			if (lhs._elem <= rhs._elem)
-				return (true);
-			return (false);
+				return true;
+			return false;
 		}
 
 		/* elem >= rhs */
 		friend bool	operator>=(randomIterator const & lhs, randomIterator const & rhs)
 		{
 			if (lhs._elem >= rhs._elem)
-				return (true);
-			return (false);
+				return true;
+			return false;
 		}
 
 		/* elem += rhs */
 		randomIterator	operator+=(difference_type rhs)
 		{
-			return(randomIterator(this->_elem += rhs));
+			return (randomIterator(_elem += rhs));
 		}
 
 		/* elem -= rhs */
 		randomIterator	operator-=(difference_type const & rhs)
 		{
-			return(randomIterator(this->_elem -= rhs));
+			return (randomIterator(_elem -= rhs));
 		}
 
 		/* elem + rhs */
 		difference_type		operator+(randomIterator b)
 		{
-			return (this->_elem + b._elem);
+			return (_elem + b._elem);
 		}
 
 		/* elem - rhs */
 		difference_type		operator-(randomIterator b)
 		{
-			return (this->_elem - b._elem);
+			return (_elem - b._elem);
 		}
 
 		/* elem[] */
 		reference	operator[](difference_type value) const
 		{
-			return (*(this->_elem + value));
+			return (*(_elem + value));
 		}
 };
 

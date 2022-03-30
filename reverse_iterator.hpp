@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:24:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/29 21:22:22 by vserra           ###   ########.fr       */
+/*   Updated: 2022/03/30 15:25:27 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 		//default
 		reverseIterator() : current() {}
 
-		//initialization
+		//initialization : on construit un itérateur inverse à partir d'un itérateur normal
 		explicit reverseIterator(iterator_type it) : current(it) {}
 
-		//copy
-		reverseIterator(reverseIterator const & it) : current(it.current) {}
+		//copy : Construit un itérateur inverse à partir d'un autre itérateur inverse
+		reverseIterator(reverseIterator const & rev_it) : current(rev_it.current) {}
 
-		//copy form InputIterator
+		//copy form InputIterator : on construit un itérateur inverse à partir d'un autre itérateur inverse
 		template<typename InputIterator> //template <class Iter>
-		reverseIterator(reverseIterator<InputIterator> const & it) : current(it.base()) {}
+		reverseIterator(reverseIterator<InputIterator> const & rev_it) : current(rev_it.base()) {}
 
 		/* ------------------------------------------------------------------ */
 		/* MEMBER FUNCTIONS                                                   */
@@ -59,9 +59,15 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 
 		pointer				operator->() const { return (&(operator*())); }
 
+		reference			operator*() const
+		{
+			Iterator tmp = current;
+			return *(--tmp);
+		}
+
 		reverseIterator		operator+(difference_type n) const
 		{
-			return (reverseIterator(current - n));
+			return reverseIterator(current - n);
 		}
 
 		reverseIterator		operator-(difference_type n) const
@@ -69,55 +75,49 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 			return reverseIterator(current + n);
 		}
 
-		reverseIterator&	operator++()
+		reverseIterator&	operator++() // pre-incrementation
 		{
 			--current;
-			return (*this);
+			return *this;
 		}
 
-		reverseIterator		operator++(int)
+		reverseIterator		operator++(int) // post-incrementation
 		{
 			reverseIterator tmp = (*this);
-
 			--current;
-			return (tmp);
+			// ++(*this);
+			return tmp;
 		}
 
 		reverseIterator&	operator--()
 		{
 			++current;
-			return (*this);
+			return *this;
 		}
 
 		reverseIterator		operator--(int)
 		{
 			reverseIterator tmp = (*this);
-
 			++current;
-			return (tmp);
-		}
-
-		reference			operator*() const
-		{
-			Iterator tmp = current;
-			return (*(--tmp));
+			// --(*this);
+			return tmp;
 		}
 
 		reverseIterator&	operator+=(difference_type n)
 		{
 			current -= n;
-			return (*this);
+			return *this;
 		}
 
 		reverseIterator&	operator-=(difference_type n)
 		{
 			current += n;
-			return (*this);
+			return *this;
 		}
 
 		reference			operator[](difference_type n) const
 		{
-			return (*(*this + n));
+			return *(*this + n);
 		}
 };
 
