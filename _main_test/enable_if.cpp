@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enable_if.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:36:24 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/23 18:41:48 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:37:46 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 #include <iostream>
 #include <type_traits>
 #include "enable_if.hpp"
+#include "is_integral.hpp"
 
 // 1. the return type (bool) is only valid if T is an integral type:
 template <class T>
-typename std::enable_if<std::is_integral<T>::value,bool>::type is_odd (T i)
+typename ft::enable_if<ft::is_integral<T>::value,bool>::type is_odd (T i)
 {
   return bool(i%2);
 }
 
 // 2. the second template argument is only valid if T is an integral type:
 template < class T,
-           class = typename std::enable_if<std::is_integral<T>::value>::type>
+           class = typename ft::enable_if<ft::is_integral<T>::value>::type>
 bool is_even (T i) {return !bool(i%2);}
 
 class nimportequoi {

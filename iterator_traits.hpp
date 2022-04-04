@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iterator_traits.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:22:31 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/25 21:52:38 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:04:58 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,17 @@ namespace ft
 	struct bidirectional_iterator_tag : public forward_iterator_tag {};
 	struct random_access_iterator_tag : public bidirectional_iterator_tag {};
 
-	// template <class Category,              // iterator::iterator_category
-    //       class T,                         // iterator::value_type
-    //       class Distance = ptrdiff_t,      // iterator::difference_type
-    //       class Pointer = T*,              // iterator::pointer
-    //       class Reference = T&             // iterator::reference
-    //       > class iterator;
-
 	template	<typename _Category,
-				typename _Tp,
 				typename _Distance = std::ptrdiff_t,
+				typename _Tp,
 				typename _Pointer = _Tp*,
 				typename _Reference = _Tp&>
 
 	struct iterator
 	{
 		typedef _Category	iterator_category;
-		typedef _Tp			value_type;
 		typedef _Distance	difference_type; // l'ecart entre deux poineurs
+		typedef _Tp			value_type;
 		typedef _Pointer	pointer;
 		typedef _Reference	reference;
 	};
@@ -60,8 +53,8 @@ namespace ft
 	template<typename _Iterator>
 	struct iterator_traits
 	{
-		typedef typename _Iterator::value_type			value_type;
 		typedef typename _Iterator::difference_type		difference_type;
+		typedef typename _Iterator::value_type			value_type;
 		typedef typename _Iterator::pointer				pointer;
 		typedef typename _Iterator::reference			reference;
 	};
@@ -71,8 +64,8 @@ namespace ft
 	struct iterator_traits<Tp*>
 	{
 		typedef random_access_iterator_tag	iterator_category;
-		typedef Tp							value_type;
 		typedef std::ptrdiff_t				difference_type;
+		typedef Tp							value_type;
 		typedef Tp*							pointer;
 		typedef Tp&							reference;
 	};
@@ -82,8 +75,8 @@ namespace ft
 	struct iterator_traits<const Tp*>
 	{
 		typedef random_access_iterator_tag	iterator_category;
-		typedef Tp							value_type;
 		typedef std::ptrdiff_t				difference_type;
+		typedef Tp							value_type;
 		typedef const Tp*					pointer;
 		typedef const Tp&					reference;
 	};
