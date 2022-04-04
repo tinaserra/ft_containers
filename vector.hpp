@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/29 20:03:55 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/04 09:11:07 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,25 @@ class vector
 		/* ------------------------------------------------------------------ */
 		/* MODIFIERS                                                          */
 		/* ------------------------------------------------------------------ */
+
+		//range (1)	
+		template <class InputIterator>
+		void assign (InputIterator first, InputIterator last)
+		{
+			this->clear();
+			difference_type n = ft::itDiff(first, last);
+			reserve(n);
+			while (first != last)
+			{
+				_alloc.construct(_start + _size, *first);
+				++first;
+				_size++;
+			}
+			_end = _start + _size;
+		}
+
+		// fill (2)	
+		void assign (size_type n, const value_type& val);
 
 		void clear()
 		{
