@@ -1,5 +1,5 @@
 # ft_containers
-Les containers C++, tout simplement
+Implementing containters Vector, Map and Stack from STL.
 
 ## Tester
 
@@ -7,32 +7,24 @@ Les containers C++, tout simplement
 
 ## Sujet
 
+Les containers C++, tout simplement.
 
 ### Vector
 
-(1) constructeur de conteneur vide (constructeur par défaut)
-Construit un conteneur vide , sans éléments.
-(2) constructeur de remplissage
-Construit un conteneur avec n éléments. Chaque élément est une copie de val.
-(3) constructeur de gamme
-Construit un conteneur avec autant d'éléments que la plage *[first, last]* , avec chaque élément construit à partir de son élément correspondant dans cette plage, dans le même ordre.
-(4) copier le constructeur
-Construit un conteneur avec une copie de chacun des éléments de x , dans le même ordre.
-
 |                  |  a implementer      | description |
 | :--------------- | :------------------ | :---------- |
-| Member functions |                     | |
+| Member functions |                     |             |
 | ✅               | Default constructor | Construit un conteneur vide, sans éléments. |
 | ✅               | Fill constructor    | Construit un conteneur avec *n* éléments. Chaque élément est une copie de *val*.|
-| ✅               | Range constructor   | Construit un conteneur avec autant d'éléments que la plage *[first, last]* , avec chaque élément construit à partir de son élément correspondant dans cette plage, dans le même ordre. |
+| ✅               | Range constructor   | Construit un conteneur avec autant d'éléments que la plage *[first, last]*, avec chaque élément construit à partir de son élément correspondant dans cette plage, dans le même ordre. |
 | ✅               | Copy constructor    | Construit un conteneur avec une copie de chacun des éléments de x , dans le même ordre.|
 | ✅               | Destructor          | Detruit le conteneur |
 | ✅               | `operator=`         | Affecte un nouveau contenu au conteneur, en remplaçant son contenu actuel et en modifiant sa taille en conséquence. |
 | Iterators        |                                 | |
-| ✅               | iterator `begin`<br/>const_iterator `begin`                | Renvoie un itérateur pointant vers le premier élément |
-| ✅               | iterator `end`<br/>const_iterator `end`                  | Renvoie un itérateur faisant référence à l'élément après la fin du vecteur.|
+| ✅               | iterator `begin`<br/>const_iterator `begin`                         | Renvoie un itérateur pointant vers le premier élément |
+| ✅               | iterator `end`<br/>const_iterator `end`                             | Renvoie un itérateur faisant référence à l'élément après la fin du vecteur.|
 | ✅               | reverse_iterator `rbegin`<br/>const_reverse_iterator `rbegin`       | Renvoie un reverse iterator pointant vers le dernier élément du vecteur (son début inverse).|
-| ✅               | reverse_iterator `rend`<br/>const_reverse_iterator `rend`         | Renvoie un reverse iterator pointant vers l'élément théorique précédant le premier élément du vecteur. |
+| ✅               | reverse_iterator `rend`<br/>const_reverse_iterator `rend`           | Renvoie un reverse iterator pointant vers l'élément théorique précédant le premier élément du vecteur. |
 | Capacity         |                    | |
 | ✅               | `size`             | Renvoie le nombre d'éléments reels dans le vecteur. |
 | ✅               | `max_size`         | Renvoie le nombre maximum d'éléments que le vecteur peut contenir (taille maximale potentielle). |
@@ -41,8 +33,8 @@ Construit un conteneur avec une copie de chacun des éléments de x , dans le m�
 | ✅               | `empty`            | Retourne *true* si la taille du vecteur est 0. |
 | ✅               | `reserve`          | Demande que la capacité vectorielle soit au moins suffisante pour contenir *n* éléments.|
 | Element access   |                              | |
-| ✅               | reference `operator[]`<br/>const_reference `operator[]` | Renvoie une référence de l'élément à la position *n*.
-| ✅               | reference `at`<br/>const_reference `at`              | Renvoie une référence de l'élément à la position *n*. lance une exception out_of_range.
+| ✅               | reference `operator[]`<br/>const_reference `operator[]`  | Renvoie une référence de l'élément à la position *n*.
+| ✅               | reference `at`<br/>const_reference `at`                  | Renvoie une référence de l'élément à la position *n*. lance une exception out_of_range.
 | ✅               | reference `front`<br/>const_reference `front`            | Renvoie une référence au premier élément |
 | ✅               | reference `back`<br/> const_reference `back`             | Renvoie une référence au dernier élément |
 | Modifiers        |                               | |
