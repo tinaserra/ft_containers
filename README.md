@@ -73,45 +73,45 @@ Les containers C++, tout simplement
 |                  |  a implementer      | description |
 | :--------------- | :------------------ | :---------- |
 | Member functions |                     | |
-|                  | Default constructor | |
-|                  | Fill constructor    | |
-|                  | Range constructor   | |
-|                  | Copy constructor    | |
-|                  | Destructor          | |
-|                  | `operator=`         | |
+| ✅               | Default constructor | |
+| ✅               | Fill constructor    | |
+| ✅               | Range constructor   | |
+| ✅               | Copy constructor    | |
+| ✅               | Destructor          | |
+| ✅               | `operator=`         | |
 | Iterators        |                                 | |
-|                  | `iterator begin`                | |
-|                  | `const_iterator begin`          | |
-|                  | `iterator end`                  | |
-|                  | `const_iterator end`            | |
-|                  | `reverse_iterator rbegin`       | |
-|                  | `const_reverse_iterator rbegin` | |
-|                  | `reverse_iterator rend`         | |
-|                  | `const_reverse_iterator rend`   | |
+| ✅               | `iterator begin`                | |
+| ✅               | `const_iterator begin`          | |
+| ✅               | `iterator end`                  | |
+| ✅               | `const_iterator end`            | |
+| ✅               | `reverse_iterator rbegin`       | |
+| ✅               | `const_reverse_iterator rbegin` | |
+| ✅               | `reverse_iterator rend`         | |
+| ✅               | `const_reverse_iterator rend`   | |
 | Capacity         |                    | |
-|                  | `size`             | |
-|                  | `max_size`         | |
-|                  | `resize`           | |
-|                  | `capacity`         | |
-|                  | `empty`            | |
-|                  | `reserve`          | |
+| ✅               | `size`             | |
+| ✅               | `max_size`         | |
+| ✅               | `resize`           | |
+| ✅               | `capacity`         | |
+| ✅               | `empty`            | |
+| ✅               | `reserve`          | |
 | Element access   |                              | |
-|                  | reference `operator[]`<br/>const_reference `operator[]` | Renvoie une référence de l'élément à la position `n`.
-|                  | reference `at`<br/>const_reference `at`              | Renvoie une référence de l'élément à la position `n`. lance une exception out_of_range.
-|                  | reference `front`<br/>const_reference `front`            | |
-|                  | reference `back`<br/> const_reference `back`             | |
+| ✅               | reference `operator[]`<br/>const_reference `operator[]` | Renvoie une référence de l'élément à la position `n`.
+| ✅               | reference `at`<br/>const_reference `at`              | Renvoie une référence de l'élément à la position `n`. lance une exception out_of_range.
+| ✅               | reference `front`<br/>const_reference `front`            | |
+| ✅               | reference `back`<br/> const_reference `back`             | |
 | Modifiers        |                               | |
-|                  | `assign`- range (1)           | |
-|                  | `assign` - fill (2)           | |
-|                  | `push_back`                   | |
-|                  | `pop_back`                    | |
+| ✅               | `assign`- range (1)           | |
+| ✅               | `assign` - fill (2)           | |
+| ✅               | `push_back`                   | |
+| ✅               | `pop_back`                    | |
 |                  | `insert` - single element (1) | |
 |                  | `insert` - fill (2)           | |
 |                  | `insert` - range (3)          | |
 |                  | `erase` - iterator (1)        | |
 |                  | `erase` - range (2)           | |
 |                  | `swap`                        | |
-|                  | `clear`                       | |
+| ✅               | `clear`                       | |
 | Allocator        |                         | |
 |                  | get_allocator           | |
 | Non-member function overloads |            | |
