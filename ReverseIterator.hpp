@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_iterator.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:24:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/03 18:23:24 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/04/06 16:34:47 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 		reverseIterator(reverseIterator const & rev_it) : current(rev_it.current) {}
 
 		//copy form InputIterator : on construit un itérateur inverse à partir d'un autre itérateur inverse
-		template<typename inputIterator> //template <class Iter>
-		reverseIterator(reverseIterator<inputIterator> const & rev_it) : current(rev_it.base()) {}
+		template<typename InputIterator> //template <class Iter>
+		reverseIterator(reverseIterator<InputIterator> const & rev_it) : current(rev_it.base()) {}
 
 		/* ------------------------------------------------------------------ */
 		/* MEMBER FUNCTIONS                                                   */
@@ -122,52 +122,52 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 /* NON-MEMBER FUNCTION OVERLOADS                                              */
 /* -------------------------------------------------------------------------- */
 
-template <typename inputIterator>
-bool operator==	(const reverseIterator<inputIterator>& lhs,
-					const reverseIterator<inputIterator>& rhs)
+template <typename InputIterator>
+bool operator==	(const reverseIterator<InputIterator>& lhs,
+					const reverseIterator<InputIterator>& rhs)
 {
 	return (lhs.base() == rhs.base());
 }
 
-template <typename inputIterator>
-bool operator!=	(const reverseIterator<inputIterator>& lhs,
-					const reverseIterator<inputIterator>& rhs)
+template <typename InputIterator>
+bool operator!=	(const reverseIterator<InputIterator>& lhs,
+					const reverseIterator<InputIterator>& rhs)
 {
 	return (!(lhs == rhs));
 }
 
-template <typename inputIterator>
-bool operator<	(const reverseIterator<inputIterator>& lhs,
-					const reverseIterator<inputIterator>& rhs)
+template <typename InputIterator>
+bool operator<	(const reverseIterator<InputIterator>& lhs,
+					const reverseIterator<InputIterator>& rhs)
 {
 	return (rhs.base() < lhs.base());
 }
 
-template <typename inputIterator>
-bool operator<=	(const reverseIterator<inputIterator>& lhs,
-					const reverseIterator<inputIterator>& rhs)
+template <typename InputIterator>
+bool operator<=	(const reverseIterator<InputIterator>& lhs,
+					const reverseIterator<InputIterator>& rhs)
 {
 	return (!(rhs < lhs));
 }
 
-template <typename inputIterator>
-bool operator>	(const reverseIterator<inputIterator>& lhs,
-					const reverseIterator<inputIterator>& rhs)
+template <typename InputIterator>
+bool operator>	(const reverseIterator<InputIterator>& lhs,
+					const reverseIterator<InputIterator>& rhs)
 {
 	return (rhs < lhs);
 }
 
-template <typename inputIterator>
-bool operator>=	(const reverseIterator<inputIterator>& lhs,
-					const reverseIterator<inputIterator>& rhs)
+template <typename InputIterator>
+bool operator>=	(const reverseIterator<InputIterator>& lhs,
+					const reverseIterator<InputIterator>& rhs)
 {
 	return (!(lhs < rhs));
 }
 
-template <typename inputIterator>
-typename reverseIterator<inputIterator>::difference_type operator- (
-		const reverseIterator<inputIterator>& lhs,
-		const reverseIterator<inputIterator>& rhs)
+template <typename InputIterator>
+typename reverseIterator<InputIterator>::difference_type operator- (
+		const reverseIterator<InputIterator>& lhs,
+		const reverseIterator<InputIterator>& rhs)
 {
 	return (rhs.base() - lhs.base());
 }

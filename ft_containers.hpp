@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:01:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/25 22:05:50 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/06 16:39:24 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@
 # include "enable_if.hpp"
 # include "is_integral.hpp"
 // # include "iterator_traits.hpp"
-// # include "vectorIterator.hpp"
-# include "reverse_iterator.hpp"
-// # include "utils.hpp"
+# include "RandomIterator.hpp"
+# include "ReverseIterator.hpp"
+# include "InputIterator.hpp"
 # include "vector.hpp"
 # include "stack.hpp"
 # include "pair.hpp"
 # include "make_pair.hpp"
 // # include "redBlackIterator.hpp"
 # include "map.hpp"
-// # include "set.hpp"
 
 #if (STD == 1)
 	#define NAMESP			std
