@@ -96,14 +96,10 @@ Les containers C++, tout simplement
 |                  | `empty`            | |
 |                  | `reserve`          | |
 | Element access   |                              | |
-|                  | reference `operator[]`       | Renvoie une référence de l'élément à la position `n`.
-|                  | const_reference `operator[]` | |
-|                  | reference `at`               | Renvoie une référence de l'élément à la position `n`. lance une exception out_of_range.
-|                  | const_reference `at`         | |
-|                  | reference `front`            | |
-|                  | const_reference `front`      | |
-|                  | reference `back`             | |
-|                  | const_reference `back`       | |
+|                  | reference `operator[]`<br/>const_reference `operator[]` | Renvoie une référence de l'élément à la position `n`.
+|                  | reference `at`<br/>const_reference `at`              | Renvoie une référence de l'élément à la position `n`. lance une exception out_of_range.
+|                  | reference `front`<br/>const_reference `front`            | |
+|                  | reference `back`<br/> const_reference `back`             | |
 | Modifiers        |                               | |
 |                  | `assign`- range (1)           | |
 |                  | `assign` - fill (2)           | |
