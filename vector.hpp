@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/05 19:45:32 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/04/06 16:35:19 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ class vector
 		}
 
 		// Range constructor
-		template <class inputIterator>
-		vector (inputIterator first, inputIterator last,
+		template <class InputIterator>
+		vector (InputIterator first, InputIterator last,
 				const allocator_type& alloc = allocator_type(),
-				typename ft::enable_if<!ft::is_integral<inputIterator>::value, inputIterator>::type* = NULL)
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 		{
 			_alloc = alloc;
 			_size = ft::itDiff(first, last);
@@ -162,9 +162,9 @@ class vector
 
 		size_type	capacity(void) const { return (_capacity); }
 
-		void		resize (size_type size, value_type val = value_type())
+		void		resize(size_type size, value_type val = value_type())
 		{
-			if (size < _size)
+			if (size < _size) // on reduit en supprimant les elements en trop
 			{
 				while (size < _size)
 				{
@@ -172,7 +172,7 @@ class vector
 					_alloc.destroy((_start + _size));
 				}
 			}
-			else
+			else // on ajoute des elements
 			{
 				if (size <= _capacity)
 					;
@@ -180,8 +180,8 @@ class vector
 					this->reserve(_size * 2);
 				else
 					this->reserve(size);
-				while (_size < size) {
-
+				while (_size < size)
+				{
 					_alloc.construct(_start + _size, val);
 					_size++;
 				}
@@ -196,17 +196,17 @@ class vector
 			return (false);
 		}
 
-		void		reserve (size_type capacity)
+		void		reserve(size_type capacity)
 		{
 			vector		res;
-			iterator	itBegin = this->begin();
-			iterator	itEnd = this->end();
+			iterator	it_begin = this->begin();
+			iterator	it_end = this->end();
 
 			if (capacity > this->max_size())
-				throw std::length_error("Error : Alloc size is greater than max_size");
+				throw std::length_error("Error : [reserve] Alloc size is greater than max_size");
 			if (capacity <= this->capacity())
 				return ;
-			difference_type len = ft::itDiff(itBegin, itEnd);
+			difference_type len = ft::itDiff(it_begin, it_end);
 			if (capacity < (size_t)len)
 				throw std::bad_alloc();
 			res._alloc = _alloc;
@@ -214,9 +214,9 @@ class vector
 			res._capacity = capacity;
 			res._start = res._alloc.allocate(capacity);
 			res._end = res._start + res._size;
-			for (size_type i = 0; itBegin != itEnd; ++itBegin)
+			for (size_type i = 0; it_begin != it_end; ++it_begin)
 			{
-				res._alloc.construct(res._start + i, *itBegin);
+				res._alloc.construct(res._start + i, *it_begin);
 				i++;
 			}
 			if (_start != NULL)
@@ -245,10 +245,10 @@ class vector
 
 		const_reference	operator[] (size_type n) const { return (_start[n]); }
 
-		reference		at (size_type n) {
-
-			if (n >= this->size()) {
-
+		reference		at (size_type n)
+		{
+			if (n >= this->size())
+			{
 				throw std::out_of_range("Error : [at] out of range error");
 			}
 			return (_start[n]);
@@ -327,6 +327,120 @@ class vector
 			}
 		}
 
+		// Insert single element (1)
+		iterator insert (iterator position, const value_type& val)
+		{
+			difference_type			newSize = ft::itDiff(this->begin(), position);
+
+			insert(position, 1, val);
+			return iterator(this->begin() + newSize);
+		}
+
+		// Insert fill (2)
+		void insert (iterator position, size_type n, const value_type& val)
+		{
+			difference_type			beginToPosition = ft::itDiff(this->begin(), position);
+			difference_type			beginToEnd = ft::itDiff(this->begin(), this->end());
+			difference_type			newSize = n;
+			iterator				previousEnd;
+			iterator				end;
+
+			this->resize(this->_size + newSize);
+
+			previousEnd = this->begin() + beginToEnd;
+			position = this->begin() + beginToPosition;
+			end = this->_start + this->_size;
+			this->_end = this->_start + this->_size;
+			while (previousEnd != position)
+				*(--end) = *(--previousEnd);
+			while (0 < n)
+			{
+				*position++ = val;
+				n--;
+			}
+		}
+
+		// Insert range (3)
+		template < class InputIterator >
+		void insert(iterator position, InputIterator first, InputIterator last,
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+		{
+			difference_type			beginToPosition = ft::itDiff(this->begin(), position);
+			difference_type			beginToEnd = ft::itDiff(this->begin(), this->end());
+			difference_type			newSize = ft::itDiff(first, last);
+			iterator				previousEnd;
+			iterator				end;
+
+			this->resize(this->_size + newSize);
+
+			previousEnd = this->begin() + beginToEnd;
+			position = this->begin() + beginToPosition;
+			end = this->end();
+			while (previousEnd != position)
+				*(--end) = *(--previousEnd);
+			while (first != last)
+			{
+				*position = *first;
+				position++;
+				first++;
+			}
+			this->_end = this->_start + this->_size;
+		}
+
+		// Iterator erase (1)
+		iterator erase(iterator position)
+		{
+			return (this->erase(position, position + 1));
+		}
+
+		// Range erase (2)
+		iterator erase(iterator first, iterator last)
+		{
+			size_type	rangeToDelete = ft::itDiff(first, last);
+			iterator	tmp = first;
+
+			while (last != this->end())
+			{
+				*first = *last;
+				++first;
+				++last;
+			}
+			for (size_type i = 0; i < rangeToDelete; i++)
+			{
+				this->_alloc.destroy((this->_start + this->_size));
+				this->_size--;
+				this->_end--;
+			}
+			return (tmp);
+		}
+
+		void swap(vector& x)
+		{
+			allocator_type	tmpAlloc;
+			size_type		tmpSize;
+			size_type		tmpCapacity;
+			pointer			tmpStart;
+			pointer			tmpEnd;
+
+			tmpAlloc = this->_alloc;
+			tmpSize = this->_size;
+			tmpCapacity = this->_capacity;
+			tmpStart = this->_start;
+			tmpEnd = this->_end;
+
+			this->_alloc = x._alloc;
+			this->_size = x._size;
+			this->_capacity = x._capacity;
+			this->_start = x._start;
+			this->_end = x._end;
+
+			x._alloc = tmpAlloc;
+			x._size = tmpSize;
+			x._capacity = tmpCapacity;
+			x._start = tmpStart;
+			x._end = tmpEnd;
+		}
+
 		void clear()
 		{
 			size_type len = size();
@@ -348,6 +462,69 @@ class vector
 /* -------------------------------------------------------------------------- */
 /* NON-MEMBER FUNCTION OVERLOADS                                              */
 /* -------------------------------------------------------------------------- */
+
+// Operator ==
+template <class T, class Alloc>
+bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs.size() == rhs.size())
+		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	return (false);
+}
+
+// Operator !=
+// a!=b -> !(a==b)
+template <class T, class Alloc>
+bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	return (!(lhs == rhs));
+}
+
+// Operator <
+template <class T, class Alloc>
+bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs != rhs)
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	return (false);
+}
+
+// Operator <=
+// a<=b -> !(b<a)
+template <class T, class Alloc>
+bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs == rhs)
+		return (true);
+	return (!(rhs < lhs));
+}
+
+// Operator >
+// a>b -> b<a
+template <class T, class Alloc>
+bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs == rhs)
+		return (false);
+	return (rhs < lhs);
+}
+
+// Operator >=
+// a>=b -> !(a<b)
+template <class T, class Alloc>
+bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+{
+	if (lhs == rhs)
+		return (true);
+	return (!(lhs < rhs));
+}
+
+// No member Swap overload
+template <class T, class Alloc>
+void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+{
+	x.swap(y);
+}
 
 };
 
