@@ -36,9 +36,9 @@ Les containers C++, tout simplement
 - [x] Function `reserve`
 
 #### Element access
-- [x] reference `operator[]`
+- [x] reference `operator[]`Renvoie une référence de l'élément à la position `n`.
 - [x] const_reference `operator[]`
-- [x] reference `at`
+- [x] reference `at` Renvoie une référence de l'élément à la position `n`. lance une exception out_of_range.
 - [x] const_reference `at`
 - [x] reference `front`
 - [x] const_reference `front`
@@ -46,15 +46,15 @@ Les containers C++, tout simplement
 - [x] const_reference `back`
 
 #### Modifiers
-- [x] Range `assign`
-- [x] Fill `assign`
+- [x] `assign`- range (1)
+- [x] `assign` - fill (2)
 - [x] `push_back`
 - [x] `pop_back`
-- [ ] single element `insert`
-- [ ] fill `insert`
-- [ ] range `insert`
-- [ ] iterator `erase`
-- [ ] range `erase`
+- [ ] `insert` - single element (1)
+- [ ] `insert` - fill (2)
+- [ ] `insert` - range (3)
+- [ ] `erase` - iterator (1)
+- [ ] `erase` - range (2)
 - [ ] `swap`
 - [x] `clear`
 
@@ -69,6 +69,16 @@ Les containers C++, tout simplement
 - [ ] `Operator >`
 - [ ] `Operator >=`
 - [ ] No member Swap overload
+
+|       | Member functions    |
+| :---- | :------------------ |
+| - [x] | Default constructor |
+| - [x] | Fill constructor    |
+| - [x] | Range constructor   |
+| - [x] | Copy constructor    |
+| - [x] | Destructor          |
+| - [x] | `operator=`         |
+
 
 ### Stack
 - [ ] une belle pile
