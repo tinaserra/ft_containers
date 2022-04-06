@@ -72,12 +72,12 @@ Les containers C++, tout simplement
 
 |       | Member functions    |
 | :---- | :------------------ |
-| \-[x] | Default constructor |
-| \-[x] | Fill constructor    |
-| \-[x] | Range constructor   |
-| \-[x] | Copy constructor    |
-| \-[x] | Destructor          |
-| \-[x] | `operator=`         |
+| [x]   | Default constructor |
+| [x]   | Fill constructor    |
+| [x]   | Range constructor   |
+| [x]   | Copy constructor    |
+| [x]   | Destructor          |
+| [x]   | `operator=`         |
 
 
 ### Stack
