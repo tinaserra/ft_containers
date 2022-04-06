@@ -71,7 +71,7 @@ Les containers C++, tout simplement
 - [ ] No member Swap overload
 
 |                  |  a implementer      | description |
-| :--------------- | :------------------ | |
+| :--------------- | :------------------ | :---------- |
 | Member functions |                     | |
 |                  | Default constructor | |
 |                  | Fill constructor    | |
