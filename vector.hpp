@@ -6,7 +6,7 @@
 /*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/04 09:11:07 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/04/05 19:45:32 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,82 @@ class vector
 
 		size_type	max_size() const { return _alloc.max_size(); }
 
-		
+		size_type	capacity(void) const { return (_capacity); }
+
+		void		resize (size_type size, value_type val = value_type())
+		{
+			if (size < _size)
+			{
+				while (size < _size)
+				{
+					_size--;
+					_alloc.destroy((_start + _size));
+				}
+			}
+			else
+			{
+				if (size <= _capacity)
+					;
+				else if (size <= _size * 2)
+					this->reserve(_size * 2);
+				else
+					this->reserve(size);
+				while (_size < size) {
+
+					_alloc.construct(_start + _size, val);
+					_size++;
+				}
+			}
+			_end = _start + _size;
+		}
+
+		bool		empty() const
+		{
+			if (_size == 0)
+				return (true);
+			return (false);
+		}
+
+		void		reserve (size_type capacity)
+		{
+			vector		res;
+			iterator	itBegin = this->begin();
+			iterator	itEnd = this->end();
+
+			if (capacity > this->max_size())
+				throw std::length_error("Error : Alloc size is greater than max_size");
+			if (capacity <= this->capacity())
+				return ;
+			difference_type len = ft::itDiff(itBegin, itEnd);
+			if (capacity < (size_t)len)
+				throw std::bad_alloc();
+			res._alloc = _alloc;
+			res._size = len;
+			res._capacity = capacity;
+			res._start = res._alloc.allocate(capacity);
+			res._end = res._start + res._size;
+			for (size_type i = 0; itBegin != itEnd; ++itBegin)
+			{
+				res._alloc.construct(res._start + i, *itBegin);
+				i++;
+			}
+			if (_start != NULL)
+			{
+				this->clear();
+				_alloc.deallocate(_start, _capacity);
+				_start = NULL;
+				_size = 0;
+				_capacity = 0;
+			}
+			_alloc = res._alloc;
+			_start = res._start;
+			_end = res._end;
+			_size = res._size;
+			_capacity = res._capacity;
+			res._start = NULL;
+			res._size = 0;
+			res._capacity = 0;
+		}
 
 		/* ------------------------------------------------------------------ */
 		/* ELEMENT ACCESS                                                     */
@@ -201,13 +276,13 @@ class vector
 		/* MODIFIERS                                                          */
 		/* ------------------------------------------------------------------ */
 
-		//range (1)	
+		// Assign range (1)
 		template <class InputIterator>
 		void assign (InputIterator first, InputIterator last)
 		{
 			this->clear();
 			difference_type n = ft::itDiff(first, last);
-			reserve(n);
+			this->reserve(n); // Demande que la capacité vectorielle soit au moins suffisante pour contenir n éléments
 			while (first != last)
 			{
 				_alloc.construct(_start + _size, *first);
@@ -217,8 +292,40 @@ class vector
 			_end = _start + _size;
 		}
 
-		// fill (2)	
-		void assign (size_type n, const value_type& val);
+		// Assign fill (2)
+		void assign (size_type n, const value_type& val)
+		{
+			this->clear();
+			this->reserve(n);
+			while (n != 0)
+			{
+				_alloc.construct(_start + _size, val);
+				_size++;
+				n--;
+			}
+			_end = _start + _size;
+		}
+
+		void push_back (const value_type& val)
+		{
+			if (_size == _capacity)
+				this->resize(_size + 1, val);
+			else
+			{
+				_alloc.construct(_start + _size, val);
+				_size++;
+			}
+			_end = _start + _size;
+		}
+
+		void pop_back()
+		{
+			if (this->empty() == false)
+			{
+				_alloc.destroy(--_end);
+				_size--;
+			}
+		}
 
 		void clear()
 		{
@@ -232,7 +339,6 @@ class vector
 			_size = 0;
 		}
 
-	
 		/* ------------------------------------------------------------------ */
 		/* ALLOCATOR                                                          */
 		/* ------------------------------------------------------------------ */

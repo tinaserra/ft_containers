@@ -30,10 +30,10 @@ Les containers C++, tout simplement
 #### Capacity
 - [x] Function `size`
 - [x] Function `max_size`
-- [ ] Function `resize`
-- [ ] Function `capacity`
-- [ ] Function `empty`
-- [ ] Function `reserve`
+- [x] Function `resize`
+- [x] Function `capacity`
+- [x] Function `empty`
+- [x] Function `reserve`
 
 #### Element access
 - [x] reference `operator[]`
@@ -46,10 +46,10 @@ Les containers C++, tout simplement
 - [x] const_reference `back`
 
 #### Modifiers
-- [ ] Range `assign`
-- [ ] Fill `assign`
-- [ ] `push_back`
-- [ ] `pop_back`
+- [x] Range `assign`
+- [x] Fill `assign`
+- [x] `push_back`
+- [x] `pop_back`
 - [ ] single element `insert`
 - [ ] fill `insert`
 - [ ] range `insert`
