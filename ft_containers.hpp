@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:01:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/06 16:39:24 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/06 17:51:38 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <map>
 
 # include "lexicographical_compare.hpp"
-// # include "equal_compare.hpp"
+# include "equal.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
-// # include "iterator_traits.hpp"
+# include "iterator_traits.hpp"
 # include "RandomIterator.hpp"
 # include "ReverseIterator.hpp"
 # include "InputIterator.hpp"
