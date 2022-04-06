@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:19:57 by vserra            #+#    #+#             */
-/*   Updated: 2022/03/17 17:39:14 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/05 19:05:09 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int lexicographical_compare();
 int make_pair();
 int pair();
 int reverse_iterator();
+int assign();
 
 int main() {
 
@@ -38,5 +39,7 @@ int main() {
     pair();
     std::cout << std::endl << "MAKE PAIR" << std::endl;
     make_pair();
+    std::cout << std::endl << "ASSIGN" << std::endl;
+    assign();
     return 0;
 }

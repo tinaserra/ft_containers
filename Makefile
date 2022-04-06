@@ -6,19 +6,20 @@
 #    By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/04/04 09:36:07 by tinaserra        ###   ########.fr        #
+#    Updated: 2022/04/05 19:37:04 by tinaserra        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	main.cpp \
-		iterator_traits.cpp \
-		reverse_iterator.cpp \
-		enable_if.cpp \
-		is_integral.cpp \
-		equal.cpp \
-		lexicographical_compare.cpp \
-		pair.cpp \
-		make_pair.cpp
+		utils_iterator_traits.cpp \
+		utils_reverse_iterator.cpp \
+		utils_enable_if.cpp \
+		utils_is_integral.cpp \
+		utils_equal.cpp \
+		utils_lexicographical_compare.cpp \
+		utils_pair.cpp \
+		utils_make_pair.cpp \
+		vector_assign.cpp
 
 NAME = ft_containers
 

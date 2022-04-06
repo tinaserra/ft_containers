@@ -6,7 +6,7 @@
 /*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 17:36:24 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/04 09:37:46 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/04/05 18:36:23 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typename ft::enable_if<ft::is_integral<T>::value,bool>::type is_odd (T i)
 
 // 2. the second template argument is only valid if T is an integral type:
 template < class T,
-           class = typename ft::enable_if<ft::is_integral<T>::value>::type>
+            class = typename ft::enable_if<ft::is_integral<T>::value>::type>
 bool is_even (T i) {return !bool(i%2);}
 
 class nimportequoi {
