@@ -9,110 +9,55 @@ Les containers C++, tout simplement
 
 
 ### Vector
-#### Member functions [constructor](https://cplusplus.com/reference/vector/vector/vector/)
-- [x] Default constructor 
-- [x] Fill constructor
-- [x] Range constructor
-- [x] Copy constructor
-- [x] Destructor
-- [x] `operator=`
 
-#### Iterators
-- [x] `iterator begin`
-- [x] `const_iterator begin`
-- [x] `iterator end`
-- [x] `const_iterator end`
-- [x] `reverse_iterator rbegin`
-- [x] `const_reverse_iterator rbegin`
-- [x] `reverse_iterator rend`
-- [x] `const_reverse_iterator rend`
-
-#### Capacity
-- [x] Function `size`
-- [x] Function `max_size`
-- [x] Function `resize`
-- [x] Function `capacity`
-- [x] Function `empty`
-- [x] Function `reserve`
-
-#### Element access
-- [x] reference `operator[]`Renvoie une référence de l'élément à la position `n`.
-- [x] const_reference `operator[]`
-- [x] reference `at` Renvoie une référence de l'élément à la position `n`. lance une exception out_of_range.
-- [x] const_reference `at`
-- [x] reference `front`
-- [x] const_reference `front`
-- [x] reference `back`
-- [x] const_reference `back`
-
-#### Modifiers
-- [x] `assign`- range (1)
-- [x] `assign` - fill (2)
-- [x] `push_back`
-- [x] `pop_back`
-- [ ] `insert` - single element (1)
-- [ ] `insert` - fill (2)
-- [ ] `insert` - range (3)
-- [ ] `erase` - iterator (1)
-- [ ] `erase` - range (2)
-- [ ] `swap`
-- [x] `clear`
-
-#### Allocator
-- [ ] get_allocator
-
-#### Non-member function overloads
-- [ ] `Operator ==`
-- [ ] `Operator !=`
-- [ ] `Operator <`
-- [ ] `Operator <=`
-- [ ] `Operator >`
-- [ ] `Operator >=`
-- [ ] No member Swap overload
+(1) constructeur de conteneur vide (constructeur par défaut)
+Construit un conteneur vide , sans éléments.
+(2) constructeur de remplissage
+Construit un conteneur avec n éléments. Chaque élément est une copie de val.
+(3) constructeur de gamme
+Construit un conteneur avec autant d'éléments que la plage *[first, last]* , avec chaque élément construit à partir de son élément correspondant dans cette plage, dans le même ordre.
+(4) copier le constructeur
+Construit un conteneur avec une copie de chacun des éléments de x , dans le même ordre.
 
 |                  |  a implementer      | description |
 | :--------------- | :------------------ | :---------- |
 | Member functions |                     | |
-| ✅               | Default constructor | |
-| ✅               | Fill constructor    | |
-| ✅               | Range constructor   | |
-| ✅               | Copy constructor    | |
-| ✅               | Destructor          | |
-| ✅               | `operator=`         | |
+| ✅               | Default constructor | Construit un conteneur vide, sans éléments. |
+| ✅               | Fill constructor    | Construit un conteneur avec *n* éléments. Chaque élément est une copie de *val*.|
+| ✅               | Range constructor   | Construit un conteneur avec autant d'éléments que la plage *[first, last]* , avec chaque élément construit à partir de son élément correspondant dans cette plage, dans le même ordre. |
+| ✅               | Copy constructor    | Construit un conteneur avec une copie de chacun des éléments de x , dans le même ordre.|
+| ✅               | Destructor          | Detruit le conteneur |
+| ✅               | `operator=`         | Affecte un nouveau contenu au conteneur, en remplaçant son contenu actuel et en modifiant sa taille en conséquence. |
 | Iterators        |                                 | |
-| ✅               | `iterator begin`                | |
-| ✅               | `const_iterator begin`          | |
-| ✅               | `iterator end`                  | |
-| ✅               | `const_iterator end`            | |
-| ✅               | `reverse_iterator rbegin`       | |
-| ✅               | `const_reverse_iterator rbegin` | |
-| ✅               | `reverse_iterator rend`         | |
-| ✅               | `const_reverse_iterator rend`   | |
+| ✅               | iterator `begin`<br/>const_iterator `begin`                | Renvoie un itérateur pointant vers le premier élément |
+| ✅               | iterator `end`<br/>const_iterator `end`                  | Renvoie un itérateur faisant référence à l'élément après la fin du vecteur.|
+| ✅               | reverse_iterator `rbegin`<br/>const_reverse_iterator `rbegin`       | Renvoie un reverse iterator pointant vers le dernier élément du vecteur (son début inverse).|
+| ✅               | reverse_iterator `rend`<br/>const_reverse_iterator `rend`         | Renvoie un reverse iterator pointant vers l'élément théorique précédant le premier élément du vecteur. |
 | Capacity         |                    | |
-| ✅               | `size`             | |
-| ✅               | `max_size`         | |
-| ✅               | `resize`           | |
-| ✅               | `capacity`         | |
-| ✅               | `empty`            | |
-| ✅               | `reserve`          | |
+| ✅               | `size`             | Renvoie le nombre d'éléments reels dans le vecteur. |
+| ✅               | `max_size`         | Renvoie le nombre maximum d'éléments que le vecteur peut contenir (taille maximale potentielle). |
+| ✅               | `resize`           | Redimensionne le conteneur afin qu'il contienne *n* éléments. |
+| ✅               | `capacity`         | Renvoie la taille de l'espace de stockage (nombre d'éléments) du vecteur. |
+| ✅               | `empty`            | Retourne *true* si la taille du vecteur est 0. |
+| ✅               | `reserve`          | Demande que la capacité vectorielle soit au moins suffisante pour contenir *n* éléments.|
 | Element access   |                              | |
-| ✅               | reference `operator[]`<br/>const_reference `operator[]` | Renvoie une référence de l'élément à la position `n`.
-| ✅               | reference `at`<br/>const_reference `at`              | Renvoie une référence de l'élément à la position `n`. lance une exception out_of_range.
-| ✅               | reference `front`<br/>const_reference `front`            | |
-| ✅               | reference `back`<br/> const_reference `back`             | |
+| ✅               | reference `operator[]`<br/>const_reference `operator[]` | Renvoie une référence de l'élément à la position *n*.
+| ✅               | reference `at`<br/>const_reference `at`              | Renvoie une référence de l'élément à la position *n*. lance une exception out_of_range.
+| ✅               | reference `front`<br/>const_reference `front`            | Renvoie une référence au premier élément |
+| ✅               | reference `back`<br/> const_reference `back`             | Renvoie une référence au dernier élément |
 | Modifiers        |                               | |
-| ✅               | `assign`- range (1)           | |
-| ✅               | `assign` - fill (2)           | |
-| ✅               | `push_back`                   | |
-| ✅               | `pop_back`                    | |
-|                  | `insert` - single element (1) | |
-|                  | `insert` - fill (2)           | |
-|                  | `insert` - range (3)          | |
-|                  | `erase` - iterator (1)        | |
-|                  | `erase` - range (2)           | |
-|                  | `swap`                        | |
-| ✅               | `clear`                       | |
-| Allocator        |                         | |
+| ✅               | `assign`- range (1)           | Remplace le contenu actuel par chacun des éléments de la plage entre first et last, dans le même ordre. Et modifie sa taille en conséquence.|
+| ✅               | `assign` - fill (2)           | Remplace le contenu actuel par *n* éléments, chacun initialisé à une copie de *val*. Et modifie sa taille en conséquence.|
+| ✅               | `push_back`                   | Ajoute un élément à la fin du vecteur (réallocation automatique si besoin).|
+| ✅               | `pop_back`                    | Supprime le dernier élément du vecteur, réduisant la taille du conteneur d'une unité.|
+|                  | `insert` - single element (1) | Insert un élément de valeur `val` à la position spécifiée.|
+|                  | `insert` - fill (2)           | Insert `n` nouveaux éléments de valeur `val` à la position spécifiée.|
+|                  | `insert` - range (3)          | Insert de nouveaux éléments de valeur `val` sur un rang spécifié.|
+|                  | `erase` - iterator (1)        | Supprime du vecteur un seul élément a la position demandee . |
+|                  | `erase` - range (2)           | Supprime du vecteur une plage d'éléments *[first, last]*.|
+|                  | `swap`                        | Échange le contenu du conteneur X par le contenu de Y Les tailles peuvent différer.|
+| ✅               | `clear`                       | Détruit tous les éléments du vecteur, laissant le conteneur avec une taille de 0 . |
+| Allocator        |                         | Renvoie une copie de l'objet d'allocation associé au vecteur . |
 |                  | get_allocator           | |
 | Non-member function overloads |            | |
 |                  | `Operator ==`           | |
