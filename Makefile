@@ -3,22 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+         #
+#    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/04/05 19:37:04 by tinaserra        ###   ########.fr        #
+#    Updated: 2022/04/07 20:25:05 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	main.cpp \
-		utils_iterator_traits.cpp \
-		utils_reverse_iterator.cpp \
-		utils_enable_if.cpp \
-		utils_is_integral.cpp \
-		utils_equal.cpp \
-		utils_lexicographical_compare.cpp \
-		utils_pair.cpp \
-		utils_make_pair.cpp \
+SRC =	main2.cpp \
+		vector_construction.cpp \
 		vector_assign.cpp
 
 NAME = ft_containers

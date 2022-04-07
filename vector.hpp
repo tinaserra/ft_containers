@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/06 17:51:07 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/07 20:29:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@ namespace ft {
 template < class T, class Alloc = std::allocator<T> >
 class vector
 {
-	private:
-
-		allocator_type	_alloc;
-		size_type		_size;
-		size_type		_capacity;
-		pointer			_start;
-		pointer			_end;
-
 	public:
 
 		typedef T												value_type;
@@ -145,11 +137,11 @@ class vector
 
 		reverse_iterator		rbegin() { return reverse_iterator(_end); }
 
-		const_reverse_iterator	rbegin() { return const_reverse_iterator(_end); }
+		const_reverse_iterator	rbegin() const { return const_reverse_iterator(_end); }
 
 		reverse_iterator		rend() { return reverse_iterator(_start); }
 		
-		const_reverse_iterator	rend() { return const_reverse_iterator(_start); }
+		const_reverse_iterator	rend() const { return const_reverse_iterator(_start); }
 
 
 		/* ------------------------------------------------------------------ */
@@ -278,32 +270,38 @@ class vector
 
 		// Assign range (1)
 		template <class InputIterator>
-		void assign (InputIterator first, InputIterator last)
+		void	assign(InputIterator first, InputIterator last,
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 		{
-			this->clear();
-			difference_type n = ft::itDiff(first, last);
-			this->reserve(n); // Demande que la capacité vectorielle soit au moins suffisante pour contenir n éléments
-			while (first != last)
+			difference_type dist = std::distance(first, last);
+			if (this->_capacity)
 			{
-				_alloc.construct(_start + _size, *first);
-				++first;
-				_size++;
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(_start + i);
+				_alloc.deallocate(_start, _capacity);
 			}
-			_end = _start + _size;
+			_capacity = 0;
+			_size = 0;
+			if (dist)
+			{
+				_check_range(dist);
+				_start = _alloc.allocate(dist);
+				_capacity = dist;
+			}
+			for (iterator i = begin(); i < begin() + dist; i++)
+				this->_alloc.construct(i, *first++);
+			this->_size = dist;
 		}
 
 		// Assign fill (2)
-		void assign (size_type n, const value_type& val)
+		void	assign(size_type n, const value_type& val)
 		{
-			this->clear();
-			this->reserve(n);
-			while (n != 0)
-			{
-				_alloc.construct(_start + _size, val);
-				_size++;
-				n--;
-			}
-			_end = _start + _size;
+			this->_dealloc();
+			if (n)
+				this->reserve(n);
+			for (iterator i = begin(); i < begin() + n; i++)
+				this->_alloc.construct(i, val);
+			this->_size = n;
 		}
 
 		void push_back (const value_type& val)
@@ -462,6 +460,12 @@ class vector
 			return (_alloc);
 		}
 
+	private:
+		allocator_type	_alloc;
+		size_type		_size;
+		size_type		_capacity;
+		pointer			_start;
+		pointer			_end;
 };
 
 /* -------------------------------------------------------------------------- */

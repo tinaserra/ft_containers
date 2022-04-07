@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inputIterator.hpp                                  :+:      :+:    :+:   */
+/*   InputIterator.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 18:39:19 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/06 16:34:17 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/07 20:15:31 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 namespace ft {
 
 	template<class InputIterator>
-	typename iterator_traits<InputIterator>::difference_type itDiff(
-				InputIterator start, InputIterator end)
+	typename iterator_traits<InputIterator>::difference_type itDiff(InputIterator start, InputIterator end)
 	{
 		typename iterator_traits<InputIterator>::difference_type len = 0;
 

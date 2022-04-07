@@ -6,9 +6,6 @@ namespace ft {
 template < class T >
 class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 {
-	private:
-		pointer		_elem;
-
 	public :
 		typedef typename ft::iterator<random_access_iterator_tag, T>::value_type		value_type;
 		typedef typename ft::iterator<random_access_iterator_tag, T>::pointer			pointer;
@@ -71,7 +68,7 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		/* &elem */
 		pointer		operator->(void) const
 		{
-			return ->_elem;
+			return _elem;
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -119,7 +116,7 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		/* Iter + Iter */
 		friend difference_type	operator+(randomIterator const &lhs, randomIterator const &rhs)
 		{
-			return (lhs._elem + rhs._elem;)
+			return (lhs._elem + rhs._elem);
 		};
 
 
@@ -214,6 +211,9 @@ class randomIterator : public ft::iterator<random_access_iterator_tag, T>
 		{
 			return (*(_elem + value));
 		}
+
+	private:
+		pointer		_elem;
 };
 
 };

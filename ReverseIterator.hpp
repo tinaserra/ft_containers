@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_iterator.hpp                               :+:      :+:    :+:   */
+/*   ReverseIterator.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:24:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/06 16:34:47 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/07 19:52:40 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,8 +222,6 @@ reverseIterator<Iterator> operator+ (
 // 		const reverseIterator<InputIteratorR>& rhs) {
 // 	return (rhs.base() - lhs.base());
 // }
-
-};
 
 };
 

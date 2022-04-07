@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:01:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/06 17:51:38 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/07 20:07:16 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,3 +89,14 @@ void	mapFindCount(std::ofstream &outfile);
 void	mapLowerUpperBoundEqualRange(std::ofstream &outfile);
 
 #endif
+
+/*
+utils_iterator_traits.cpp \
+		utils_reverse_iterator.cpp \
+		utils_enable_if.cpp \
+		utils_is_integral.cpp \
+		utils_equal.cpp \
+		utils_lexicographical_compare.cpp \
+		utils_pair.cpp \
+		utils_make_pair.cpp \
+		*/
