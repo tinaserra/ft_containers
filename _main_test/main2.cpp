@@ -1,29 +1,23 @@
-# include "ft_containers.hpp"
+# include "aLaSalope.hpp"
 
-static void	vectorTests() {
-
-	std::ofstream outfile;
-
-	outfile.open(VECTORNAME);
-
-	vectorConstructor(outfile);
+static void	vectorTests()
+{
+	// vectorConstructor(outfile);
 	// vectorAssignation(outfile);
 	// vectorIterators(outfile);
 	// vectorSizeMaxSizeCapacityEmpty(outfile);
-	// vectorResize(outfile);
-	// vectorReserve(outfile);
+	vectorResize();
+	vectorReserve();
 	// vectorElementAccess(outfile);
-	vectorAssign(outfile);
+	// vectorAssign(outfile);
 	// vectorPushPopBack(outfile);
-	// vectorInsertEraseClear(outfile);
+	vectorInsert();
 	// vectorSwap(outfile);
 	// vectorRelationalOperators(outfile);
-	
-	outfile.close();
 }
 
 static void stackTests() {
-
+	std::cout << "MODAFUCKER" << std::endl;
 	// std::ofstream outfile;
 
 	// outfile.open(STACKNAME);
@@ -37,7 +31,7 @@ static void stackTests() {
 }
 
 static void mapTests() {
-
+	std::cout << "MODAFUCKER" << std::endl;
 	// std::ofstream outfile;
 
 	// outfile.open(MAPNAME);
@@ -56,31 +50,15 @@ static void mapTests() {
 	// outfile.close();
 }
 
-static void setTests() {
-
-// 	std::ofstream outfile;
-
-// 	outfile.open(SETNAME);
-
-// 	setConstructor(outfile);
-// 	setAssignation(outfile);
-// 	setIterators(outfile);
-// 	setSizeMaxSizeEmpty(outfile);
-// 	setInsertEraseClear(outfile);
-// 	setSwap(outfile);
-// 	setKeyValueComp(outfile);
-// 	setFindCount(outfile);
-
-
-// 	outfile.close();
-}
-
-int main(int ac, char **av) {
-
+int main(int ac, char **av)
+{
 	std::string input;
 
 	if (ac != 2)
+	{
+		std::cout << "met un argument ta race" << std::endl;
 		return (0);
+	}
 	input = av[1];
 	if (input.compare("vector") == 0)
 		vectorTests();
@@ -88,7 +66,5 @@ int main(int ac, char **av) {
 		stackTests();
 	else if (input.compare("map") == 0)
 		mapTests();
-	else if (input.compare("set") == 0)
-		setTests();
 	return (0);
 }
