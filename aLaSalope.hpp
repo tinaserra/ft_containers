@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_containers.hpp                                  :+:      :+:    :+:   */
+/*   aLaSalope.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:01:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/07 20:07:16 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/08 20:32:25 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	vectorConstructor(std::ofstream &outfile);
 void	vectorAssignation(std::ofstream &outfile);
 void	vectorIterators(std::ofstream &outfile);
 void	vectorSizeMaxSizeCapacityEmpty(std::ofstream &outfile);
-void	vectorResize(std::ofstream &outfile);
-void	vectorReserve(std::ofstream &outfile);
+int		vectorResize();
+int		vectorReserve();
 void	vectorElementAccess(std::ofstream &outfile);
 void	vectorAssign(std::ofstream &outfile);
 void	vectorPushPopBack(std::ofstream &outfile);
-void	vectorInsertEraseClear(std::ofstream &outfile);
+int		vectorInsert();
 void	vectorSwap(std::ofstream &outfile);
 void	vectorRelationalOperators(std::ofstream &outfile);
 

@@ -6,13 +6,14 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/04/07 20:25:05 by vserra           ###   ########.fr        #
+#    Updated: 2022/04/08 20:30:57 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC =	main2.cpp \
-		vector_construction.cpp \
-		vector_assign.cpp
+		vector_reserve.cpp \
+		vector_resize.cpp \
+		vector_insert.cpp
 
 NAME = ft_containers
 
