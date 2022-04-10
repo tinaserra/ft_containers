@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/08 20:24:16 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/10 22:20:38 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,50 +209,37 @@ class vector
 				return (clear());
 			if (size < this->_size)
 			{
-				erase(begin() + size, end());
-				// iterator it = end();
-				// size_type diff = this->_size - size;
-				// while (diff--)
-				// {
-				// 	this->_alloc.destroy(&it);
-				// 	this->_size--;
-				// }
-				// return ;
+				// erase(begin() + size, end());
+				iterator it = end();
+				size_type diff = this->_size - size;
+				while (diff--)
+				{
+					this->_alloc.destroy(&it);
+					this->_size--;
+				}
+				return ;
 			}
 			if (size > this->_size)
 			{
-				insert(end(), size - this->_size, val);
+				// insert(end(), size - this->_size, val);
 				// this->_realloc_fill(size, val);
-				// if (size <= this->_capacity)
-				// 		;
-				// if (this->_capacity < size)
-				// {
-				// 	else if (size <= this->_size * 2)
-				// 		this->reserve(this->_size * 2);
-				// 	else
-				// 		this->reserve(size);
-				// }
-				// while (this->_size < size)
-				// {
-				// 	this->_alloc.construct(this->_start + this->_size, val);
-				// 	this->_size++;
-				// }
+				if (size <= this->_capacity)
+						;
+				if (this->_capacity < size)
+				{
+					// if (size <= this->_size * 2)
+					// 	this->reserve(this->_size * 2);
+					// else
+						this->reserve(size);
+				}
+				while (this->_size < size)
+				{
+					this->_alloc.construct(this->_start + this->_size, val);
+					this->_size++;
+				}
 			}
 			this->_end = this->_start + this->_size;
 		}
-		
-		// void	_realloc_fill(size_type n, value_type const & val)
-		// {
-		// 	iterator	tmp = this->_alloc.allocate(n);
-		// 	size_type	prevSize = _size;
-
-		// 	std::uninitialized_copy(_start, _start + _size, tmp);
-		// 	_dealloc();
-		// 	_start = tmp;
-		// 	std::uninitialized_fill(_start + prevSize, _start + n, val);
-		// 	_size = n;
-		// 	_capacity = n;
-		// }
 
 		bool		empty() const
 		{
@@ -394,7 +381,7 @@ class vector
 			this->_end = this->_start + this->_size;
 		}
 
-		void pop_back()
+		void	pop_back()
 		{
 			if (this->empty() == false)
 			{
@@ -404,7 +391,7 @@ class vector
 		}
 
 		// Insert single element (1)
-		iterator insert (iterator position, const value_type& val)
+		iterator	insert (iterator position, const value_type& val)
 		{
 			difference_type			newSize = ft::itDiff(this->begin(), position);
 
@@ -413,7 +400,7 @@ class vector
 		}
 
 		// Insert fill (2)
-		void insert (iterator position, size_type n, const value_type& val)
+		void	insert (iterator position, size_type n, const value_type& val)
 		{
 			difference_type			beginToPosition = ft::itDiff(this->begin(), position);
 			difference_type			beginToEnd = ft::itDiff(this->begin(), this->end());
@@ -421,9 +408,9 @@ class vector
 			iterator				previousEnd;
 			iterator				end;
 
-			// this->resize(this->_size + newSize);
-			if (_capacity < _size + newSize)
-				this->reserve(this->_size + newSize);
+			this->resize(this->_size + newSize);
+			// if (_capacity < _size + newSize)
+			// 	this->reserve(this->_size + newSize);
 
 			previousEnd = this->begin() + beginToEnd;
 			position = this->begin() + beginToPosition;
@@ -440,7 +427,7 @@ class vector
 
 		// Insert range (3)
 		template < class InputIterator >
-		void insert(iterator position, InputIterator first, InputIterator last,
+		void	insert(iterator position, InputIterator first, InputIterator last,
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 		{
 			difference_type			beginToPosition = ft::itDiff(this->begin(), position);
@@ -450,6 +437,8 @@ class vector
 			iterator				end;
 
 			this->resize(this->_size + newSize);
+			// if (_capacity < _size + newSize)
+			// 	this->reserve(this->_size + newSize);
 
 			previousEnd = this->begin() + beginToEnd;
 			position = this->begin() + beginToPosition;
