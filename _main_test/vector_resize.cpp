@@ -6,15 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:48:29 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/08 18:50:10 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/11 16:04:05 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "aLaSalope.hpp"
-
-// resizing vector
 #include <iostream>
 #include <vector>
+#include "vector.hpp"
 
 int		vectorResize()
 {

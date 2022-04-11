@@ -6,14 +6,13 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:28:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/10 20:43:06 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/11 16:05:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// inserting into a vector
 #include <iostream>
 #include <vector>
-#include "aLaSalope.hpp"
+#include "vector.hpp"
 
 int		vectorInsert()
 {

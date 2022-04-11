@@ -1,4 +1,8 @@
-# include "aLaSalope.hpp"
+#include "vector.hpp"
+
+int		vectorInsert();
+int		vectorResize();
+int		vectorReserve();
 
 static void	vectorTests()
 {
