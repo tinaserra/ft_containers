@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/11 12:57:50 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/11 16:35:11 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define VECTOR_HPP
 
 # include <memory>
-# include <iostream> // asuppr
+# include <iostream> // a supprimer ?
 # include <cstddef>
-# include "ReverseIterator.hpp"
-# include "enable_if.hpp"
-# include "is_integral.hpp"
-# include "equal.hpp"
-# include "lexicographical_compare.hpp"
+# include "utils/reverseIterator.hpp"
+# include "utils/enable_if.hpp"
+# include "utils/is_integral.hpp"
+# include "utils/equal.hpp"
+# include "utils/lexicographical_compare.hpp"
 
 namespace ft {
 

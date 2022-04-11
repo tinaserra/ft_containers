@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:28:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/11 16:05:22 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/11 16:13:25 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		vectorInsert()
 	std::vector<int> anothervector (2,400);
 	STLvector.insert (it+2,anothervector.begin(),anothervector.end());
 	ft::vector<int> anothervector2 (2,400);
-	pute.insert (it+2,anothervector2.begin(),anothervector2.end());
+	pute.insert (itPute+2, anothervector2.begin(), anothervector2.end());
 
 	int myarray [] = { 501,502,503 };
 	STLvector.insert (STLvector.begin(), myarray, myarray+3);
