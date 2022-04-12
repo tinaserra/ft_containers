@@ -1,9 +1,16 @@
 #include "vector.hpp"
+#include "stack.hpp"
 #include "utils/reverseIterator.hpp"
 
 int		vectorInsert();
 int		vectorResize();
 int		vectorReserve();
+
+int		stackConstructor();
+int		stackEmpty();
+int		stackPushPop();
+int		stackSize();
+int		stackTop();
 
 static void	vectorTests()
 {
@@ -22,24 +29,17 @@ static void	vectorTests()
 }
 
 static void stackTests() {
-	std::cout << "MODAFUCKER" << std::endl;
-	// std::ofstream outfile;
 
-	// outfile.open(STACKNAME);
-
-	// stackConstructor(outfile);
-	// stackEmptySizeTop(outfile);
-	// stackPushPop(outfile);
+	stackConstructor();
+	stackEmpty();
+	stackPushPop();
+	stackSize();
+	stackTop();
 	// stackRelationalOperators(outfile);
-
-	// outfile.close();
 }
 
 static void mapTests() {
 	std::cout << "MODAFUCKER" << std::endl;
-	// std::ofstream outfile;
-
-	// outfile.open(MAPNAME);
 
 	// mapConstructor(outfile);
 	// mapAssignation(outfile);
@@ -52,7 +52,6 @@ static void mapTests() {
 	// mapFindCount(outfile);
 	// mapLowerUpperBoundEqualRange(outfile);
 
-	// outfile.close();
 }
 
 int main(int ac, char **av)

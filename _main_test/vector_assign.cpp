@@ -1,67 +1,98 @@
-#include "aLaSalope.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_assign.cpp                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/12 18:00:36 by vserra            #+#    #+#             */
+/*   Updated: 2022/04/12 18:10:11 by vserra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// void	vectorAssign(std::ofstream &outfile)
-// {
-
-// 	LOG1("")
-// 	LOG1("//-----------------------------ASSIGN-----------------------------//")
-// 	LOG1("")
-// 	NAMESP::vector<int> vect1(10);
-
-//     vect1.assign(7,100);
-
-// 	LOG2("Size of vect1: ", int(vect1.size()))
-
-//     NAMESP::vector<int>::iterator it = vect1.begin();
-//     NAMESP::vector<int>::iterator ite = vect1.end();
-//     while (it != ite) {
-        	
-//         LOG1(*it)
-//         ++it;
-//     }
-// }
-
-// vector assign
 #include <iostream>
 #include <vector>
+#include "vector.hpp"
 
-int main ()
+int		vectorAssign()
 {
-  std::vector<int> first;
-  std::vector<int> second;
-  std::vector<int> third;
+	std::cout << std::endl << "* \033[1m[VECTOR] Assign\033[0m ------------------------------- *" << std::endl;
+	std::vector<int> STLfirst;
+	std::vector<int> STLsecond;
+	std::vector<int> STLthird;
 
-  first.assign (7,100);             // 7 ints with a value of 100
+	STLfirst.assign (7,100);             // 7 ints with a value of 100
 
-  std::cout << "first" << std::endl;
-  for (unsigned int i = 0; i < first.size(); i++)
+	std::cout << "STLfirst" << std::endl;
+	for (unsigned int i = 0; i < STLfirst.size(); i++)
 	{
-		std::cout << first[i] << " ";
+		std::cout << STLfirst[i] << " ";
 	}
-  std::cout << std::endl;
+	std::cout << std::endl;
 
-  std::vector<int>::iterator it;
-  it=first.begin()+1;
+	std::vector<int>::iterator it;
+	it=STLfirst.begin()+1;
 
-  second.assign (it,first.end()-1); // the 5 central values of first
+	STLsecond.assign (it,STLfirst.end()-1); // the 5 central values of STLfirst
 
-  std::cout << "second" << std::endl;
-  for (unsigned int i = 0; i < second.size(); i++)
+	std::cout << "STLsecond" << std::endl;
+	for (unsigned int i = 0; i < STLsecond.size(); i++)
 	{
-		std::cout << second[i] << " ";
+		std::cout << STLsecond[i] << " ";
 	}
-  std::cout << std::endl;
-  int myints[] = {1776,7,4};
-  third.assign (myints,myints+3);   // assigning from array.
+	std::cout << std::endl;
+	int myints[] = {1776,7,4};
+	STLthird.assign (myints,myints+3);   // assigning from array.
 
-  std::cout << "third" << std::endl;
-  for (unsigned int i = 0; i < third.size(); i++)
+	std::cout << "STLthird" << std::endl;
+	for (unsigned int i = 0; i < STLthird.size(); i++)
 	{
-		std::cout << third[i] << " ";
+		std::cout << STLthird[i] << " ";
 	}
-  std::cout << std::endl;
-  std::cout << "Size of first: " << int (first.size()) << '\n';
-  std::cout << "Size of second: " << int (second.size()) << '\n';
-  std::cout << "Size of third: " << int (third.size()) << '\n';
-  return 0;
+	std::cout << std::endl;
+	std::cout << "STL vector:" << std::endl;
+	std::cout << "Size of STLfirst: " << int (STLfirst.size()) << '\n';
+	std::cout << "Size of STLsecond: " << int (STLsecond.size()) << '\n';
+	std::cout << "Size of STLthird: " << int (STLthird.size()) << '\n';
+
+	/* ---------------------------------------------------------------------- */
+
+	ft::vector<int> myfirst;
+	ft::vector<int> mysecond;
+	ft::vector<int> mythird;
+
+	myfirst.assign (7,100);             // 7 ints with a value of 100
+
+	std::cout << "myfirst" << std::endl;
+	for (unsigned int i = 0; i < myfirst.size(); i++)
+	{
+		std::cout << myfirst[i] << " ";
+	}
+	std::cout << std::endl;
+
+	ft::vector<int>::iterator myit;
+	myit=myfirst.begin()+1;
+
+	mysecond.assign (myit,myfirst.end()-1); // the 5 central values of myfirst
+
+	std::cout << "mysecond" << std::endl;
+	for (unsigned int i = 0; i < mysecond.size(); i++)
+	{
+		std::cout << mysecond[i] << " ";
+	}
+	std::cout << std::endl;
+	int myints[] = {1776,7,4};
+	mythird.assign (myints,myints+3);   // assigning from array.
+
+	std::cout << "mythird" << std::endl;
+	for (unsigned int i = 0; i < mythird.size(); i++)
+	{
+		std::cout << mythird[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "My vector:" << std::endl;
+	std::cout << "Size of myfirst: " << int (myfirst.size()) << '\n';
+	std::cout << "Size of mysecond: " << int (mysecond.size()) << '\n';
+	std::cout << "Size of mythird: " << int (mythird.size()) << '\n';
+	return 0;
 }

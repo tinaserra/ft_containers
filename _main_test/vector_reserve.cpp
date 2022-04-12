@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:16:10 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/11 16:03:44 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/12 18:01:58 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int		vectorReserve()
 {
-	std::cout << std::endl << "* Reserve tests -------------------------- *" << std::endl;
+	std::cout << std::endl << "* \033[1m[VECTOR] Reserve\033[0m ------------------------------- *" << std::endl;
 	std::vector<int>::size_type sz;
 	ft::vector<int>::size_type ft_sz;
 

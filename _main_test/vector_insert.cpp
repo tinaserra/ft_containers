@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:28:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/11 16:13:25 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/12 18:03:04 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int		vectorInsert()
 {
-	std::cout << std::endl << "* Insert tests -------------------------- *" << std::endl;
+	std::cout << std::endl << "* \033[1m[VECTOR] Insert\033[0m ------------------------------- *" << std::endl;
 	std::vector<int> STLvector (3,100);
 	std::vector<int>::iterator it;
 
