@@ -1,4 +1,5 @@
 #include "vector.hpp"
+#include "utils/reverseIterator.hpp"
 
 int		vectorInsert();
 int		vectorResize();
