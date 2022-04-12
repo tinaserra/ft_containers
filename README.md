@@ -42,28 +42,51 @@ Les containers C++, tout simplement.
 | ✅               | `assign` - fill (2)           | Remplace le contenu actuel par *n* éléments, chacun initialisé à une copie de *val*. Et modifie sa taille en conséquence.|
 | ✅               | `push_back`                   | Ajoute un élément à la fin du vecteur (réallocation automatique si besoin).|
 | ✅               | `pop_back`                    | Supprime le dernier élément du vecteur, réduisant la taille du conteneur d'une unité.|
-|                  | `insert` - single element (1) | Insert un élément de valeur `val` à la position spécifiée.|
-|                  | `insert` - fill (2)           | Insert `n` nouveaux éléments de valeur `val` à la position spécifiée.|
-|                  | `insert` - range (3)          | Insert de nouveaux éléments de valeur `val` sur un rang spécifié.|
-|                  | `erase` - iterator (1)        | Supprime du vecteur un seul élément a la position demandee . |
-|                  | `erase` - range (2)           | Supprime du vecteur une plage d'éléments *[first, last]*.|
-|                  | `swap`                        | Échange le contenu du conteneur X par le contenu de Y Les tailles peuvent différer.|
+| ✅               | `insert` - single element (1) | Insert un élément de valeur *val* à la position spécifiée.|
+| ✅               | `insert` - fill (2)           | Insert *n* nouveaux éléments de valeur *val* à la position spécifiée.|
+| ✅               | `insert` - range (3)          | Insert de nouveaux éléments de valeur *val* sur un rang spécifié.|
+| ✅               | `erase` - iterator (1)        | Supprime du vecteur un seul élément a la position demandee . |
+| ✅               | `erase` - range (2)           | Supprime du vecteur une plage d'éléments *[first, last]*.|
+| ✅               | `swap`                        | Échange le contenu du conteneur X par le contenu de Y Les tailles peuvent différer.|
 | ✅               | `clear`                       | Détruit tous les éléments du vecteur, laissant le conteneur avec une taille de 0 . |
 | Allocator        |                         | Renvoie une copie de l'objet d'allocation associé au vecteur . |
-|                  | get_allocator           | |
+| ✅               | get_allocator           | |
 | Non-member function overloads |            | |
-|                  | `Operator ==`           | |
-|                  | `Operator !=`           | |
-|                  | `Operator <`            | |
-|                  | `Operator <=`           | |
-|                  | `Operator >`            | |
-|                  | `Operator >=`           | |
-|                  | No member Swap overload | |
+| ✅               | `Operator ==`           | |
+| ✅               | `Operator !=`           | |
+| ✅               | `Operator <`            | |
+| ✅               | `Operator <=`           | |
+| ✅               | `Operator >`            | |
+| ✅               | `Operator >=`           | |
+| ✅               | No member Swap overload | |
 
 
 
 ### Stack
-- [ ] une belle pile
+
+Un **adaptateur de conteneur** conserve en interne un objet conteneur sous forme de données.
+Cet objet conteneur est une copie de l'argument `ctnr `passé au constructeur, le cas échéant, sinon c'est un conteneur vide.
+
+`container_type` est le type du type de conteneur sous-jacent, défini comme un alias du deuxième paramètre de modèle de classe: `Container`
+
+|                  |  a implementer      | description |
+| :--------------- | :------------------ | :---------- |
+| Constructor      |                     |             |
+| ✅               | Default constructor | Construit un objet *stack* adaptateur de conteneur. |
+| Member functions |                     |             |
+| ✅               | `empty`             | Renvoie *true* si la taille du conteneur est 0, *false* sinon. |
+| ✅               | `pop`               | Supprime l'élément au-dessus de la pile, réduisant ainsi sa taille de un. |
+| ✅               | `push`              | Insère un nouvel élément en haut de la pile, au-dessus de son élément supérieur actuel. Le contenu de ce nouvel élément est initialisé à une copie de val. |
+| ✅               | `size`              | Renvoie le nombre d'éléments dans la pile. |
+| ✅               | `top`               | Renvoie une référence à l'élément supérieur dans la pile. |
+| Non-member function overloads |        | |
+| ✅               | `Operator ==`       | |
+| ✅               | `Operator !=`       | |
+| ✅               | `Operator <`        | |
+| ✅               | `Operator <=`       | |
+| ✅               | `Operator >`        | |
+| ✅               | `Operator >=`       | |
+
 
 ### Map
 - [ ] une belle carte
@@ -130,4 +153,15 @@ c'est un peu l'inverse d'un iterator classique, mais attention il y a quelques s
 | [reverse_iterator::operator=](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator=/) | |
 | [reverse_iterator::operator[]](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator[]/) | |
 
-**les cas tricky :**
+**Le tips:**
+
+Pour les non-member overloads,l'un des deux iterateurs peut etre const et l'autre non. Et cela le compilateur c++ n'aime pas donc tu peux prototyper les operateurs non membres comme ceci:
+
+```c++
+template <class InputIterator1, class InputIterator2>
+bool	operator==(const reverseIterator<InputIterator1>& lhs,
+					const reverseIterator<InputIterator2>& rhs)
+{
+	return (lhs.base() == rhs.base());
+}
+```
