@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/11 16:35:11 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/12 14:26:26 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ class vector
 		{
 			_alloc = alloc;
 			_start = NULL;
-			_check_range(n);
+			_ft_check_range(n);
 			if (n)
 			{
 				_start = _alloc.allocate(n);
@@ -90,7 +90,7 @@ class vector
 			this->_capacity = static_cast<size_type>(dist);
 			if (dist)
 			{
-				_check_range(_capacity);
+				_ft_check_range(_capacity);
 				_start = _alloc.allocate(_capacity);
 				std::uninitialized_copy(first, last, this->_start);
 			}
@@ -121,12 +121,12 @@ class vector
 		{
 			if (*this != rhs)
 			{
-				this->_dealloc();
+				this->_ft_dealloc();
 				if (rhs.empty())
 					return (*this);
 				this->_size = rhs.size();
 				this->_capacity = rhs.capacity();
-				_check_range(rhs.capacity());
+				_ft_check_range(rhs.capacity());
 				_start = _alloc.allocate(rhs.capacity());
 				std::uninitialized_copy(rhs.begin(), rhs.end(), this->_start);
 			}
@@ -164,49 +164,9 @@ class vector
 
 		size_type	capacity(void) const { return (this->_capacity); }
 
-		// void	resize(size_type size, value_type val = value_type())
-		// {
-		// 	this->_check_range(size);
-		// 	if (size == this->_size)
-		// 		return ;
-		// 	if (size == 0)
-		// 		return (clear());
-		// 	if (size < this->_size)
-		// 	{
-		// 		// erase(begin() + size, end());
-		// 		iterator it = end();
-		// 		size_type diff = this->_size - size;
-		// 		while (diff--)
-		// 		{
-		// 			this->_alloc.destroy(&it);
-		// 			this->_size--;
-		// 		}
-		// 		return ;
-		// 	}
-		// 	if (size > this->_size)
-		// 	{
-		// 		// insert(end(), size - this->_size, val);
-		// 		// this->_realloc_fill(size, val);
-		// 		if (size <= this->_capacity)
-		// 				;
-		// 		if (this->_capacity < size)
-		// 		{
-		// 			// if (size <= this->_size * 2)
-		// 			// 	this->reserve(this->_size * 2);
-		// 			// else
-		// 				this->reserve(size);
-		// 		}
-		// 		while (this->_size < size)
-		// 		{
-		// 			this->_alloc.construct(this->_start + this->_size, val);
-		// 			this->_size++;
-		// 		}
-		// 	}
-		// }
-
 		void	resize(size_type n, value_type val = value_type())
 		{
-			this->_check_range(n);
+			this->_ft_check_range(n);
 			if (n == this->_size)
 				return ;
 			if (n == 0)
@@ -224,11 +184,10 @@ class vector
 			}
 			if (n > this->_size)
 			{
-				// this->_realloc_fill(n, val);
 				iterator	tmp = this->_alloc.allocate(n);
 				size_type	prevSize = _size;
 				std::uninitialized_copy(_start, _start + _size, tmp);
-				_dealloc();
+				_ft_dealloc();
 				_start = tmp;
 				std::uninitialized_fill(_start + prevSize, _start + n, val);
 				_size = n;
@@ -243,50 +202,6 @@ class vector
 			return (false);
 		}
 
-		// void		reserve(size_type n)
-		// {
-		// 	vector		res;
-		// 	iterator	it_begin = this->begin();
-		// 	iterator	it_end = this->end();
-
-		// 	if (n > this->max_size())
-		// 		throw std::out_of_range("Error: vector: [reserve] out of range");
-		// 	if (n <= this->capacity())
-		// 		return ;
-		// 	difference_type len = ft::itDiff(it_begin, it_end);
-		// 	if (n < (size_t)len)
-		// 		throw std::bad_alloc();
-		// 	res._alloc = this->_alloc;
-		// 	res._size = len;
-		// 	res._capacity = this->_capacity;
-		// 	if (this->_capacity== 0)
-		// 		res._capacity = 1;
-		// 	while (res._capacity < n)
-		// 		res._capacity *= 2;
-		// 	res._start = res._alloc.allocate(res._capacity);
-		// 	res._end = res._start + res._size;
-		// 	for (size_type i = 0; it_begin != it_end; ++it_begin)
-		// 	{
-		// 		res._alloc.construct(res._start + i, *it_begin);
-		// 		i++;
-		// 	}
-		// 	if (this->_start != NULL)
-		// 	{
-		// 		this->clear();
-		// 		this->_alloc.deallocate(this->_start, _capacity);
-		// 		this->_start = NULL;
-		// 		this->_size = 0;
-		// 		this->_capacity = 0;
-		// 	}
-		// 	this->_alloc = res._alloc;
-		// 	this->_start = res._start;
-		// 	this->_size = res._size;
-		// 	this->_capacity = res._capacity;
-		// 	res._start = NULL;
-		// 	res._size = 0;
-		// 	res._capacity = 0;
-		// }
-
 		void	reserve(size_type n)
 		{
 			if (this->_capacity > n)
@@ -294,35 +209,14 @@ class vector
 			if (n > max_size())
 				throw std::out_of_range("vector::reserve");
 
-			// if (this->_capacity== 0)
-			// 	this->_capacity = 1;
-			// while (this->_capacity < n)
-			// 	this->_capacity *= 2;
 			else
-				this->_realloc(n);
-		}
-
-		void	_dealloc()
-		{
-			if (this->_capacity)
 			{
-				for (size_type i = 0; i < _size; i++)
-					_alloc.destroy(_start + i);
-				_alloc.deallocate(_start, _capacity);
+				// if (this->_capacity == 0)
+				// 	this->_capacity = 1;
+				// while (this->_capacity < n)
+				// 	this->_capacity *= 2;
+				this->_ft_realloc(n); // this->_realloc(_capacity);
 			}
-			_capacity = 0;
-			_size = 0;
-		}
-
-		void	_realloc(size_type n)
-		{
-			size_type	prevSize = this->_size;
-			iterator	tmp = _alloc.allocate(n);
-			std::uninitialized_copy(_start, _start + _size, tmp);
-			_dealloc();
-			_size = prevSize;
-			_start = tmp;
-			_capacity = n;
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -370,6 +264,7 @@ class vector
 					typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 		{
 			difference_type dist = std::distance(first, last);
+			// _dealloc();
 			if (this->_capacity)
 			{
 				for (size_type i = 0; i < this->_size; i++)
@@ -380,7 +275,7 @@ class vector
 			this->_size = 0;
 			if (dist)
 			{
-				_check_range(dist);
+				_ft_check_range(dist);
 				this->_start = this->_alloc.allocate(dist);
 				this->_capacity = dist;
 			}
@@ -392,6 +287,7 @@ class vector
 		// Assign fill (2)
 		void	assign(size_type n, const value_type& val)
 		{
+			// _dealloc();
 			if (this->_capacity)
 			{
 				for (size_type i = 0; i < this->_size; i++)
@@ -407,54 +303,15 @@ class vector
 			this->_size = n;
 		}
 
-		// void push_back (const value_type& val)
-		// {
-		// 	if (this->_size == this->_capacity)
-		// 		this->resize(this->_size + 1, val);
-		// 	else
-		// 	{
-		// 		this->_alloc.construct(this->_start + this->_size, val);
-		// 	// std::cout << "OOOOOOOOOOOOOOOOOOOOOOOOOOOO " << std::endl;
-		// 		this->_size++;
-		// 	}
-		// 	this->_end = this->_start + this->_size;
-		// }
-
-		void	push_back(const value_type& val)
+		void push_back (const value_type& val)
 		{
-			this->_insert_back(val);
-			this->_size++;
-		}
-
-		void	_insert_back(value_type const & val)
-		{
-			if (_capacity == 0)
-			{
-				_start = _alloc.allocate(1);
-				_alloc.construct(_start, val);
-				_capacity = 1;
-				return ;
-			}
-			if (_size + 1 <= this->_capacity)
-			{
-				_alloc.construct(_start + _size, val);
-				return ;
-			}
-			size_type	newSize;
-			size_type	prevSize = _size;
-			_check_range(_size + 1);
-			if (_size * 2 < _alloc.max_size())
-				newSize = _size * 2;
+			if (this->_size == this->_capacity)
+				this->resize(this->_size + 1, val);
 			else
-				newSize = _size + 1;
-			iterator	tmp;
-			tmp = _alloc.allocate(newSize);
-			std::uninitialized_copy(_start, _start + _size, tmp);
-			_alloc.construct(tmp + prevSize, val);    
-			_dealloc();
-			_capacity = newSize;
-			_start = tmp;
-			_size = prevSize;
+			{
+				this->_alloc.construct(this->_start + this->_size, val);
+				this->_size++;
+			}
 		}
 
 		void	pop_back()
@@ -484,9 +341,6 @@ class vector
 			iterator				end;
 
 			this->resize(this->_size + n);
-			// if (_capacity < _size + newSize)
-			// 	this->reserve(this->_size + newSize);
-
 			prevEnd = this->begin() + prevSize;
 			position = this->begin() + beginToPos;
 			end = this->_start + this->_size;
@@ -593,16 +447,47 @@ class vector
 			return (this->_alloc);
 		}
 
+	/* ---------------------------------------------------------------------- */
+	/* PRIVATE MEMBERS                                                        */
+	/* ---------------------------------------------------------------------- */
+
 	private:
 		allocator_type	_alloc;
 		size_type		_size;
 		size_type		_capacity;
 		pointer			_start;
 
-		void	_check_range(size_type n)
+		/* ------------------------------------------------------------------ */
+		/* MY MEMBER FUNCTIONS                                                */
+		/* ------------------------------------------------------------------ */
+
+		void	_ft_check_range(size_type n)
 		{
 			if (n > this->_alloc.max_size())
 				throw std::out_of_range("Error: vector: out of range");
+		}
+
+		void	_ft_dealloc()
+		{
+			if (this->_capacity)
+			{
+				for (size_type i = 0; i < _size; i++)
+					_alloc.destroy(_start + i);
+				_alloc.deallocate(_start, _capacity);
+			}
+			_capacity = 0;
+			_size = 0;
+		}
+
+		void	_ft_realloc(size_type n)
+		{
+			size_type	prevSize = this->_size;
+			iterator	tmp = _alloc.allocate(n);
+			std::uninitialized_copy(_start, _start + _size, tmp);
+			_ft_dealloc();
+			_size = prevSize;
+			_start = tmp;
+			_capacity = n;
 		}
 };
 
