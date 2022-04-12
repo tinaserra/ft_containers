@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:24:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/11 16:28:52 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/12 14:50:18 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,6 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 /* -------------------------------------------------------------------------- */
 /* NON-MEMBER FUNCTION OVERLOADS                                              */
 /* -------------------------------------------------------------------------- */
-
-// template<class InputIterator1, class InputIterator2>
-// 	bool	operator==(const reverseIterator<InputIterator1>& lhs, const reverseIterator<InputIterator2>& rhs)
-
 
 template <class InputIterator1, class InputIterator2>
 bool	operator==(const reverseIterator<InputIterator1>& lhs,
