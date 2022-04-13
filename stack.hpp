@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:07 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/12 15:25:37 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/13 17:06:02 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,35 @@ class stack
 
 		void				pop() { _ctnr.pop_back(); }
 
+		friend bool		operator==(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+		{
+			return (lhs._ctnr == rhs._ctnr);
+		}
 
-		template <typename _T, typename _Container>
-		friend bool			ft::operator==(stack<_T, _Container> const &lhs, stack<_T, _Container> const &rhs);
+		friend bool		operator!=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+		{
+		return (!(lhs == rhs));
+		}
 
-		template <typename _T, typename _Container>
-		friend bool			ft::operator<(stack<_T, _Container> const &lhs, stack<_T, _Container> const &rhs);
+		friend bool		operator<(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+		{
+			return (lhs._ctnr < rhs._ctnr);
+		}
+
+		friend bool		operator<=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+		{
+			return (!(rhs < lhs));
+		}
+		
+		friend bool		operator>(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+		{
+			return (rhs < lhs);
+		}
+
+		friend bool		operator>=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+		{
+			return (!(lhs < rhs));
+		}
 
 	/* ---------------------------------------------------------------------- */
 	/* PROTECTED MEMBERS                                                      */
@@ -67,41 +90,41 @@ class stack
 /* NON-MEMBER FUNCTION OVERLOADS                                              */
 /* -------------------------------------------------------------------------- */
 
-template <typename T, typename Container>
-bool	operator==(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
-{
-	return (lhs._ctnr == rhs._ctnr);
-}
+// template <typename T, typename Container>
+// bool	operator==(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+// {
+// 	return (lhs._ctnr == rhs._ctnr);
+// }
 
-template <typename T, typename Container>
-bool	operator!=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
-{
-	return (!(lhs == rhs));
-}
+// template <typename T, typename Container>
+// bool	operator!=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+// {
+// 	return (!(lhs == rhs));
+// }
 
-template <typename T, typename Container>
-bool	operator<(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
-{
-	return (lhs._ctnr < rhs._ctnr);
-}
+// template <typename T, typename Container>
+// bool	operator<(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+// {
+// 	return (lhs._ctnr < rhs._ctnr);
+// }
 
-template <typename T, typename Container>
-bool	operator<=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
-{
-	return (!(rhs < lhs));
-}
+// template <typename T, typename Container>
+// bool	operator<=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+// {
+// 	return (!(rhs < lhs));
+// }
 
-template <typename T, typename Container>
-bool	operator>(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
-{
-	return (rhs < lhs);
-}
+// template <typename T, typename Container>
+// bool	operator>(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+// {
+// 	return (rhs < lhs);
+// }
 
-template <typename T, typename Container>
-bool	operator>=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
-{
-	return (!(lhs < rhs));
-}
+// template <typename T, typename Container>
+// bool	operator>=(stack<T, Container> const &lhs, stack<T, Container> const &rhs)
+// {
+// 	return (!(lhs < rhs));
+// }
 
 };
 
