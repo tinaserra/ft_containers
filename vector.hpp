@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/12 14:26:26 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/13 16:09:01 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ template < class T, class Alloc = std::allocator<T> >
 class vector
 {
 	public:
-
 		typedef T												value_type;
 		typedef Alloc											allocator_type;
-
 		typedef typename allocator_type::reference				reference;
 		typedef typename allocator_type::const_reference		const_reference;
 		typedef typename allocator_type::pointer				pointer;
@@ -43,10 +41,21 @@ class vector
 		typedef size_t											size_type;
 		typedef ptrdiff_t										difference_type;
 
-		/* ------------------------------------------------------------------ */
-		/* MEMBER FUNCTIONS                                                   */
-		/* ------------------------------------------------------------------ */
+	/* ---------------------------------------------------------------------- */
+	/* PRIVATE MEMBERS                                                        */
+	/* ---------------------------------------------------------------------- */
 
+	private:
+		allocator_type	_alloc;
+		size_type		_size;
+		size_type		_capacity;
+		pointer			_start;
+
+	/* ---------------------------------------------------------------------- */
+	/* PUBLIC MEMBER FUNCTIONS                                                */
+	/* ---------------------------------------------------------------------- */
+
+	public:
 		// Default constructor
 		explicit vector (const allocator_type& alloc = allocator_type())
 		{
@@ -442,24 +451,12 @@ class vector
 		/* ALLOCATOR                                                          */
 		/* ------------------------------------------------------------------ */
 
-		allocator_type get_allocator() const
-		{
-			return (this->_alloc);
-		}
+		allocator_type get_allocator() const { return (this->_alloc); }
 
 	/* ---------------------------------------------------------------------- */
-	/* PRIVATE MEMBERS                                                        */
+	/* PRIVATE MEMBER FUNCTIONS                                               */
 	/* ---------------------------------------------------------------------- */
-
 	private:
-		allocator_type	_alloc;
-		size_type		_size;
-		size_type		_capacity;
-		pointer			_start;
-
-		/* ------------------------------------------------------------------ */
-		/* MY MEMBER FUNCTIONS                                                */
-		/* ------------------------------------------------------------------ */
 
 		void	_ft_check_range(size_type n)
 		{
