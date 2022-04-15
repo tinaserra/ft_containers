@@ -189,16 +189,16 @@ void printTree(Node *root, string indent, bool last) {
 
 int main() {
   Node *root = NULL;
-  root = insertNode(root, 33);
-  root = insertNode(root, 13);
-  root = insertNode(root, 53);
   root = insertNode(root, 9);
-  root = insertNode(root, 21);
-  root = insertNode(root, 61);
+  root = insertNode(root, 15);
+  root = insertNode(root, 20);
   root = insertNode(root, 8);
+  root = insertNode(root, 7);
+  root = insertNode(root, 13);
+  root = insertNode(root, 10);
   root = insertNode(root, 11);
   printTree(root, "", true);
-  root = deleteNode(root, 13);
+  root = deleteNode(root, 9);
   cout << "After deleting " << endl;
   printTree(root, "", true);
 }

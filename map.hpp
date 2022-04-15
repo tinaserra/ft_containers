@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/13 16:28:27 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/15 17:31:35 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ class map {
 						const allocator_type & alloc = allocator_type())
 						: _comp(comp), _alloc(alloc), _size(0), _root(NULL)
 		{
-			_last = _create_node(value_type());
+			_last = _newNode(value_type());
 		}
 			
 		// Range constructor
@@ -99,14 +99,14 @@ class map {
 				const allocator_type & alloc = allocator_type())
 				: _comp(comp), _alloc(alloc), _size(0), _root(NULL)
 		{
-			_last = _create_node(value_type());
+			_last = _newNode(value_type());
 			insert(first, last);
 		}
 	
 		// Copy constructor
 		map(const map & x) : _comp(x._comp), _alloc(x._alloc), _size(0), _root(NULL)
 		{
-			_last = _create_node(value_type());
+			_last = _newNode(value_type());
 			*this = x;
 		}
 
@@ -304,66 +304,196 @@ class map {
 	/* ---------------------------------------------------------------------- */
 	private:
 
-		void	_print_tree()
-		{
+		int		_max(int a, int b);
 
+		// Calculate height
+		int		_height(node_pointer N)
+		{
+			if (N == NULL)
+				return 0;
+			return N->height;
 		}
 
-		void	_recursive_print(node_pointer node, std::stringstream & buffer, bool is_tail, std::string prefix)
+		int		_max(int a, int b)
 		{
-
+			return (a > b) ? a : b;
 		}
 
-		node_pointer	_minimum(node_pointer node) const
+		// New node creation
+		node_pointer	_newNode(key_type key)
 		{
-
+			node_pointer node = new Node();
+			node->key = key;
+			node->left = NULL;
+			node->right = NULL;
+			node->height = 1;
+			return (node);
 		}
 
-		node_pointer	_maximum(node_pointer node) const
+		// Rotate right
+		node_pointer _rightRotate(node_pointer y)
 		{
-
+			node_pointer x = y->left;
+			node_pointer T2 = x->right;
+			x->right = y;
+			y->left = T2;
+			y->height = _max(_height(y->left), _height(y->right)) + 1;
+			x->height = _max(_height(x->left), _height(x->right)) + 1;
+			return x;
 		}
 
-		bool	is_in_tree(const_iterator pos) const
+		// Rotate left
+		node_pointer _leftRotate(node_pointer x)
 		{
-
+			Node *y = x->right;
+			Node *T2 = y->left;
+			y->left = x;
+			x->right = T2;
+			x->height = _max(_height(x->left), _height(x->right)) + 1;
+			y->height = _max(_height(y->left), _height(y->right)) + 1;
+			return y;
 		}
 
-		node_pointer	_find_key(key_type const & key, node_pointer node) const
+		// Get the balance factor of each node
+		int _getBalanceFactor(node_pointer N)
 		{
-
+			if (N == NULL)
+				return 0;
+			return _height(N->left) - _height(N->right);
 		}
 
-		bool			_is_equal(value_type const & x, value_type const & y) const
+		// Insert a node
+		node_pointer	_insertNode(node_pointer node, key_type key)
 		{
+			// Find the correct postion and insert the node
+			if (node == NULL)
+				return (_newNode(key));
+			if (key < node->key)
+				node->left = _insertNode(node->left, key);
+			else if (key > node->key)
+				node->right = _insertNode(node->right, key);
+			else
+				return node;
 
+			// Update the balance factor of each node and
+			// balance the tree
+			node->height = 1 + _max(height(node->left), _height(node->right));
+			int balanceFactor = _getBalanceFactor(node);
+			if (balanceFactor > 1)
+			{
+				if (key < node->left->key)
+					return _rightRotate(node);
+				else if (key > node->left->key)
+				{
+					node->left = _leftRotate(node->left);
+					return _rightRotate(node);
+				}
+			}
+			if (balanceFactor < -1)
+			{
+				if (key > node->right->key)
+					return _leftRotate(node);
+				else if (key < node->right->key)
+				{
+					node->right = _rightRotate(node->right);
+					return _leftRotate(node);
+				}
+			}
+			return node;
 		}
 
-		node_pointer	_create_node(value_type const & val)
+		// Node with minimum value
+		node_pointer _nodeWithMimumValue(node_pointer node)
 		{
-
+			node_pointer current = node;
+			while (current->left != NULL)
+				current = current->left;
+			return current;
 		}
 
-		bool	_insert_node(const value_type &val, node_pointer current)
-		{
 
+		// Delete a node
+		node_pointer	_deleteNode(node_pointer root, key_type key)
+		{
+			// Find the node and delete it
+			if (root == NULL)
+				return root;
+			if (key < root->key)
+				root->left = _deleteNode(root->left, key);
+			else if (key > root->key)
+				root->right = _deleteNode(root->right, key);
+			else
+			{
+				if ((root->left == NULL) || (root->right == NULL))
+				{
+					node_pointer temp = root->left ? root->left : root->right;
+					if (temp == NULL)
+					{
+						temp = root;
+						root = NULL;
+					}
+					else
+						*root = *temp;
+					free(temp);
+				}
+				else 
+				{
+					node_pointer temp = _nodeWithMimumValue(root->right);
+					root->key = temp->key;
+					root->right = _deleteNode(root->right, temp->key);
+				}
+			}
+			if (root == NULL)
+				return root;
+
+			// Update the balance factor of each node and
+			// balance the tree
+			root->height = 1 + _max(_height(root->left), _height(root->right));
+			int balanceFactor = _getBalanceFactor(root);
+			if (balanceFactor > 1)
+			{
+				if (_getBalanceFactor(root->left) >= 0)
+					return _rightRotate(root);
+				else
+				{
+					root->left = _leftRotate(root->left);
+					return _rightRotate(root);
+				}
+			}
+			if (balanceFactor < -1)
+			{
+				if (_getBalanceFactor(root->right) <= 0)
+					return _leftRotate(root);
+				else
+				{
+					root->right = _rightRotate(root->right);
+					return _leftRotate(root);
+				}
+			}
+			return root;
 		}
 
-		bool	_insert_node_root(const value_type &val)
+
+		void	_printTree(node_pointer root, string indent, bool last)
 		{
-
+			if (root != nullptr)
+			{
+				cout << indent;
+				if (last)
+				{
+					cout << "R----";
+					indent += "   ";
+				}
+				else
+				{
+					cout << "L----";
+					indent += "|  ";
+				}
+				cout << root->key << endl;
+				_printTree(root->left, indent, false);
+				_printTree(root->right, indent, true);
+			}
 		}
-
-		void	_delete_node(node_pointer node)
-		{
-
-		}
-
-		void	_clean_recursive(node_pointer node)
-		{
-
-		}
-
 	};
 
 /* -------------------------------------------------------------------------- */
