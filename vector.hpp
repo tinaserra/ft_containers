@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/13 16:09:01 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/19 09:23:23 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ class vector
 
 	public:
 		// Default constructor
-		explicit vector (const allocator_type& alloc = allocator_type())
+		explicit vector(const allocator_type& alloc = allocator_type())
 		{
 			this->_alloc = alloc;
 			this->_size = 0;
@@ -344,10 +344,10 @@ class vector
 		// Insert fill (2)
 		void	insert(iterator position, size_type n, const value_type& val)
 		{
-			difference_type			beginToPos = std::distance(this->begin(), position);
-			difference_type			prevSize = this->_size;
-			iterator				prevEnd;
-			iterator				end;
+			difference_type		beginToPos = std::distance(this->begin(), position);
+			difference_type		prevSize = this->_size;
+			iterator			prevEnd;
+			iterator			end;
 
 			this->resize(this->_size + n);
 			prevEnd = this->begin() + prevSize;
@@ -369,11 +369,11 @@ class vector
 		void	insert(iterator position, InputIterator first, InputIterator last,
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 		{
-			difference_type			beginToPos = std::distance(this->begin(), position);
-			difference_type			prevSize = this->_size;
-			difference_type			newSize = std::distance(first, last);
-			iterator				prevEnd;
-			iterator				end;
+			difference_type		beginToPos = std::distance(this->begin(), position);
+			difference_type		prevSize = this->_size;
+			difference_type		newSize = std::distance(first, last);
+			iterator			prevEnd;
+			iterator			end;
 
 			this->resize(this->_size + newSize);
 
