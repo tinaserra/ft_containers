@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 09:01:06 by vserra           ###   ########.fr       */
+/*   Updated: 2022/04/19 14:12:00 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,24 @@ class map {
 		{
 			if (this->_size == 0)
 				return (iterator(_last));
-			return (_minimum(_root));
+			if (!_root || _root == _last)
+				return (_root);
+			node_pointer	res = _root;
+			while (res->left)
+				res = res->left;
+			return (res);
 		}
 
 		const_iterator			begin() const
 		{
 			if (this->_size == 0)
 				return (const_iterator(_last));
-			return (_minimum(_root));
+			if (!_root || _root == _last)
+				return (_root);
+			node_pointer	res = _root;
+			while (res->left)
+				res = res->left;
+			return (res);
 		}
 
 		iterator				end() { return (iterator(_last)); }
@@ -177,7 +187,31 @@ class map {
 
 		mapped_type &		operator[](const key_type & k)
 		{
+			node_pointer	tmp = _find_key(k, this->_root);
 
+			if (tmp)
+				return (tmp->value.second);
+			insert(value_type(k, mapped_type()));
+			return (_find_key(k, this->_root)->value.second);
+		}
+
+		node_pointer	_find_key(key_type const & key, node_pointer node) const
+		{
+			if (!node || node == _last)
+				return (NULL);
+			value_type	tmp = ft::make_pair<key_type, mapped_type>(key, mapped_type());
+			if (_is_equal(tmp, node->value))
+				return (node);
+			if (this->_comp(key, node->value.first))
+				return (_find_key(key, node->left));
+			else if (this->_comp(node->value.first, key))
+				return (_find_key(key, node->right));
+			return (NULL);
+		}
+
+		bool			_is_equal(value_type const & x, value_type const & y) const
+		{
+			return (!_comp(x.first, y.first) && !_comp(y.first, x.first));
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -250,7 +284,11 @@ class map {
 
 		iterator	find(key_type const & k)
 		{
+			node_pointer	res = _find_key(k, _root);
 
+			if (res)
+				return (iterator(res));
+			return (end());
 		}
 
 		const_iterator	find(key_type const & k) const
@@ -322,13 +360,15 @@ class map {
 		// New node creation
 		node_pointer	_newNode(key_type key)
 		{
-			node_pointer node = new Node();
+			node_pointer	node = _alloc.allocate(1);
+			// this->_alloc.construct(node, node_type(val, NULL, NULL, NULL));
 			node->key = key;
 			node->left = NULL;
 			node->right = NULL;
 			node->height = 1;
 			return (node);
 		}
+
 
 		// Rotate right
 		node_pointer _rightRotate(node_pointer y)
