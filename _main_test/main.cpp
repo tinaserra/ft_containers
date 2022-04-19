@@ -1,10 +1,27 @@
 #include "vector.hpp"
 #include "stack.hpp"
 #include "utils/reverseIterator.hpp"
+#include "map.hpp"
 
+int		vectorAccessOperator();
+int		vectorAssign();
+int		vectorAssignation();
+int		vectorAt();
+int		vectorBack();
+int		vectorBeginEnd();
+int		vectorCapacitySizeMaxSize();
+int		vectorClear();
+int		vectorConstructor();
+int		vectorEmpty();
+int		vectorErase();
+int		vectorFront();
 int		vectorInsert();
+int		vectorPopBack();
+int		vectorPushBack();
+int		vectorRbeginRend();
 int		vectorResize();
 int		vectorReserve();
+int		vectorSwap();
 
 int		stackConstructor();
 int		stackEmpty();
@@ -12,45 +29,81 @@ int		stackPushPop();
 int		stackSize();
 int		stackTop();
 
+int		mapAccessOperator();
+int		mapAssignation();
+int		mapBeginEnd();
+int		mapClear();
+int		mapConstructor();
+int		mapCount();
+int		mapEmpty();
+int		mapEqualRange();
+int		mapErase();
+int		mapFind();
+int		mapGetAllocator();
+int		mapInsert();
+int		mapKeyComp();
+int		mapLowerUpperBound();
+int		mapMaxSize();
+int		mapRbeginRend();
+int		mapSize();
+int		mapSwap();
+int		mapValueComp();
+
+
+
 static void	vectorTests()
 {
-	// vectorConstructor(outfile);
-	// vectorAssignation(outfile);
-	// vectorIterators(outfile);
-	// vectorSizeMaxSizeCapacityEmpty(outfile);
+	vectorAccessOperator();
+	vectorAssign();
+	vectorAssignation();
+	vectorAt();
+	vectorBack();
+	vectorBeginEnd();
+	vectorCapacitySizeMaxSize();
+	vectorClear();
+	vectorConstructor();
+	vectorEmpty();
+	vectorErase();
+	vectorFront();
+	vectorInsert();
+	vectorPopBack();
+	vectorPushBack();
+	vectorRbeginRend();
 	vectorResize();
 	vectorReserve();
-	// vectorElementAccess(outfile);
-	// vectorAssign(outfile);
-	// vectorPushPopBack(outfile);
-	vectorInsert();
-	// vectorSwap(outfile);
-	// vectorRelationalOperators(outfile);
+	vectorSwap();
 }
 
-static void stackTests() {
-
+static void stackTests()
+{
 	stackConstructor();
 	stackEmpty();
 	stackPushPop();
 	stackSize();
 	stackTop();
-	// stackRelationalOperators(outfile);
 }
 
-static void mapTests() {
-	std::cout << "MODAFUCKER" << std::endl;
-
-	// mapConstructor(outfile);
-	// mapAssignation(outfile);
-	// mapIterators(outfile);
-	// mapSizeMaxSizeEmpty(outfile);
-	// mapElementAccess(outfile);
-	// mapInsertEraseClear(outfile);
-	// mapSwap(outfile);
-	// mapKeyValueComp(outfile);
-	// mapFindCount(outfile);
-	// mapLowerUpperBoundEqualRange(outfile);
+static void mapTests()
+{
+	mapAccessOperator();
+	mapAssignation();
+	mapBeginEnd();
+	mapClear();
+	mapConstructor();
+	mapCount();
+	mapEmpty();
+	mapEqualRange();
+	mapErase();
+	mapFind();
+	mapGetAllocator();
+	mapInsert();
+	mapKeyComp();
+	mapLowerUpperBound();
+	mapMaxSize();
+	mapRbeginRend();
+	mapSize();
+	mapSwap();
+	mapValueComp();
 
 }
 
