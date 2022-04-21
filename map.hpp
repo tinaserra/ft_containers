@@ -89,7 +89,9 @@ class map {
 						const allocator_type & alloc = allocator_type())
 						: _comp(comp), _alloc(alloc), _size(0), _root(NULL)
 		{
-			_last = _newNode(value_type());
+			_last = _newNode(); // allocate
+			_last->color = 0;
+			_root = _last;
 		}
 			
 		// Range constructor
@@ -99,14 +101,14 @@ class map {
 				const allocator_type & alloc = allocator_type())
 				: _comp(comp), _alloc(alloc), _size(0), _root(NULL)
 		{
-			_last = _newNode(value_type());
+			_last = _newNode();
 			insert(first, last);
 		}
 	
 		// Copy constructor
 		map(const map & x) : _comp(x._comp), _alloc(x._alloc), _size(0), _root(NULL)
 		{
-			_last = _newNode(value_type());
+			_last = _newNode();
 			*this = x;
 		}
 
@@ -136,26 +138,26 @@ class map {
 
 		iterator				begin()
 		{
-			if (this->_size == 0)
-				return (iterator(_last));
-			if (!_root || _root == _last)
-				return (_root);
-			node_pointer	res = _root;
-			while (res->left)
-				res = res->left;
-			return (res);
+			// if (this->_size == 0)
+			// 	return (iterator(_last));
+			// if (!_root || _root == _last)
+			// 	return (_root);
+			// node_pointer	res = _root;
+			// while (res->left)
+			// 	res = res->left;
+			// return (res);
 		}
 
 		const_iterator			begin() const
 		{
-			if (this->_size == 0)
-				return (const_iterator(_last));
-			if (!_root || _root == _last)
-				return (_root);
-			node_pointer	res = _root;
-			while (res->left)
-				res = res->left;
-			return (res);
+			// if (this->_size == 0)
+			// 	return (const_iterator(_last));
+			// if (!_root || _root == _last)
+			// 	return (_root);
+			// node_pointer	res = _root;
+			// while (res->left)
+			// 	res = res->left;
+			// return (res);
 		}
 
 		iterator				end() { return (iterator(_last)); }
@@ -190,7 +192,7 @@ class map {
 			node_pointer	tmp = _find_key(k, this->_root);
 
 			if (tmp)
-				return (tmp->value.second);
+				return (tmp->data.second);
 			insert(value_type(k, mapped_type()));
 			return (_find_key(k, this->_root)->value.second);
 		}
@@ -200,11 +202,11 @@ class map {
 			if (!node || node == _last)
 				return (NULL);
 			value_type	tmp = ft::make_pair<key_type, mapped_type>(key, mapped_type());
-			if (_is_equal(tmp, node->value))
+			if (_is_equal(tmp, node->data))
 				return (node);
-			if (this->_comp(key, node->value.first))
+			if (this->_comp(key, node->data.first))
 				return (_find_key(key, node->left));
-			else if (this->_comp(node->value.first, key))
+			else if (this->_comp(node->data.first, key))
 				return (_find_key(key, node->right));
 			return (NULL);
 		}
@@ -219,9 +221,10 @@ class map {
 		/* ------------------------------------------------------------------ */
 
 		// insert single element
-		ft::pair<iterator, bool>	insert(value_type const & val)
+		ft::pair<iterator, bool>	insert(value_type const & val) // ft::pair<const key_type, mapped_type>
 		{
-
+			_insert(val);
+			_printTree();
 		}
 
 		// insert with hint
@@ -342,181 +345,279 @@ class map {
 	/* ---------------------------------------------------------------------- */
 	private:
 
-		int		_max(int a, int b);
+		// struct Node {
+		// 	int key;
+		// 	int data;
+		// 	Node *parent;
+		// 	Node *left;
+		// 	Node *right;
+		// 	int color;
+		// };
 
-		// Calculate height
-		int		_height(node_pointer N)
-		{
-			if (N == NULL)
-				return 0;
-			return N->height;
-		}
+		node_pointer root;
+		node_pointer TNULL;
 
-		int		_max(int a, int b)
-		{
-			return (a > b) ? a : b;
-		}
+		// constructor ?
+		// void _initializeNULLNode(node_pointer node, node_pointer parent)
+		// {
+		// 	node->key = 0;
+		// 	node->parent = parent;
+		// 	node->left = nullptr;
+		// 	node->right = nullptr;
+		// 	node->color = 0;
+		// }
 
-		// New node creation
-		node_pointer	_newNode(key_type key)
+		node_pointer _newNode(const value_type &val)
 		{
-			node_pointer	node = _alloc.allocate(1);
-			// this->_alloc.construct(node, node_type(val, NULL, NULL, NULL));
-			node->key = key;
-			node->left = NULL;
-			node->right = NULL;
-			node->height = 1;
+			node_pointer	node = node_allocator.allocate(1);
+
+			node->parent = nullptr;
+			node->left = nullptr;
+			node->right = nullptr;
+			node->color = 1;
+			node->data = _alloc.allocate(1);
+			_alloc.construct(node->data, val);
 			return (node);
 		}
 
-
-		// Rotate right
-		node_pointer _rightRotate(node_pointer y)
-		{
-			node_pointer x = y->left;
-			node_pointer T2 = x->right;
-			x->right = y;
-			y->left = T2;
-			y->height = _max(_height(y->left), _height(y->right)) + 1;
-			x->height = _max(_height(x->left), _height(x->right)) + 1;
-			return x;
-		}
-
-		// Rotate left
-		node_pointer _leftRotate(node_pointer x)
-		{
-			Node *y = x->right;
-			Node *T2 = y->left;
-			y->left = x;
-			x->right = T2;
-			x->height = _max(_height(x->left), _height(x->right)) + 1;
-			y->height = _max(_height(y->left), _height(y->right)) + 1;
-			return y;
-		}
-
-		// Get the balance factor of each node
-		int _getBalanceFactor(node_pointer N)
-		{
-			if (N == NULL)
-				return 0;
-			return _height(N->left) - _height(N->right);
-		}
-
-		// Insert a node
-		node_pointer	_insertNode(node_pointer node, key_type key)
-		{
-			// Find the correct postion and insert the node
-			if (node == NULL)
-				return (_newNode(key));
-			if (key < node->key)
-				node->left = _insertNode(node->left, key);
-			else if (key > node->key)
-				node->right = _insertNode(node->right, key);
-			else
-				return node;
-
-			// Update the balance factor of each node and
-			// balance the tree
-			node->height = 1 + _max(height(node->left), _height(node->right));
-			int balanceFactor = _getBalanceFactor(node);
-			if (balanceFactor > 1)
-			{
-				if (key < node->left->key)
-					return _rightRotate(node);
-				else if (key > node->left->key)
-				{
-					node->left = _leftRotate(node->left);
-					return _rightRotate(node);
-				}
+		// Preorder
+		void _preOrderHelper(node_pointer node) {
+			if (node != TNULL) {
+			cout << node->key << " ";
+			_preOrderHelper(node->left);
+			_preOrderHelper(node->right);
 			}
-			if (balanceFactor < -1)
-			{
-				if (key > node->right->key)
-					return _leftRotate(node);
-				else if (key < node->right->key)
-				{
-					node->right = _rightRotate(node->right);
-					return _leftRotate(node);
-				}
+		}
+
+		// Inorder
+		void _inOrderHelper(node_pointer node) {
+			if (node != TNULL) {
+			_inOrderHelper(node->left);
+			cout << node->key << " ";
+			_inOrderHelper(node->right);
 			}
+		}
+
+		// Post order
+		void _postOrderHelper(node_pointer node) {
+			if (node != TNULL) {
+			_postOrderHelper(node->left);
+			_postOrderHelper(node->right);
+			cout << node->key << " ";
+			}
+		}
+
+		node_pointer _searchTreeHelper(node_pointer node, key_type key) {
+			if (node == TNULL || key == node->key) {
 			return node;
+			}
+
+			if (key < node->key) {
+			return _searchTreeHelper(node->left, key);
+			}
+			return _searchTreeHelper(node->right, key);
 		}
 
-		// Node with minimum value
-		node_pointer _nodeWithMimumValue(node_pointer node)
-		{
-			node_pointer current = node;
-			while (current->left != NULL)
-				current = current->left;
-			return current;
-		}
-
-
-		// Delete a node
-		node_pointer	_deleteNode(node_pointer root, key_type key)
-		{
-			// Find the node and delete it
-			if (root == NULL)
-				return root;
-			if (key < root->key)
-				root->left = _deleteNode(root->left, key);
-			else if (key > root->key)
-				root->right = _deleteNode(root->right, key);
-			else
-			{
-				if ((root->left == NULL) || (root->right == NULL))
+		// For balancing the tree after deletion
+		void _deleteFix(node_pointer x) {
+			node_pointer s;
+			while (x != root && x->color == 0) {
+				if (x == x->parent->left)
 				{
-					node_pointer temp = root->left ? root->left : root->right;
-					if (temp == NULL)
+					s = x->parent->right;
+					if (s->color == 1)
 					{
-						temp = root;
-						root = NULL;
+						s->color = 0;
+						x->parent->color = 1;
+						_leftRotate(x->parent);
+						s = x->parent->right;
+					}
+
+					if (s->left->color == 0 && s->right->color == 0)
+					{
+						s->color = 1;
+						x = x->parent;
 					}
 					else
-						*root = *temp;
-					free(temp);
+					{
+						if (s->right->color == 0)
+						{
+							s->left->color = 0;
+							s->color = 1;
+							_rightRotate(s);
+							s = x->parent->right;
+						}
+						s->color = x->parent->color;
+						x->parent->color = 0;
+						s->right->color = 0;
+						_leftRotate(x->parent);
+						x = root;
+					}
 				}
-				else 
+				else
 				{
-					node_pointer temp = _nodeWithMimumValue(root->right);
-					root->key = temp->key;
-					root->right = _deleteNode(root->right, temp->key);
-				}
-			}
-			if (root == NULL)
-				return root;
+					s = x->parent->left;
+					if (s->color == 1)
+					{
+						s->color = 0;
+						x->parent->color = 1;
+						_rightRotate(x->parent);
+						s = x->parent->left;
+					}
 
-			// Update the balance factor of each node and
-			// balance the tree
-			root->height = 1 + _max(_height(root->left), _height(root->right));
-			int balanceFactor = _getBalanceFactor(root);
-			if (balanceFactor > 1)
-			{
-				if (_getBalanceFactor(root->left) >= 0)
-					return _rightRotate(root);
-				else
-				{
-					root->left = _leftRotate(root->left);
-					return _rightRotate(root);
+					if (s->right->color == 0 && s->right->color == 0) {
+						s->color = 1;
+						x = x->parent;
+					}
+					else
+					{
+						if (s->left->color == 0)
+						{
+							s->right->color = 0;
+							s->color = 1;
+							_leftRotate(s);
+							s = x->parent->left;
+						}
+
+						s->color = x->parent->color;
+						x->parent->color = 0;
+						s->left->color = 0;
+						_rightRotate(x->parent);
+						x = root;
+					}
 				}
 			}
-			if (balanceFactor < -1)
-			{
-				if (_getBalanceFactor(root->right) <= 0)
-					return _leftRotate(root);
-				else
-				{
-					root->right = _rightRotate(root->right);
-					return _leftRotate(root);
-				}
-			}
-			return root;
+			x->color = 0;
 		}
 
-
-		void	_printTree(node_pointer root, string indent, bool last)
+		void _rbTransplant(node_pointer u, node_pointer v)
 		{
-			if (root != nullptr)
+			if (u->parent == nullptr)
+				root = v;
+			else if (u == u->parent->left)
+				u->parent->left = v;
+			else
+				u->parent->right = v;
+			v->parent = u->parent;
+		}
+
+		void _deleteNodeHelper(node_pointer node, key_type key)
+		{
+			node_pointer z = TNULL;
+			node_pointer x, y;
+
+			while (node != TNULL)
+			{
+				if (node->key == key)
+					z = node;
+				if (node->key <= key)
+					node = node->right;
+				else
+					node = node->left;
+			}
+
+			if (z == TNULL)
+			{
+				cout << "Key not found in the tree" << endl;
+				return;
+			}
+
+			y = z;
+			int y_original_color = y->color;
+			if (z->left == TNULL)
+			{
+				x = z->right;
+				_rbTransplant(z, z->right);
+			}
+			else if (z->right == TNULL)
+			{
+				x = z->left;
+				_rbTransplant(z, z->left);
+			}
+			else
+			{
+				y = _minimum(z->right);
+				y_original_color = y->color;
+				x = y->right;
+				if (y->parent == z)
+					x->parent = y;
+				else
+				{
+					_rbTransplant(y, y->right);
+					y->right = z->right;
+					y->right->parent = y;
+				}
+
+				_rbTransplant(z, y);
+				y->left = z->left;
+				y->left->parent = y;
+				y->color = z->color;
+			}
+			delete z;
+			if (y_original_color == 0)
+				_deleteFix(x);
+		}
+
+		// For balancing the tree after insertion
+		void _insertFix(node_pointer k)
+		{
+			node_pointer u;
+			while (k->parent->color == 1)
+			{
+				if (k->parent == k->parent->parent->right)
+				{
+					u = k->parent->parent->left;
+					if (u->color == 1)
+					{
+						u->color = 0;
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						k = k->parent->parent;
+					}
+					else
+					{
+						if (k == k->parent->left)
+						{
+							k = k->parent;
+							_rightRotate(k);
+						}
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						_leftRotate(k->parent->parent);
+					}
+				}
+				else
+				{
+					u = k->parent->parent->right;
+
+					if (u->color == 1)
+					{
+						u->color = 0;
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						k = k->parent->parent;
+					}
+					else
+					{
+						if (k == k->parent->right)
+						{
+							k = k->parent;
+							_leftRotate(k);
+						}
+						k->parent->color = 0;
+						k->parent->parent->color = 1;
+						_rightRotate(k->parent->parent);
+					}
+				}
+				if (k == root)
+					break;
+			}
+			root->color = 0;
+		}
+
+		void _printHelper(node_pointer root, std::string indent, bool last)
+		{
+			if (root != TNULL)
 			{
 				cout << indent;
 				if (last)
@@ -529,11 +630,167 @@ class map {
 					cout << "L----";
 					indent += "|  ";
 				}
-				cout << root->key << endl;
-				_printTree(root->left, indent, false);
-				_printTree(root->right, indent, true);
+				string sColor = root->color ? "RED" : "BLACK";
+				cout << root->key << "(" << sColor << ")" << endl;
+				_printHelper(root->left, indent, false);
+				_printHelper(root->right, indent, true);
 			}
 		}
+
+		void _preorder()
+		{
+			_preOrderHelper(this->root);
+		}
+
+		void _inorder()
+		{
+			_inOrderHelper(this->root);
+		}
+
+		void _postorder()
+		{
+			_postOrderHelper(this->root);
+		}
+
+		node_pointer _searchTree(int k)
+		{
+			return _searchTreeHelper(this->root, k);
+		}
+
+		node_pointer _minimum(node_pointer node)
+		{
+			while (node->left != TNULL)
+				node = node->left;
+			return node;
+		}
+
+		node_pointer _maximum(node_pointer node)
+		{
+			while (node->right != TNULL)
+				node = node->right;
+			return node;
+		}
+
+		node_pointer _successor(node_pointer x)
+		{
+			if (x->right != TNULL)
+				return _minimum(x->right);
+
+			node_pointer y = x->parent;
+			while (y != TNULL && x == y->right)
+			{
+				x = y;
+				y = y->parent;
+			}
+			return y;
+		}
+
+		node_pointer _predecessor(node_pointer x)
+		{
+			if (x->left != TNULL)
+				return _maximum(x->left);
+			node_pointer y = x->parent;
+			while (y != TNULL && x == y->left)
+			{
+				x = y;
+				y = y->parent;
+			}
+			return y;
+		}
+
+		void _leftRotate(node_pointer x)
+		{
+			node_pointer y = x->right;
+			x->right = y->left;
+			if (y->left != TNULL)
+				y->left->parent = x;
+			y->parent = x->parent;
+			if (x->parent == nullptr)
+				this->root = y;
+			else if (x == x->parent->left)
+				x->parent->left = y;
+			else
+				x->parent->right = y;
+			y->left = x;
+			x->parent = y;
+		}
+
+		void _rightRotate(node_pointer x)
+		{
+			node_pointer y = x->left;
+			x->left = y->right;
+			if (y->right != TNULL)
+				y->right->parent = x;
+			y->parent = x->parent;
+			if (x->parent == nullptr)
+				this->root = y;
+			else if (x == x->parent->right)
+				x->parent->right = y;
+			else
+				x->parent->left = y;
+			y->right = x;
+			x->parent = y;
+		}
+
+		// Inserting a node
+		void _insert(value_type val)
+		{
+			node_pointer node = _newNode(); //new
+			node->parent = nullptr;
+			node->key = val->first;
+			node->data = val->second;
+			node->left = TNULL;
+			node->right = TNULL;
+			node->color = 1;
+
+			node_pointer y = nullptr;
+			node_pointer x = this->root;
+
+			while (x != TNULL)
+			{
+				y = x;
+				if (node->key < x->key)
+					x = x->left;
+				else
+					x = x->right;
+			}
+
+			node->parent = y;
+			if (y == nullptr)
+				root = node;
+			else if (node->key < y->key)
+				y->left = node;
+			else
+				y->right = node;
+
+			if (node->parent == nullptr)
+			{
+				node->color = 0;
+				return;
+			}
+
+			if (node->parent->parent == nullptr)
+				return;
+
+			_insertFix(node);
+		}
+
+		node_pointer _getRoot()
+		{
+			return this->root;
+		}
+
+		void _deleteNode(int data)
+		{
+			_deleteNodeHelper(this->root, data);
+		}
+
+		void _printTree()
+		{
+			if (root)
+				_printHelper(this->root, "", true);
+		}
+		
 	};
 
 /* -------------------------------------------------------------------------- */

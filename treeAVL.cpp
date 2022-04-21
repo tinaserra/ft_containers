@@ -197,7 +197,7 @@ int main() {
   root = insertNode(root, 7);
   root = insertNode(root, 13);
   root = insertNode(root, 10);
-  root = insertNode(root, 11);
+  // root = insertNode(root, 11);
   printTree(root, "", true);
   root = deleteNode(root, 9);
   cout << "After deleting " << endl;

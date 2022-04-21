@@ -85,25 +85,25 @@ static void stackTests()
 
 static void mapTests()
 {
-	mapAccessOperator();
-	mapAssignation();
-	mapBeginEnd();
-	mapClear();
-	mapConstructor();
-	mapCount();
-	mapEmpty();
-	mapEqualRange();
-	mapErase();
-	mapFind();
-	mapGetAllocator();
+	// mapAccessOperator();
+	// mapAssignation();
+	// mapBeginEnd();
+	// mapClear();
+	// mapConstructor();
+	// mapCount();
+	// mapEmpty();
+	// mapEqualRange();
+	// mapErase();
+	// mapFind();
+	// mapGetAllocator();
 	mapInsert();
-	mapKeyComp();
-	mapLowerUpperBound();
-	mapMaxSize();
-	mapRbeginRend();
-	mapSize();
-	mapSwap();
-	mapValueComp();
+	// mapKeyComp();
+	// mapLowerUpperBound();
+	// mapMaxSize();
+	// mapRbeginRend();
+	// mapSize();
+	// mapSwap();
+	// mapValueComp();
 
 }
 

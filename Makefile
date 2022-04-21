@@ -10,18 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	main.cpp \
-		vector_reserve.cpp \
-		vector_resize.cpp \
-		vector_insert.cpp \
-
-		stack_constructor.cpp \
-		stack_empty.cpp \
-		stack_push_pop.cpp \
-		stack_size.cpp \
-		stack_top.cpp \
-
-		map_constructor.cpp
+SRC =	main.cpp
 
 NAME = ft_containers
 
