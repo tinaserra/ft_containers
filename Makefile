@@ -10,12 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	main.cpp
+SRC =	main.cpp	\
+		mapInsert.cpp
 
 NAME = ft_containers
 
 # override -> permet de reecrire la suite de la variable
-override CXXFLAGS += -Wall -Wextra -Werror -MMD -std=c++11
+override CXXFLAGS +=  -MMD -std=c++11
 
 OBJ_DIR = obj
 SRC_DIR = _main_test

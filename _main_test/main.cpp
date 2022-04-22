@@ -53,34 +53,34 @@ int		mapValueComp();
 
 static void	vectorTests()
 {
-	vectorAccessOperator();
-	vectorAssign();
-	vectorAssignation();
-	vectorAt();
-	vectorBack();
-	vectorBeginEnd();
-	vectorCapacitySizeMaxSize();
-	vectorClear();
-	vectorConstructor();
-	vectorEmpty();
-	vectorErase();
-	vectorFront();
-	vectorInsert();
-	vectorPopBack();
-	vectorPushBack();
-	vectorRbeginRend();
-	vectorResize();
-	vectorReserve();
-	vectorSwap();
+	// vectorAccessOperator();
+	// vectorAssign();
+	// vectorAssignation();
+	// vectorAt();
+	// vectorBack();
+	// vectorBeginEnd();
+	// vectorCapacitySizeMaxSize();
+	// vectorClear();
+	// vectorConstructor();
+	// vectorEmpty();
+	// vectorErase();
+	// vectorFront();
+	// vectorInsert();
+	// vectorPopBack();
+	// vectorPushBack();
+	// vectorRbeginRend();
+	// vectorResize();
+	// vectorReserve();
+	// vectorSwap();
 }
 
 static void stackTests()
 {
-	stackConstructor();
-	stackEmpty();
-	stackPushPop();
-	stackSize();
-	stackTop();
+	// stackConstructor();
+	// stackEmpty();
+	// stackPushPop();
+	// stackSize();
+	// stackTop();
 }
 
 static void mapTests()
