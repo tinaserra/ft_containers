@@ -21,7 +21,7 @@ class Node
         node_pointer    min;
         node_pointer    max;
         Node() : color(RED) {}
-        Node(const Node &copy) { return *this; }
+        Node(const Node &copy) { *this = copy; }
 
         Node &operator=(const Node &rhs) {
             color = rhs.color;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   reverseIterator.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:24:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/12 14:50:18 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/02 14:20:34 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REVERSE_ITERATOR_HPP
-# define REVERSE_ITERATOR_HPP
-# include "utils/iterator_traits.hpp"
+#ifndef REVERSEITERATOR_HPP
+# define REVERSEITERATOR_HPP
+# include "iterator_traits.hpp"
 
 namespace ft {
 
@@ -74,13 +74,15 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 			return reverseIterator(current + n);
 		}
 
-		reverseIterator&	operator++() // pre-incrementation
+		// pre-incrementation
+		reverseIterator&	operator++()
 		{
 			--current;
 			return *this;
 		}
 
-		reverseIterator		operator++(int) // post-incrementation
+		 // post-incrementation
+		reverseIterator		operator++(int)
 		{
 			reverseIterator tmp = (*this);
 			--current;

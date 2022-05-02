@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 14:12:00 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/02 14:42:23 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@
 # include "utils/is_integral.hpp"
 # include "utils/lexicographical_compare.hpp"
 # include "utils/equal.hpp"
-#include "rb.hpp"
-// # include "utils/node.hpp"
-// # include "utils/mapIterator.hpp"
+# include "RedBlackTree.hpp" // a mettre dans utils/
 
 namespace ft {
 
@@ -71,17 +69,13 @@ class map {
 		typedef typename allocator_type::template rebind<node_type>::other	node_allocator;
 
 	/* ---------------------------------------------------------------------- */
-	/* PROTECTED & PRIVATE MEMBERS                                            */
+	/* PRIVATE MEMBERS                                                        */
 	/* ---------------------------------------------------------------------- */
-	// protected:
-	// 	key_compare		_comp;
-	// 	node_allocator	_alloc;
-	// 	size_type		_size;
-	// 	node_pointer	_root;
 
 	private:
+		key_compare		_key_comp;
 		node_pointer	_last;
-		tree_type	_tree;
+		tree_type		_redBlackTree;
 
 	/* ---------------------------------------------------------------------- */
 	/* PUBLIC MEMBER FUNCTIONS                                                */
@@ -91,28 +85,29 @@ class map {
 		// Default constructor
 		explicit map(const key_compare & comp = key_compare(),
 						const allocator_type & alloc = allocator_type())
-						: _tree(comp , alloc)
+						: _redBlackTree(comp , alloc)
 		{}
 			
-		// // Range constructor
-		// template <class InputIterator>
-		// map(InputIterator first, InputIterator last,
-		// 		const key_compare & comp = key_compare(),
-		// 		const allocator_type & alloc = allocator_type())
-		// 		: _comp(comp), _alloc(alloc), _size(0), _root(NULL)
-		// {
-		// 	_last = _newNode();
-		// 	insert(first, last);
-		// }
-	
-		// // Copy constructor
-		// map(const map & x) : _comp(x._comp), _alloc(x._alloc), _size(0), _root(NULL)
-		// {
-		// 	_last = _newNode();
-		// 	*this = x;
-		// }
+		// Range constructor
+		template <class InputIterator>
+		map(InputIterator first, InputIterator last,
+				const key_compare & comp = key_compare(),
+				const allocator_type & alloc = allocator_type())
+				: _redBlackTree(comp , alloc)
+			{
+				while (first != last)
+					_redBlackTree.insert(*first++);
+			}
+
+		// Copy constructor
+		map(const map & x) : _redBlackTree(x.key_comp(), x.get_allocator())
+		{
+			for (const_iterator pos = x.begin(); pos != x.end(); pos++)
+				_redBlackTree.insert(*pos);
+		}
 
 		// Destructor
+		~map() {}
 		// virtual ~map()
 		// {
 		// 	clear();
@@ -120,62 +115,55 @@ class map {
 		// 	_alloc.deallocate(_last, 1);
 		// }
 
-		// Assignation operator
-		// map &	operator=(const map & rhs)
-		// {
-		// 	if (this != &rhs)
-		// 	{
-		// 		clear();
-		// 		if (rhs._size)
-		// 			insert(rhs.begin(), rhs.end());
-		// 	}
-		// 	return (*this);
-		// }
+		//Assignation operator
+		map &	operator=(const map & rhs)
+		{
+			_redBlackTree = rhs._redBlackTree;
+			return (*this);
+		}
 
 		/* ------------------------------------------------------------------ */
 		/* ITERATORS                                                          */
 		/* ------------------------------------------------------------------ */
 
-		iterator				begin() { return _tree.begin(); }
+		iterator				begin() { return _redBlackTree.begin(); }
 
-		const_iterator			begin() const { return _tree.begin(); }
+		const_iterator			begin() const { return _redBlackTree.begin(); }
 
-		iterator				end() { return (_tree.end()); }
+		iterator				end() { return (_redBlackTree.end()); }
 
-		const_iterator			end() const { return (_tree.end()); }
+		const_iterator			end() const { return (_redBlackTree.end()); }
 
-		reverse_iterator		rbegin() { return (_tree.rbegin()); }
+		reverse_iterator		rbegin() { return (_redBlackTree.rbegin()); }
 
-		const_reverse_iterator	rbegin() const { return (_tree.rbegin()); }
+		const_reverse_iterator	rbegin() const { return (_redBlackTree.rbegin()); }
 
-		reverse_iterator		rend() { return (_tree.rend()); }
+		reverse_iterator		rend() { return (_redBlackTree.rend()); }
 
-		const_reverse_iterator	rend() const { return (_tree.rend()); }
+		const_reverse_iterator	rend() const { return (_redBlackTree.rend()); }
 
 		/* ------------------------------------------------------------------ */
 		/* CAPACITY                                                           */
 		/* ------------------------------------------------------------------ */
 
-		bool		empty() const { return (this->_size == 0); }
+		bool		empty() const { return (_redBlackTree.getSize() == 0); }
 
-		size_type	size() const { return (this->_size); }
+		size_type	size() const { return (_redBlackTree.getSize()); }
 
-		// size_type	max_size() const { return (_alloc.max_size()); }
-
+		size_type	max_size() const
+		{ 
+			Alloc tmp;
+			return tmp.max_size();
+		}
 
 		/* ------------------------------------------------------------------ */
 		/* ELEMENT ACCESS                                                     */
 		/* ------------------------------------------------------------------ */
 
-		mapped_type &		operator[](const key_type & k)
+		mapped_type	&		operator[](const key_type &k)
 		{
-			
-			// node_pointer	tmp = _find_key(k, this->_root);
-
-			// if (tmp)
-			// 	return (tmp->data.second);
-			// insert(value_type(k, mapped_type()));
-			// return (_find_key(k, this->_root)->value.second);
+			value_type val = ft::make_pair(k, mapped_type());
+			return (((insert(val)).first)->second);
 		}
 
 		node_pointer	_find_key(key_type const & key, node_pointer node) const
@@ -204,23 +192,21 @@ class map {
 		// insert single element
 		ft::pair<iterator, bool>	insert(value_type const & val) // ft::pair<const key_type, mapped_type>
 		{
-			std::cout << "ntm\n";
-			_tree.insert(val);
-
-			return val;
+			return _redBlackTree.insert(val);
 		}
 
 		// insert with hint
 		iterator	insert(iterator position, value_type const & val)
 		{
-
+			return _redBlackTree.insert_it(position, val);
 		}
 
 		// insert range
 		template <class InputIterator>
 		void	insert(InputIterator first, InputIterator last) 
 		{
-
+			while (first != last)
+				_redBlackTree.insert(*first++);	
 		}
 
 		// erase position
@@ -259,7 +245,7 @@ class map {
 		/* OBSERVERS                                                          */
 		/* ------------------------------------------------------------------ */
 
-		key_compare		key_comp() const { return (this->_comp); }
+		key_compare		key_comp() const { return (this->_key_comp); }
 
 		value_compare	value_comp() const { return (value_compare(key_compare())); }
 
@@ -268,7 +254,7 @@ class map {
 		/* OPERATIONS                                                         */
 		/* ------------------------------------------------------------------ */
 
-		iterator	find(key_type const & k)
+		iterator	find(key_type const & k) // search
 		{
 			// node_pointer	res = _find_key(k, _root);
 
