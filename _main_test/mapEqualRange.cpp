@@ -11,26 +11,24 @@
 /* ************************************************************************** */
 
 // map::equal_range
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapEqualRange()
+int		mapEqualRange(std::ofstream &outfile)
 {
-	std::map<char,int> mymap;
+	WOO::map<char,int> mymap;
 
 	mymap['a']=10;
 	mymap['b']=20;
 	mymap['c']=30;
 
-	std::pair<std::map<char,int>::iterator,std::map<char,int>::iterator> ret;
+	WOO::pair<WOO::map<char,int>::iterator,WOO::map<char,int>::iterator> ret;
 	ret = mymap.equal_range('b');
 
-	std::cout << "lower bound points to: ";
-	std::cout << ret.first->first << " => " << ret.first->second << '\n';
+	outfile << "lower bound points to: ";
+	outfile << ret.first->first << " => " << ret.first->second << '\n';
 
-	std::cout << "upper bound points to: ";
-	std::cout << ret.second->first << " => " << ret.second->second << '\n';
+	outfile << "upper bound points to: ";
+	outfile << ret.second->first << " => " << ret.second->second << '\n';
 
 	return 0;
 }

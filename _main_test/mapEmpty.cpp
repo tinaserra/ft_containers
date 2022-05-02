@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 
 // map::empty
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapEmpty()
+int		mapEmpty(std::ofstream &outfile)
 {
-	std::map<char,int> mymap;
+	WOO::map<char,int> mymap;
 
 	mymap['a']=10;
 	mymap['b']=20;
@@ -25,7 +23,7 @@ int		mapEmpty()
 
 	while (!mymap.empty())
 	{
-		std::cout << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
+		outfile << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
 		mymap.erase(mymap.begin());
 	}
 

@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 
 // vector::front
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorFront()
+int		vectorFront(std::ofstream &outfile)
 {
-	std::vector<int> myvector;
+	WOO::vector<int> myvector;
 
 	myvector.push_back(78);
 	myvector.push_back(16);
@@ -26,7 +24,7 @@ int		vectorFront()
 
 	myvector.front() -= myvector.back();
 
-	std::cout << "myvector.front() is now " << myvector.front() << '\n';
+	outfile << "myvector.front() is now " << myvector.front() << '\n';
 
 	return 0;
 }

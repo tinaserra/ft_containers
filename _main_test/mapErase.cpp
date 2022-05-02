@@ -11,14 +11,12 @@
 /* ************************************************************************** */
 
 // erasing from map
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
 int		mapErase()
 {
-	std::map<char,int> mymap;
-	std::map<char,int>::iterator it;
+	WOO::map<char,int> mymap;
+	WOO::map<char,int>::iterator it;
 
 	// insert some values:
 	mymap['a']=10;
@@ -38,7 +36,7 @@ int		mapErase()
 
 	// show content:
 	for (it=mymap.begin(); it!=mymap.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
+		outfile << it->first << " => " << it->second << '\n';
 
 	return 0;
 }

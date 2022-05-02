@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 
 // vector::pop_back
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
 int		vectorPopBack()
 {
-	std::vector<int> myvector;
+	WOO::vector<int> myvector;
 	int sum (0);
 	myvector.push_back (100);
 	myvector.push_back (200);
@@ -29,7 +27,7 @@ int		vectorPopBack()
 		myvector.pop_back();
 	}
 
-	std::cout << "The elements of myvector add up to " << sum << '\n';
+	outfile << "The elements of myvector add up to " << sum << '\n';
 
 	return 0;
 }

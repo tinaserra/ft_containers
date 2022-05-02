@@ -11,30 +11,28 @@
 /* ************************************************************************** */
 
 // clearing vectors
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorClear()
+int		vectorClear(std::ofstream &outfile)
 {
-	std::vector<int> myvector;
+	WOO::vector<int> myvector;
 	myvector.push_back (100);
 	myvector.push_back (200);
 	myvector.push_back (300);
 
-	std::cout << "myvector contains:";
+	outfile << "myvector contains:";
 	for (unsigned i=0; i<myvector.size(); i++)
-		std::cout << ' ' << myvector[i];
-	std::cout << '\n';
+		outfile << ' ' << myvector[i];
+	outfile << '\n';
 
 	myvector.clear();
 	myvector.push_back (1101);
 	myvector.push_back (2202);
 
-	std::cout << "myvector contains:";
+	outfile << "myvector contains:";
 	for (unsigned i=0; i<myvector.size(); i++)
-		std::cout << ' ' << myvector[i];
-	std::cout << '\n';
+		outfile << ' ' << myvector[i];
+	outfile << '\n';
 
 	return 0;
 }

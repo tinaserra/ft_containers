@@ -11,15 +11,14 @@
 /* ************************************************************************** */
 
 // vector::operator[]
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
 
-int		vectorAccessOperator()
+#include "tests.hpp"
+
+int		vectorAccessOperator(std::ofstream &outfile)
 {
-	std::vector<int> myvector (10);   // 10 zero-initialized elements
+	WOO::vector<int> myvector (10);   // 10 zero-initialized elements
 
-	std::vector<int>::size_type sz = myvector.size();
+	WOO::vector<int>::size_type sz = myvector.size();
 
 	// assign some values:
 	for (unsigned i=0; i<sz; i++) myvector[i]=i;
@@ -33,10 +32,10 @@ int		vectorAccessOperator()
 		myvector[i]=temp;
 	}
 
-	std::cout << "myvector contains:";
+	outfile << "myvector contains:";
 	for (unsigned i=0; i<sz; i++)
-		std::cout << ' ' << myvector[i];
-	std::cout << '\n';
+		outfile << ' ' << myvector[i];
+	outfile << '\n';
 
 	return 0;
 }

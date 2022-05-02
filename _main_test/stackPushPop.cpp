@@ -10,24 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>       // std::cout
-#include <stack>          // std::stack
-#include "stack.hpp"
+#include "tests.hpp"
 
-int		stackPushPop()
+int		stackPushPop(std::ofstream &outfile)
 {
-	std::cout << std::endl << "* \033[1m[STACK] PushPop\033[0m ----------------------------*" << std::endl;
-	std::stack<int> mystack;
+	outfile << std::endl << "* \033[1m[STACK] PushPop\033[0m ----------------------------*" << std::endl;
+	WOO::stack<int> mystack;
 
 	for (int i=0; i<5; ++i) mystack.push(i);
 
-	std::cout << "Popping out elements...";
+	outfile << "Popping out elements...";
 	while (!mystack.empty())
 	{
-		std::cout << ' ' << mystack.top();
+		outfile << ' ' << mystack.top();
 		mystack.pop();
 	}
-	std::cout << '\n';
+	outfile << '\n';
 
 	return 0;
 }

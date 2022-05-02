@@ -10,41 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorResize()
+int		vectorResize(std::ofstream &outfile)
 {
-	std::cout << std::endl << "* \033[1m[VECTOR] Resize\033[0m -------------------------------- *" << std::endl;
-	
-	std::vector<int> STLvector;
-	ft::vector<int> pute;
-
-	// set some initial content:
-	for (int i = 1; i < 10; i++)
-		STLvector.push_back(i);
-	
-	for (int i = 1; i < 10; i++)
-		pute.push_back(i);
-
-	STLvector.resize(5);
-	STLvector.resize(8,100);
-	STLvector.resize(12);
-
-	pute.resize(5);
-	pute.resize(8,100);
-	pute.resize(12);
-
-	std::cout << "STLvector contains:" << std::endl;
-	for (unsigned long i = 0; i < STLvector.size(); i++)
-		std::cout << ' ' << STLvector[i];
-	std::cout << '\n';
-
-	std::cout << "pute contains:" << std::endl;
-	for (unsigned long i = 0; i < pute.size(); i++)
-		std::cout << ' ' << pute[i];
-	std::cout << '\n';
+	outfile << std::endl << "* \033[1m[VECTOR] Resize\033[0m -------------------------------- *" << std::endl;
 
 	return 0;
 }

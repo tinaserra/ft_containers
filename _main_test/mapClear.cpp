@@ -11,50 +11,11 @@
 /* ************************************************************************** */
 
 // map::clear
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapClear()
+int		mapClear(std::ofstream &outfile)
 {
-	std::cout << std::endl << "* \033[1m[MAP] Clear\033[0m ------------------------*" << std::endl;
-	std::cout << "STL map" << std::endl;
-	std::map<char,int> mymap;
-
-	mymap['x']=100;
-	mymap['y']=200;
-	mymap['z']=300;
-
-	std::cout << "mymap contains:\n";
-	for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
-
-	mymap.clear();
-	mymap['a']=1101;
-	mymap['b']=2202;
-
-	std::cout << "mymap contains:\n";
-	for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
-
-	std::cout << "FT map" << std::endl;
-	ft::map<char,int> mymap;
-
-	mymap['x']=100;
-	mymap['y']=200;
-	mymap['z']=300;
-
-	std::cout << "mymap contains:\n";
-	for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
-
-	mymap.clear();
-	mymap['a']=1101;
-	mymap['b']=2202;
-
-	std::cout << "mymap contains:\n";
-	for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
-
+	outfile << std::endl << "* \033[1m[MAP] Clear\033[0m ------------------------*" << std::endl;
+	
 	return 0;
 }

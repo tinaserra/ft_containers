@@ -11,15 +11,13 @@
 /* ************************************************************************** */
 
 // map::count
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapCount()
+int		mapCount(std::ofstream &outfile)
 {
-	std::cout << std::endl << "* \033[1m[MAP] Count\033[0m ------------------------*" << std::endl;
-	std::cout << "STL map" << std::endl;
-	std::map<char,int> mymap;
+	outfile << std::endl << "* \033[1m[MAP] Count\033[0m ------------------------*" << std::endl;
+	outfile << "STL map" << std::endl;
+	WOO::map<char,int> mymap;
 	char c;
 
 	mymap ['a']=101;
@@ -28,29 +26,11 @@ int		mapCount()
 
 	for (c='a'; c<'h'; c++)
 	{
-		std::cout << c;
+		outfile << c;
 		if (mymap.count(c)>0)
-			std::cout << " is an element of mymap.\n";
+			outfile << " is an element of mymap.\n";
 		else
-			std::cout << " is not an element of mymap.\n";
-	}
-
-	std::cout << "FT map" << std::endl;
-
-	ft::map<char,int> ftMap;
-	char w;
-
-	ftMap ['a']=101;
-	ftMap ['c']=202;
-	ftMap ['f']=303;
-
-	for (w='a'; w<'h'; w++)
-	{
-		std::cout << w;
-		if (ftMap.count(w)>0)
-			std::cout << " is an element of mymap.\n";
-		else
-			std::cout << " is not an element of mymap.\n";
+			outfile << " is not an element of mymap.\n";
 	}
 	return 0;
 }

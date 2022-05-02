@@ -11,14 +11,12 @@
 /* ************************************************************************** */
 
 // map::find
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapFind()
+int		mapFind(std::ofstream &outfile)
 {
-	std::map<char,int> mymap;
-	std::map<char,int>::iterator it;
+	WOO::map<char,int> mymap;
+	WOO::map<char,int>::iterator it;
 
 	mymap['a']=50;
 	mymap['b']=100;
@@ -30,10 +28,10 @@ int		mapFind()
 	  mymap.erase (it);
 
 	// print content:
-	std::cout << "elements in mymap:" << '\n';
-	std::cout << "a => " << mymap.find('a')->second << '\n';
-	std::cout << "c => " << mymap.find('c')->second << '\n';
-	std::cout << "d => " << mymap.find('d')->second << '\n';
+	outfile << "elements in mymap:" << '\n';
+	outfile << "a => " << mymap.find('a')->second << '\n';
+	outfile << "c => " << mymap.find('c')->second << '\n';
+	outfile << "d => " << mymap.find('d')->second << '\n';
 
 	return 0;
 }

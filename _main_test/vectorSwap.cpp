@@ -11,26 +11,24 @@
 /* ************************************************************************** */
 
 // swap vectors
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorSwap()
+int		vectorSwap(std::ofstream &outfile)
 {
-	std::vector<int> foo (3,100);   // three ints with a value of 100
-	std::vector<int> bar (5,200);   // five ints with a value of 200
+	WOO::vector<int> foo (3,100);   // three ints with a value of 100
+	WOO::vector<int> bar (5,200);   // five ints with a value of 200
 
 	foo.swap(bar);
 
-	std::cout << "foo contains:";
+	outfile << "foo contains:";
 	for (unsigned i=0; i<foo.size(); i++)
-		std::cout << ' ' << foo[i];
-	std::cout << '\n';
+		outfile << ' ' << foo[i];
+	outfile << '\n';
 
-	std::cout << "bar contains:";
+	outfile << "bar contains:";
 	for (unsigned i=0; i<bar.size(); i++)
-		std::cout << ' ' << bar[i];
-	std::cout << '\n';
+		outfile << ' ' << bar[i];
+	outfile << '\n';
 
 	return 0;
 }

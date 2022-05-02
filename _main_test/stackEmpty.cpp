@@ -10,14 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>       // std::cout
-#include <stack>          // std::stack
-#include "stack.hpp"
+#include "tests.hpp"
 
-int		stackEmpty()
+int		stackEmpty(std::ofstream &outfile)
 {
-	std::cout << std::endl << "* \033[1m[STACK] Empty\033[0m ------------------------------*" << std::endl;
-	std::stack<int> mystack;
+	outfile << std::endl << "* \033[1m[STACK] Empty\033[0m ------------------------------*" << std::endl;
+	WOO::stack<int> mystack;
 	int sum (0);
 
 	for (int i=1;i<=10;i++) mystack.push(i);
@@ -28,7 +26,7 @@ int		stackEmpty()
 		mystack.pop();
 	}
 
-	std::cout << "total: " << sum << '\n';
+	outfile << "total: " << sum << '\n';
 
 	return 0;
 }

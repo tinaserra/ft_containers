@@ -11,23 +11,21 @@
 /* ************************************************************************** */
 
 // vector::push_back
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorPushBack()
+int		vectorPushBack(std::ofstream &outfile)
 {
-	std::vector<int> myvector;
+	WOO::vector<int> myvector;
 	int myint;
 
-	std::cout << "Please enter some integers (enter 0 to end):\n";
+	outfile << "Please enter some integers (enter 0 to end):\n";
 
 	do {
 		std::cin >> myint;
 		myvector.push_back (myint);
 	} while (myint);
 
-	std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+	outfile << "myvector stores " << int(myvector.size()) << " numbers.\n";
 
 	return 0;
 }

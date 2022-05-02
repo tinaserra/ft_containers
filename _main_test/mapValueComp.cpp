@@ -11,25 +11,23 @@
 /* ************************************************************************** */
 
 // map::value_comp
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapValueComp()
+int		mapValueComp(std::ofstream &outfile)
 {
-	std::map<char,int> mymap;
+	WOO::map<char,int> mymap;
 
 	mymap['x']=1001;
 	mymap['y']=2002;
 	mymap['z']=3003;
 
-	std::cout << "mymap contains:\n";
+	outfile << "mymap contains:\n";
 
-	std::pair<char,int> highest = *mymap.rbegin();          // last element
+	WOO::pair<char,int> highest = *mymap.rbegin();          // last element
 
-	std::map<char,int>::iterator it = mymap.begin();
+	WOO::map<char,int>::iterator it = mymap.begin();
 	do {
-		std::cout << it->first << " => " << it->second << '\n';
+		outfile << it->first << " => " << it->second << '\n';
 	} while ( mymap.value_comp()(*it++, highest) );
 
 	return 0;

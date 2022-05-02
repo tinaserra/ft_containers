@@ -11,19 +11,17 @@
 /* ************************************************************************** */
 
 // vector::begin/end
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorBeginEnd()
+int		vectorBeginEnd(std::ofstream &outfile)
 {
 	std::vector<int> myvector;
 	for (int i=1; i<=5; i++) myvector.push_back(i);
 
-	std::cout << "myvector contains:";
+	outfile << "myvector contains:";
 	for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
-		std::cout << ' ' << *it;
-	std::cout << '\n';
+		outfile << ' ' << *it;
+	outfile << '\n';
 
 	return 0;
 }

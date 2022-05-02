@@ -11,19 +11,17 @@
 /* ************************************************************************** */
 
 // vector assignment
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorAssignation()
+int		vectorAssignation(std::ofstream &outfile)
 {
-	std::vector<int> foo (3,0);
-	std::vector<int> bar (5,0);
+	WOO::vector<int> foo (3,0);
+	WOO::vector<int> bar (5,0);
 
 	bar = foo;
-	foo = std::vector<int>();
+	foo = WOO::vector<int>();
 
-	std::cout << "Size of foo: " << int(foo.size()) << '\n';
-	std::cout << "Size of bar: " << int(bar.size()) << '\n';
+	outfile << "Size of foo: " << int(foo.size()) << '\n';
+	outfile << "Size of bar: " << int(bar.size()) << '\n';
 	return 0;
 }

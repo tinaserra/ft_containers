@@ -11,21 +11,19 @@
 /* ************************************************************************** */
 
 // stack::top
-#include <iostream>       // std::cout
-#include <stack>          // std::stack
-#include "stack.hpp"
+#include "tests.hpp"
 
-int		stackTop()
+int		stackTop(std::ofstream &outfile)
 {
-	std::cout << std::endl << "* \033[1m[STACK] Top\033[0m --------------------------------*" << std::endl;
-	std::stack<int> mystack;
+	outfile << std::endl << "* \033[1m[STACK] Top\033[0m --------------------------------*" << std::endl;
+	WOO::stack<int> mystack;
 
 	mystack.push(10);
 	mystack.push(20);
 
 	mystack.top() -= 5;
 
-	std::cout << "mystack.top() is now " << mystack.top() << '\n';
+	outfile << "mystack.top() is now " << mystack.top() << '\n';
 
 	return 0;
 }

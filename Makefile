@@ -10,8 +10,59 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC =	main.cpp	\
-		mapInsert.cpp
+SRC =	main.cpp \
+		mapAccessOperator.cpp \
+		mapAssignation.cpp \
+		mapBeginEnd.cpp \
+		mapClear.cpp \
+		mapConstructor.cpp \
+		mapCount.cpp \
+		mapEmpty.cpp \
+		mapEqualRange.cpp \
+		mapErase.cpp \
+		mapFind.cpp \
+		mapGetAllocator.cpp \
+		mapInsert.cpp \
+		mapKeyComp.cpp \
+		mapLowerUpperBound.cpp \
+		mapMaxSize.cpp \
+		mapRbeginRend.cpp \
+		mapSize.cpp \
+		mapSwap.cpp \
+		mapValueComp.cpp \
+		stackConstructor.cpp \
+		stackEmpty.cpp \
+		stackPushPop.cpp \
+		stackSize.cpp \
+		stackTop.cpp \
+		utils_enable_if.cpp \
+		utils_equal.cpp \
+		utils_is_integral.cpp \
+		utils_iterator_traits.cpp \
+		utils_lexicographical_compare.cpp \
+		utils_make_pair.cpp \
+		utils_pair.cpp \
+		utils_reverse_iterator.cpp \
+		vectorAccessOperator.cpp \
+		vectorAssign.cpp \
+		vectorAssignation.cpp \
+		vectorAt.cpp \
+		vectorBack.cpp \
+		vectorBeginEnd.cpp \
+		vectorCapacity.cpp \
+		vectorClear.cpp \
+		vectorConstruction.cpp \
+		vectorEmpty.cpp \
+		vectorErase.cpp \
+		vectorFront.cpp \
+		vectorInsert.cpp \
+		vectorPopBack.cpp \
+		vectorPushBack.cpp \
+		vectorRbeginRend.cpp \
+		vectorReserve.cpp \
+		vectorResize.cpp \
+		vectorSwap.cpp
+
 
 NAME = ft_containers
 
@@ -44,8 +95,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | .gitignore
 		@echo $(NAME) > .gitignore
 		@echo $(OBJ_DIR) >> .gitignore
 
-debug : fclean
-	make all CXXFLAGS:="-DDEBUG -g"
+std : fclean
+	make all CXXFLAGS:="-DSTL"
 
 clean:
 	@rm -rf $(OBJ_DIR)

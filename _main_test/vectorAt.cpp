@@ -11,22 +11,20 @@
 /* ************************************************************************** */
 
 // vector::at
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorAt()
+int		vectorAt(std::ofstream &outfile)
 {
-	std::vector<int> myvector (10);   // 10 zero-initialized ints
+	WOO::vector<int> myvector (10);   // 10 zero-initialized ints
 
 	// assign some values:
 	for (unsigned i=0; i<myvector.size(); i++)
 	myvector.at(i)=i;
 
-	std::cout << "myvector contains:";
+	outfile << "myvector contains:";
 	for (unsigned i=0; i<myvector.size(); i++)
-	std::cout << ' ' << myvector.at(i);
-	std::cout << '\n';
+	outfile << ' ' << myvector.at(i);
+	outfile << '\n';
 
 	return 0;
 }

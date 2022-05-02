@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 // pair::pair example
-#include <utility>      // std::pair, std::make_pair
-#include <string>       // std::string
-#include <iostream>     // std::cout
+#include "tests.hpp"
 
 int pair() {
   std::pair <std::string,double> product1;                     // default constructor

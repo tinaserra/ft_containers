@@ -11,14 +11,12 @@
 /* ************************************************************************** */
 
 // map::lower_bound/upper_bound
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapLowerUpperBound()
+int		mapLowerUpperBound(std::ofstream &outfile)
 {
-	std::map<char,int> mymap;
-	std::map<char,int>::iterator itlow,itup;
+	WOO::map<char,int> mymap;
+	WOO::map<char,int>::iterator itlow,itup;
 
 	mymap['a']=20;
 	mymap['b']=40;
@@ -32,8 +30,8 @@ int		mapLowerUpperBound()
 	mymap.erase(itlow,itup);        // erases [itlow,itup)
 
 	// print content:
-	for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
+	for (WOO::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+		outfile << it->first << " => " << it->second << '\n';
 
 	return 0;
 }

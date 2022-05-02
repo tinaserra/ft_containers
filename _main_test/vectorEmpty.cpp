@@ -1,11 +1,9 @@
 // vector::empty
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorEmpty()
+int		vectorEmpty(std::ofstream &outfile)
 {
-	std::vector<int> myvector;
+	WOO::vector<int> myvector;
 	int sum (0);
 
 	for (int i=1;i<=10;i++) myvector.push_back(i);
@@ -16,7 +14,7 @@ int		vectorEmpty()
 		myvector.pop_back();
 	}
 
-	std::cout << "total: " << sum << '\n';
+	outfile << "total: " << sum << '\n';
 
 	return 0;
 }

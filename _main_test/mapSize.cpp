@@ -11,18 +11,16 @@
 /* ************************************************************************** */
 
 // map::size
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapSize()
+int		mapSize(std::ofstream &outfile)
 {
-	std::map<char,int> mymap;
+	WOO::map<char,int> mymap;
 	mymap['a']=101;
 	mymap['b']=202;
 	mymap['c']=302;
 
-	std::cout << "mymap.size() is " << mymap.size() << '\n';
+	outfile << "mymap.size() is " << mymap.size() << '\n';
 
 	return 0;
 }

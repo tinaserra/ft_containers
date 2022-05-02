@@ -11,30 +11,27 @@
 /* ************************************************************************** */
 
 // map::key_comp
-#include <iostream>
-#include <map>
-#include "map.hpp"
-
-int		mapKeyComp()
+#include "tests.hpp"
+int		mapKeyComp(std::ofstream &outfile)
 {
-	std::map<char,int> mymap;
+	WOO::map<char,int> mymap;
 
-	std::map<char,int>::key_compare mycomp = mymap.key_comp();
+	WOO::map<char,int>::key_compare mycomp = mymap.key_comp();
 
 	mymap['a']=100;
 	mymap['b']=200;
 	mymap['c']=300;
 
-	std::cout << "mymap contains:\n";
+	outfile << "mymap contains:\n";
 
 	char highest = mymap.rbegin()->first;     // key value of last element
 
-	std::map<char,int>::iterator it = mymap.begin();
+	WOO::map<char,int>::iterator it = mymap.begin();
 	do {
-		std::cout << it->first << " => " << it->second << '\n';
+		outfile << it->first << " => " << it->second << '\n';
 	} while ( mycomp((*it++).first, highest) );
 
-	std::cout << '\n';
+	outfile << '\n';
 
 	return 0;
 }

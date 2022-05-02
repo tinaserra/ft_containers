@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 
 // vector::back
-#include <iostream>
-#include <vector>
-#include "vector.hpp"
+#include "tests.hpp"
 
-int		vectorBack()
+int		vectorBack(std::ofstream &outfile)
 {
-	std::vector<int> myvector;
+	WOO::vector<int> myvector;
 
 	myvector.push_back(10);
 
@@ -26,10 +24,10 @@ int		vectorBack()
 		myvector.push_back ( myvector.back() -1 );
 	}
 
-	std::cout << "myvector contains:";
+	outfile << "myvector contains:";
 	for (unsigned i=0; i<myvector.size() ; i++)
-		std::cout << ' ' << myvector[i];
-	std::cout << '\n';
+		outfile << ' ' << myvector[i];
+	outfile << '\n';
 
 	return 0;
 }

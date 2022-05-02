@@ -11,13 +11,11 @@
 /* ************************************************************************** */
 
 // swap maps
-#include <iostream>
-#include <map>
-#include "map.hpp"
+#include "tests.hpp"
 
-int		mapSwap()
+int		mapSwap(std::ofstream &outfile)
 {
-	std::map<char,int> foo,bar;
+	WOO::map<char,int> foo,bar;
 
 	foo['x']=100;
 	foo['y']=200;
@@ -28,13 +26,13 @@ int		mapSwap()
 
 	foo.swap(bar);
 
-	std::cout << "foo contains:\n";
-	for (std::map<char,int>::iterator it=foo.begin(); it!=foo.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
+	outfile << "foo contains:\n";
+	for (WOO::map<char,int>::iterator it=foo.begin(); it!=foo.end(); ++it)
+		outfile << it->first << " => " << it->second << '\n';
 
-	std::cout << "bar contains:\n";
-	for (std::map<char,int>::iterator it=bar.begin(); it!=bar.end(); ++it)
-		std::cout << it->first << " => " << it->second << '\n';
+	outfile << "bar contains:\n";
+	for (WOO::map<char,int>::iterator it=bar.begin(); it!=bar.end(); ++it)
+		outfile << it->first << " => " << it->second << '\n';
 
 	return 0;
 }
