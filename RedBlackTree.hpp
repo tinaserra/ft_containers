@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 14:28:58 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:36:45 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ class RedBlackTree
 		~RedBlackTree()
 		{
 			if (this->_root != _nil)
-				_clean();
+				clean();
 			_data_alloc.deallocate(_nil->_data, 1);
 			_node_alloc.deallocate(_nil, 1);
 		}
@@ -111,8 +111,8 @@ class RedBlackTree
 		{
 			if (this != &src)
 			{
-				_clean();
-				for (const_iterator i = src.rb_begin(); i != src.rb_end(); i++)
+				clean();
+				for (const_iterator i = src.begin(); i != src.end(); i++)
 					insert(*i);
 			}
 			return *this;
@@ -148,7 +148,7 @@ class RedBlackTree
 
 		data_allocator	get_data_allocator() const { return _data_alloc; }
 
-		Comp			get_key_compare() const { return _key_compare; }
+		Cmp				get_key_compare() const { return _key_compare; }
 
 		bool			empty() const
 		{
@@ -166,8 +166,8 @@ class RedBlackTree
 
 		iterator		get_lower_bound(const value_type & val)
 		{
-			iterator it = rb_begin();
-			while (it != rb_end())
+			iterator it = begin();
+			while (it != end())
 			{
 				if (!_key_compare(*it , val))
 					return it;
@@ -178,8 +178,8 @@ class RedBlackTree
 
 		const_iterator	get_lower_bound(const value_type & val) const
 		{
-			const_iterator it = rb_begin();
-			while (it != rb_end())
+			const_iterator it = begin();
+			while (it != end())
 			{
 				if (!_key_compare(*it , val))
 					return it;
@@ -190,8 +190,8 @@ class RedBlackTree
 
 		iterator		get_upper_bound(const value_type & val)
 		{
-			iterator it = rb_begin();
-			while (it != rb_end())
+			iterator it = begin();
+			while (it != end())
 			{
 				if (_key_compare(val , *it))
 					return it;
@@ -202,8 +202,8 @@ class RedBlackTree
 
 		const_iterator	get_upper_bound(const value_type & val) const
 		{
-			const_iterator it = rb_begin();
-			while (it != rb_end())
+			const_iterator it = begin();
+			while (it != end())
 			{
 				if (_key_compare(val , *it))
 					return it;

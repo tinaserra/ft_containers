@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/04/13 16:32:23 by vserra           ###   ########.fr        #
+#    Updated: 2022/05/03 15:33:17 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ SRC =	main.cpp \
 NAME = ft_containers
 
 # override -> permet de reecrire la suite de la variable
-override CXXFLAGS +=  -MMD -std=c++11
+override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++11
 
 OBJ_DIR = obj
 SRC_DIR = _main_test
@@ -95,7 +95,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | .gitignore
 		@echo $(NAME) > .gitignore
 		@echo $(OBJ_DIR) >> .gitignore
 
-std : fclean
+stl : fclean
 	make all CXXFLAGS:="-DSTL"
 
 clean:

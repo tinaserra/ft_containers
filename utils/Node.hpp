@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:26:19 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 14:28:52 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:35:54 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,20 @@ class Node
 			return *this;
 		}
 
-	template<typename T>
-	std::ostream	&operator<<(std::ostream &stream, const Node<T> & n)
-	{
-		if (n.data == NULL)
-		{
-			stream << "Nil node" << std::endl;
-			return stream;
-		}
-		if (n.data != NULL)
-			stream << "color " <<  n.color << " " << *n.data;
-		return stream;
-	}
 
 };
+
+template<typename T>
+std::ostream	&operator<<(std::ostream &stream, const Node<T> & n)
+{
+	if (n.data == NULL)
+	{
+		stream << "Nil node" << std::endl;
+		return stream;
+	}
+	if (n.data != NULL)
+		stream << "color " <<  n.color << " " << *n.data;
+	return stream;
+}
 
 #endif
