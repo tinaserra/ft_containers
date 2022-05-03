@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:11:08 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 12:52:15 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:25:43 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		vectorFront(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[VECTOR] Front\033[0m --- *" << std::endl;
 	WOO::vector<int> myvector;
 
 	myvector.push_back(78);

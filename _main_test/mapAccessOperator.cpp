@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmapAccessOperator.cpp                             :+:      :+:    :+:   */
+/*   mapAccessOperator.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:46:20 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 12:46:58 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:02:14 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		mapAccessOperator(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[MAP] Operator[]\033[0m -----------------------*" << std::endl;
+	outfile << std::endl << "* \033[1m[MAP] Operator[]\033[0m --- *" << std::endl;
 	WOO::map<char,std::string> myMap;
 
 	myMap['a']="an element";

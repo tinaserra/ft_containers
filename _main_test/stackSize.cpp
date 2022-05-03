@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_size.cpp                                     :+:      :+:    :+:   */
+/*   stackSize.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:31:29 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/12 18:02:20 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:15:23 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		stackSize(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[STACK] Size\033[0m -------------------------------*" << std::endl;
+	outfile << std::endl << "* \033[1m[STACK] Size\033[0m --- *" << std::endl;
 	WOO::stack<int> myints;
 	outfile << "0. size: " << myints.size() << '\n';
 

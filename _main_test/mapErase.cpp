@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:39:41 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 11:42:02 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:04:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		mapErase()
 {
+	outfile << std::endl << "* \033[1m[MAP] Erase\033[0m --- *" << std::endl;
 	WOO::map<char,int> mymap;
 	WOO::map<char,int>::iterator it;
 

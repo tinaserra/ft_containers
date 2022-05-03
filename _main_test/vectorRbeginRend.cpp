@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectorRbeginRend2.cpp                              :+:      :+:    :+:   */
+/*   vectorRbeginRend.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:14:26 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 12:53:31 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:28:11 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		vectorRbeginRend(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[VECTOR] Rbegin Rend\033[0m --- *" << std::endl;
 	WOO::vector<int> myvector (5);  // 5 default-constructed ints
 
 	int i=0;

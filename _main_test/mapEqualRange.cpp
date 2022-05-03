@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:39:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 11:41:28 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:03:40 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		mapEqualRange(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[MAP] Equal_range\033[0m --- *" << std::endl;
 	WOO::map<char,int> mymap;
 
 	mymap['a']=10;

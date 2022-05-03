@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:44:52 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 11:27:45 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:10:13 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		mapMaxSize(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[MAP] Max_size\033[0m --- *" << std::endl;
 	int i;
 	WOO::map<int,int> mymap;
 

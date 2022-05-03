@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:40:42 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 11:26:09 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:05:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		mapGetAllocator(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[MAP] Get_allocator\033[0m --- *" << std::endl;
 	int psize;
 	WOO::map<char,int> mymap;
 	WOO::pair<const char,int>* p;

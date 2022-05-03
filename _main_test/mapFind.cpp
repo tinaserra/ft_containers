@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:40:12 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 11:25:50 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:05:01 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		mapFind(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[MAP] Find\033[0m --- *" << std::endl;
 	WOO::map<char,int> mymap;
 	WOO::map<char,int>::iterator it;
 

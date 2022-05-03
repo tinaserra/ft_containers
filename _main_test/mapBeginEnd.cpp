@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:37:19 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 12:07:02 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:02:48 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		mapBeginEnd(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[MAP] Begin End\033[0m ------------------------*" << std::endl;
+	outfile << std::endl << "* \033[1m[MAP] Begin End\033[0m --- *" << std::endl;
 	WOO::map<char,int> mymap;
 
 	mymap['b'] = 100;
@@ -23,7 +23,6 @@ int		mapBeginEnd(std::ofstream &outfile)
 	mymap['c'] = 300;
 
 	// show content:
-	outfile << "STL map" << std::endl;
 	for (WOO::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
 		outfile << it->first << " => " << it->second << '\n';
 

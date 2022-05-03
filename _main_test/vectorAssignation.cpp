@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectorAssignation2.cpp                             :+:      :+:    :+:   */
+/*   vectorAssignation.cpp                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:12:03 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 12:49:40 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:20:32 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		vectorAssignation(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[VECTOR] Operator=\033[0m --- *" << std::endl;
 	WOO::vector<int> foo (3,0);
 	WOO::vector<int> bar (5,0);
 

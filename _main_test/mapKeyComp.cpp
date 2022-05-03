@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:41:55 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 11:26:48 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:09:20 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "tests.hpp"
 int		mapKeyComp(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[MAP] Key_comp\033[0m --- *" << std::endl;
 	WOO::map<char,int> mymap;
 
 	WOO::map<char,int>::key_compare mycomp = mymap.key_comp();

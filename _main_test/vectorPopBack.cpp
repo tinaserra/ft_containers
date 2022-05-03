@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectorPopBack2.cpp                                 :+:      :+:    :+:   */
+/*   vectorPopBack.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:13:15 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 12:52:47 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:27:25 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		vectorPopBack()
 {
+	outfile << std::endl << "* \033[1m[VECTOR] Pop_back\033[0m --- *" << std::endl;
 	WOO::vector<int> myvector;
 	int sum (0);
 	myvector.push_back (100);

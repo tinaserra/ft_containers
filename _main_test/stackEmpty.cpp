@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_empty.cpp                                    :+:      :+:    :+:   */
+/*   stackEmpty.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 17:20:27 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/12 17:59:46 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:14:59 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		stackEmpty(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[STACK] Empty\033[0m ------------------------------*" << std::endl;
+	outfile << std::endl << "* \033[1m[STACK] Empty\033[0m --- *" << std::endl;
 	WOO::stack<int> mystack;
 	int sum (0);
 

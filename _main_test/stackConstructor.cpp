@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_constructor.cpp                              :+:      :+:    :+:   */
+/*   stackConstructor.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:30:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/12 17:59:31 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:14:06 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,20 @@
 
 int		stackConstructor(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[STACK] Constructor\033[0m ------------------------*" << std::endl;
+	outfile << std::endl << "* \033[1m[STACK] Constructor\033[0m --- *" << std::endl;
 
+	std::deque<int> mydeque (3,100);          // deque with 3 elements
+	WOO::vector<int> myvector (2,200);        // vector with 2 elements
+
+	WOO::stack<int> first;                    // empty stack
+	WOO::stack<int> second (mydeque);         // stack initialized to copy of deque
+
+	WOO::stack<int,WOO::vector<int> > third;  // empty stack using vector
+	WOO::stack<int,WOO::vector<int> > fourth (myvector);
+
+	outfile << "size of first: " << first.size() << '\n';
+	outfile << "size of second: " << second.size() << '\n';
+	outfile << "size of third: " << third.size() << '\n';
+	outfile << "size of fourth: " << fourth.size() << '\n';
 	return 0;
 }

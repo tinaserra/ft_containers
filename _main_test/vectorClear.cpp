@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:06:48 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 12:50:51 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/03 15:24:41 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 int		vectorClear(std::ofstream &outfile)
 {
+	outfile << std::endl << "* \033[1m[VECTOR] Clear\033[0m --- *" << std::endl;
 	WOO::vector<int> myvector;
 	myvector.push_back (100);
 	myvector.push_back (200);
