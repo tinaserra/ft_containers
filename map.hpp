@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/02 14:42:23 by admin            ###   ########.fr       */
+/*   Updated: 2022/05/03 14:28:13 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <functional>
 # include <memory>
-# include <iostream>
-# include <sstream>
+# include <algorithm>
+// # include <iostream>
+// # include <sstream>
 # include "utils/pair.hpp"
 # include "utils/iterator_traits.hpp"
 # include "utils/reverseIterator.hpp"
@@ -37,6 +38,7 @@ class map {
 		typedef T											mapped_type;
 		typedef ft::pair<const key_type, mapped_type>		value_type;
 		typedef Compare										key_compare;
+		typedef Alloc										allocator_type;
 
 
 		class value_compare : public std::binary_function<value_type, value_type, bool>
@@ -52,21 +54,27 @@ class map {
 				Compare comp;
 		};
 
-		typedef Alloc														allocator_type;
 		typedef typename allocator_type::reference							reference;
 		typedef typename allocator_type::const_reference					const_reference;
 		typedef typename allocator_type::pointer							pointer;
 		typedef typename allocator_type::const_pointer						const_pointer;
+
 		typedef RedBlackTree<value_type, value_compare, allocator_type>		tree_type;
-		typedef Node<value_type>											node_type;
-		typedef node_type*													node_pointer;
-		typedef typename tree_type::iterator 						iterator;
-		typedef typename tree_type::const_iterator					const_iterator;
-		typedef typename tree_type::reverse_iterator				reverse_iterator;
-		typedef typename tree_type::const_reverse_iterator			const_reverse_iterator;
-		typedef std::ptrdiff_t												difference_type;
+		typedef typename tree_type::pair_type								pair_type;
+		typedef typename tree_type::pair_range								pair_range;
+		typedef typename tree_type::const_pair_range						const_pair_range;
+		typedef typename tree_type::iterator 								iterator;
+		typedef typename tree_type::const_iterator							const_iterator;
+		typedef typename tree_type::reverse_iterator						reverse_iterator;
+		typedef typename tree_type::const_reverse_iterator					const_reverse_iterator;
+		
+		typedef typename iterator_traits<iterator>::difference_type			difference_type;
 		typedef size_t														size_type;
-		typedef typename allocator_type::template rebind<node_type>::other	node_allocator;
+		
+		// typedef Node<value_type>											node_type;
+		// typedef node_type*												node_pointer;
+		// typedef std::ptrdiff_t											difference_type;
+		// typedef typename allocator_type::template rebind<node_type>::other	node_allocator;
 
 	/* ---------------------------------------------------------------------- */
 	/* PRIVATE MEMBERS                                                        */
@@ -74,7 +82,6 @@ class map {
 
 	private:
 		key_compare		_key_comp;
-		node_pointer	_last;
 		tree_type		_redBlackTree;
 
 	/* ---------------------------------------------------------------------- */
@@ -85,8 +92,7 @@ class map {
 		// Default constructor
 		explicit map(const key_compare & comp = key_compare(),
 						const allocator_type & alloc = allocator_type())
-						: _redBlackTree(comp , alloc)
-		{}
+						: _redBlackTree(comp , alloc) {}
 			
 		// Range constructor
 		template <class InputIterator>
@@ -108,12 +114,6 @@ class map {
 
 		// Destructor
 		~map() {}
-		// virtual ~map()
-		// {
-		// 	clear();
-		// 	_alloc.destroy(_last);
-		// 	_alloc.deallocate(_last, 1);
-		// }
 
 		//Assignation operator
 		map &	operator=(const map & rhs)
@@ -146,9 +146,9 @@ class map {
 		/* CAPACITY                                                           */
 		/* ------------------------------------------------------------------ */
 
-		bool		empty() const { return (_redBlackTree.getSize() == 0); }
+		bool		empty() const { return (_redBlackTree.empty() == 0); }
 
-		size_type	size() const { return (_redBlackTree.getSize()); }
+		size_type	size() const { return (_redBlackTree.get_size()); } // getSize
 
 		size_type	max_size() const
 		{ 
@@ -164,25 +164,6 @@ class map {
 		{
 			value_type val = ft::make_pair(k, mapped_type());
 			return (((insert(val)).first)->second);
-		}
-
-		node_pointer	_find_key(key_type const & key, node_pointer node) const
-		{
-			// if (!node || node == _last)
-			// 	return (NULL);
-			// value_type	tmp = ft::make_pair<key_type, mapped_type>(key, mapped_type());
-			// if (_is_equal(tmp, node->data))
-			// 	return (node);
-			// if (this->_comp(key, node->data.first))
-			// 	return (_find_key(key, node->left));
-			// else if (this->_comp(node->data.first, key))
-			// 	return (_find_key(key, node->right));
-			// return (NULL);
-		}
-
-		bool			_is_equal(value_type const & x, value_type const & y) const
-		{
-			// return (!_comp(x.first, y.first) && !_comp(y.first, x.first));
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -212,33 +193,46 @@ class map {
 		// erase position
 		void	erase(iterator position)
 		{
+			if (position == end())
+					return;
+			key_type key = position->first;
+			value_type val = ft::make_pair(key, mapped_type());
 
+			_redBlackTree.delete_node(_redBlackTree.searchTree(val));
 		}
 
 		// erase key
 		size_type	erase(const key_type & k)
 		{
+			value_type val = ft::make_pair(k, mapped_type());
 
+			iterator pos(_redBlackTree.searchTree(val));
+			if (pos != end())
+			{
+				_redBlackTree.delete_node(_redBlackTree.searchTree(val));
+				return 1;
+			}
+			return 0;
 		}
 
 		// erase range
 		void	erase(iterator first, iterator last)
 		{
-
+			if (first != end())
+			{
+				while(first != last)
+					_redBlackTree.delete_node(_redBlackTree.searchTree(*first++));
+			}
 		}
 
-		void	swap(map & x)
+		void	swap(map& x)
 		{
-			// std::swap(this->_comp, x._comp);
-			// std::swap(this->_alloc, x._alloc);
-			// std::swap(this->_size, x._size);
-			// std::swap(this->_root, x._root);
-			// std::swap(this->_last, x._last);
+			_redBlackTree.swap(x._redBlackTree);
 		}
 
 		void	clear()
 		{
-
+			_redBlackTree.clean();
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -247,7 +241,7 @@ class map {
 
 		key_compare		key_comp() const { return (this->_key_comp); }
 
-		value_compare	value_comp() const { return (value_compare(key_compare())); }
+		value_compare	value_comp() const { return _redBlackTree.get_key_compare(); }
 
 
 		/* ------------------------------------------------------------------ */
@@ -256,65 +250,74 @@ class map {
 
 		iterator	find(key_type const & k) // search
 		{
-			// node_pointer	res = _find_key(k, _root);
-
-			// if (res)
-			// 	return (iterator(res));
-			// return (end());
+			value_type val = ft::make_pair(k, mapped_type());
+			return iterator(_redBlackTree.searchTree(val));
 		}
 
 		const_iterator	find(key_type const & k) const
 		{
-
+			value_type val = ft::make_pair(k, mapped_type());
+			return const_iterator(_redBlackTree.searchTree(val));
 		}
 
 		size_type	count(key_type const & k) const
 		{
-
+			value_type val = ft::make_pair(k, mapped_type());
+			const_iterator res = _redBlackTree.searchTree(val);
+			if (res == end())
+				return 0;
+			else
+				return 1;
 		}
 
-		iterator	lower_bound(key_type const & k)
+		iterator	lower_bound(const key_type & k)
 		{
-
+			value_type val = ft::make_pair(k, mapped_type());
+			return (iterator(_redBlackTree.get_lower_bound(val)));
 		}
 
-		const_iterator	lower_bound(key_type const & k) const
+		const_iterator	lower_bound(const key_type & k) const
 		{
-
+			value_type val = ft::make_pair(k, mapped_type());
+			return (const_iterator(_redBlackTree.get_lower_bound(val)));
 		}
 
-		iterator	upper_bound(key_type const & k)
+		iterator	upper_bound(const key_type & k)
 		{
-
+			value_type val = ft::make_pair(k, mapped_type());
+			return (iterator(_redBlackTree.get_upper_bound(val)));
 		}
 
-		const_iterator	upper_bound(key_type const & k) const
+		const_iterator	upper_bound(const key_type & k) const
 		{
-
+			value_type val = ft::make_pair(k, mapped_type());
+			return (const_iterator(_redBlackTree.get_upper_bound(val)));
 		}
 
-		pair<iterator, iterator>		equal_range(key_type const & k)
+		pair_range	equal_range(const key_type & k)
 		{
-			// return (pair<iterator, iterator>(lower_bound(k), upper_bound(k)));
+			value_type val = ft::make_pair(k, mapped_type());
+			return (_redBlackTree.get_equal_range(val));
 		}
 
-		pair<const_iterator, const_iterator>		equal_range(key_type const & k) const
+		const_pair_range	equal_range(const key_type & k) const
 		{
-			// return (pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k)));
+			value_type val = ft::make_pair(k, mapped_type());
+			return (_redBlackTree.get_equal_range(val));
 		}
 
 		/* ------------------------------------------------------------------ */
 		/* ALLOCATOR                                                          */
 		/* ------------------------------------------------------------------ */
 
-		allocator_type	get_allocator() const { return (this->_alloc); }
+		allocator_type	get_allocator() const { return _redBlackTree.get_data_allocator(); }
 
 	/* ---------------------------------------------------------------------- */
 	/* PRIVATE MEMBER FUNCTIONS                                               */
 	/* ---------------------------------------------------------------------- */
 	private:
 
-		
+		void	_print() { _redBlackTree.printTree(); }
 	};
 
 /* -------------------------------------------------------------------------- */
@@ -345,7 +348,9 @@ bool	operator<(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compar
 template <class Key, class T, class Compare, class Alloc>
 bool	operator<=(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
 {
-	return (lhs < rhs || lhs == rhs);
+	if (lhs == rhs || lhs < rhs)
+		return true;
+	return false;
 }
 
 template <class Key, class T, class Compare, class Alloc>
@@ -357,7 +362,9 @@ bool	operator>(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compar
 template <class Key, class T, class Compare, class Alloc>
 bool	operator>=(const map<Key, T, Compare, Alloc> & lhs, const map<Key, T, Compare, Alloc> & rhs)
 {
-	return (lhs > rhs || lhs == rhs);
+	if (lhs == rhs || lhs > rhs)
+		return true;
+	return false;
 }
 
 template <class Key, class T, class Compare, class Alloc>
