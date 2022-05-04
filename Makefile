@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/05/04 13:24:51 by vserra           ###   ########.fr        #
+#    Updated: 2022/05/04 13:53:11 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,9 @@ clean:
 
 fclean:	clean
 	@rm -rf $(NAME)
+	@rm -rf stdMapOutput
+	@rm -rf stdStackOutput
+	@rm -rf stdVectorOutput
 	@echo "[$(NAME)]: $(_DELETED)"
 
 re: fclean all
