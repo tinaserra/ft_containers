@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:36:54 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:02:10 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		mapEmpty(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[MAP] Empty[]\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [MAP] Empty[]  --- *" << std::endl;
 	WOO::map<char,int> mymap;
 
 	mymap['a']=10;

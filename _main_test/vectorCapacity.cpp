@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:56 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:24:20 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		vectorCapacitySizeMaxSize(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Capacity Size Max_size\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Capacity Size Max_size  --- *" << std::endl;
 	WOO::vector<int> myvector;
 
 	// set some content in the vector:

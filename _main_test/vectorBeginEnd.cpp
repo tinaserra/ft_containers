@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:08:27 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:23:56 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		vectorBeginEnd(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Begin End\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Begin End  --- *" << std::endl;
 	WOO::vector<int> myvector;
 	for (int i=1; i<=5; i++) myvector.push_back(i);
 

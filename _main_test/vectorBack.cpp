@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:04:10 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:21:10 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		vectorBack(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Assign\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Assign  --- *" << std::endl;
 	WOO::vector<int> myvector;
 
 	myvector.push_back(10);

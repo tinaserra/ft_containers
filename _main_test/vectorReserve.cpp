@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:16:10 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:29:58 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		vectorReserve(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Reserve\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Reserve  --- *" << std::endl;
 	WOO::vector<int>::size_type sz;
 
 	WOO::vector<int> foo;

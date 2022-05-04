@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:12:44 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:20:49 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int		vectorAccessOperator(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Operator[]\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Operator[]  --- *" << std::endl;
 	WOO::vector<int> myvector (10);   // 10 zero-initialized elements
 
 	WOO::vector<int>::size_type sz = myvector.size();

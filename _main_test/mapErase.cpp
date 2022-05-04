@@ -6,16 +6,16 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 09:39:41 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:04:33 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // erasing from map
 #include "tests.hpp"
 
-int		mapErase()
+int		mapErase(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[MAP] Erase\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [MAP] Erase  --- *" << std::endl;
 	WOO::map<char,int> mymap;
 	WOO::map<char,int>::iterator it;
 

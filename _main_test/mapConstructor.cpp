@@ -10,7 +10,7 @@ struct classcomp {
 
 int		mapConstructor(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[MAP] Constructor\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [MAP] Constructor  --- *" << std::endl;
 	outfile << "STL map" << std::endl;
 	WOO::map<char,int> first;
 

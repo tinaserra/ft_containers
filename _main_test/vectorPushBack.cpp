@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:13:55 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:27:50 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:43:04 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,24 @@
 
 int		vectorPushBack(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Push_back\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Push_back  --- *" << std::endl;
 	WOO::vector<int> myvector;
-	int myint;
 
-	outfile << "Please enter some integers (enter 0 to end):\n";
+	myvector.push_back(900);
+	myvector.push_back(34);
+	myvector.push_back(654);
+	myvector.push_back(87);
+	myvector.push_back(785);
+	myvector.push_back(42674);
+	myvector.push_back(9809760);
+	myvector.push_back(0);
+	myvector.push_back(-2354);
 
-	do {
-		std::cin >> myint;
-		myvector.push_back (myint);
-	} while (myint);
 
 	outfile << "myvector stores " << int(myvector.size()) << " numbers.\n";
+	for (size_t i = 0; i < myvector.size(); i++)
+		outfile << myvector[i] << " ";
+	outfile << std::endl;
 
 	return 0;
 }

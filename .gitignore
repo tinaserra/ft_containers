@@ -13,3 +13,6 @@ ft_containers
 *.exe
 *.out
 *.app
+
+# Tests outputs
+*Output

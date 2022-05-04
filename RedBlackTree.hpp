@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:36:45 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:27:22 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,7 @@ class RedBlackTree
 		}
 
 		// Inserting a node
-		void insert(value_type &val, node_pointer pos)
+		pair_type	insert(value_type &val, node_pointer pos)
 		{
 			node_pointer y = _nil;
 			node_pointer x;
@@ -360,10 +360,10 @@ class RedBlackTree
 		iterator	insert_it(const_iterator it, const value_type & val)
 		{
 			iterator pos;
-			if (it != _end() && _key_compare(val, *(it._node->data))
+			if (it != end() && _key_compare(val, *(it._node->data))
 			&& it._node->parent != _nil
 			&& _key_compare(*(it._node->parent->data), val))
-				pos = insert(val, const_cast<typename self::node_pointer>(it._node)).first;
+				pos = insert(val, /*const_cast<typename ft::node_pointer>(*/it._node).first;
 			else
 				pos = insert(val, _root).first;
 			return pos;

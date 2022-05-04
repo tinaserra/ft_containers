@@ -6,7 +6,7 @@
 #    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/05/03 15:33:17 by vserra           ###   ########.fr        #
+#    Updated: 2022/05/04 13:24:51 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,14 +35,6 @@ SRC =	main.cpp \
 		stackPushPop.cpp \
 		stackSize.cpp \
 		stackTop.cpp \
-		utils_enable_if.cpp \
-		utils_equal.cpp \
-		utils_is_integral.cpp \
-		utils_iterator_traits.cpp \
-		utils_lexicographical_compare.cpp \
-		utils_make_pair.cpp \
-		utils_pair.cpp \
-		utils_reverse_iterator.cpp \
 		vectorAccessOperator.cpp \
 		vectorAssign.cpp \
 		vectorAssignation.cpp \

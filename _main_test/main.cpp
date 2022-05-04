@@ -7,58 +7,70 @@ static void	vectorTests()
 	outfile.open(VECTORFILE);
 
 	vectorAccessOperator(outfile);
-	// vectorAssign(outfile);
-	// vectorAssignation(outfile);
-	// vectorAt(outfile);
-	// vectorBack(outfile);
-	// vectorBeginEnd(outfile);
-	// vectorCapacitySizeMaxSize(outfile);
-	// vectorClear(outfile);
-	// vectorConstructor(outfile);
-	// vectorEmpty(outfile);
-	// vectorErase(outfile);
-	// vectorFront(outfile);
-	// vectorInsert(outfile);
-	// vectorPopBack(outfile);
-	// vectorPushBack(outfile);
-	// vectorRbeginRend(outfile);
-	// vectorResize(outfile);
-	// vectorReserve(outfile);
-	// vectorSwap(outfile);
+	vectorAssign(outfile);
+	vectorAssignation(outfile);
+	vectorAt(outfile);
+	vectorBack(outfile);
+	vectorBeginEnd(outfile);
+	vectorCapacitySizeMaxSize(outfile);
+	vectorClear(outfile);
+	vectorConstructor(outfile);
+	vectorEmpty(outfile);
+	vectorErase(outfile);
+	vectorFront(outfile);
+	vectorInsert(outfile);
+	vectorPopBack(outfile);
+	vectorPushBack(outfile);
+	vectorRbeginRend(outfile);
+	vectorResize(outfile);
+	vectorReserve(outfile);
+	vectorSwap(outfile);
 
 	outfile.close();
 }
 
 static void stackTests()
 {
-	// stackConstructor(outfile);
-	// stackEmpty(outfile);
-	// stackPushPop(outfile);
-	// stackSize(outfile);
-	// stackTop(outfile);
+	std::ofstream outfile;
+
+	outfile.open(STACKFILE);
+
+	stackConstructor(outfile);
+	stackEmpty(outfile);
+	stackPushPop(outfile);
+	stackSize(outfile);
+	stackTop(outfile);
+
+	outfile.close();
 }
 
 static void mapTests()
 {
-	// mapAccessOperator(outfile);
-	// mapAssignation(outfile);
-	// mapBeginEnd(outfile);
-	// mapClear(outfile);
-	// mapConstructor(outfile);
-	// mapCount(outfile);
-	// mapEmpty(outfile);
-	// mapEqualRange(outfile);
-	// mapErase(outfile);
-	// mapFind(outfile);
-	// mapGetAllocator(outfile);
-	// mapInsert(outfile);
-	// mapKeyComp(outfile);
-	// mapLowerUpperBound(outfile);
-	// mapMaxSize(outfile);
-	// mapRbeginRend(outfile);
-	// mapSize(outfile);
-	// mapSwap(outfile);
-	// mapValueComp(outfile);
+	std::ofstream outfile;
+
+	outfile.open(MAPFILE);
+
+	mapAccessOperator(outfile);
+	mapAssignation(outfile);
+	mapBeginEnd(outfile);
+	mapClear(outfile);
+	mapConstructor(outfile);
+	mapCount(outfile);
+	mapEmpty(outfile);
+	mapEqualRange(outfile);
+	mapErase(outfile);
+	mapFind(outfile);
+	mapGetAllocator(outfile);
+	mapInsert(outfile);
+	mapKeyComp(outfile);
+	mapLowerUpperBound(outfile);
+	mapMaxSize(outfile);
+	mapRbeginRend(outfile);
+	mapSize(outfile);
+	mapSwap(outfile);
+	mapValueComp(outfile);
+
+	outfile.close();
 
 }
 

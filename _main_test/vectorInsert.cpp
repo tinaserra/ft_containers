@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:28:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:27:02 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		vectorInsert(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Insert\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Insert  --- *" << std::endl;
 	
 	WOO::vector<int> myvector (3,100);
 	WOO::vector<int>::iterator it;

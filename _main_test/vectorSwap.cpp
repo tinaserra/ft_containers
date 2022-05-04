@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 11:15:00 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:30:59 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 13:34:03 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		vectorSwap(std::ofstream &outfile)
 {
-	outfile << std::endl << "* \033[1m[VECTOR] Swap\033[0m --- *" << std::endl;
+	outfile << std::endl << "* [VECTOR] Swap  --- *" << std::endl;
 	WOO::vector<int> foo (3,100);   // three ints with a value of 100
 	WOO::vector<int> bar (5,200);   // five ints with a value of 200
 
