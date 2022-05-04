@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 14:28:13 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 15:52:35 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ class map {
 		mapped_type	&		operator[](const key_type &k)
 		{
 			value_type val = ft::make_pair(k, mapped_type());
-			return (((insert(val)).first)->second);
+			return (((_redBlackTree.insert(val)).first)->second);
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -171,7 +171,7 @@ class map {
 		/* ------------------------------------------------------------------ */
 
 		// insert single element
-		ft::pair<iterator, bool>	insert(value_type const & val) // ft::pair<const key_type, mapped_type>
+		ft::pair<iterator, bool>	insert(value_type const & val)
 		{
 			return _redBlackTree.insert(val);
 		}
@@ -179,7 +179,7 @@ class map {
 		// insert with hint
 		iterator	insert(iterator position, value_type const & val)
 		{
-			return _redBlackTree.insert_it(position, val);
+			return _redBlackTree.insertIter(position, val);
 		}
 
 		// insert range

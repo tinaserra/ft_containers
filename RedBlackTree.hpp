@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/04 13:27:22 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/04 15:45:42 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,18 @@ class RedBlackTree
 {
 	public:
 
+		typedef RedBlackTree<T, Cmp, Alloc>										self;
 		typedef T 																value_type;
 		typedef size_t															size_type;
 		typedef ptrdiff_t														difference_type;
 
 		typedef Node<T>															node_type;
 		// typedef ft::rb_tree_node<T>												node_type;
-		typedef	Node<T>															*node_pointer;
+		typedef	Node<T>*														node_pointer;
 		// typedef ft::rb_tree_node<T>*											node_pointer;
 		typedef typename Alloc::template rebind<value_type>::other				data_allocator;
         typedef typename Alloc::template rebind<Node<value_type> >::other		node_allocator;
+
 		// typedef typename Alloc::template rebind<node_type>::other				node_allocator;
 		typedef ft::redBlackIterator<value_type, node_type>						iterator;
 		typedef	ft::redBlackIterator<value_type const, node_type const>			const_iterator;
@@ -61,11 +63,11 @@ class RedBlackTree
 	/* ---------------------------------------------------------------------- */
 
 	private:
-        node_allocator  _node_alloc;
-        data_allocator  _data_alloc;
-		Cmp            _key_compare;
-		node_pointer	*_root;
-		node_pointer	*_nil;
+        node_allocator	_node_alloc;
+        data_allocator	_data_alloc;
+		Cmp				_key_compare;
+		node_type		*_root;
+		node_type		*_nil;
 		size_type		_size;
 
 	public:
@@ -83,8 +85,8 @@ class RedBlackTree
 		{
 			_size = 0;
 			_nil = _node_alloc.allocate(1);
-			_nil->color = false;
-			_nil->data = _data_alloc.allocate(1);
+			_nil->color = RED;
+			_nil->data = _data_alloc.allocate(1); // NULL?
 			_nil->nil_node = _nil;
 			_nil->parent = _nil;
 			_nil->left = _nil;
@@ -102,7 +104,7 @@ class RedBlackTree
 		{
 			if (this->_root != _nil)
 				clean();
-			_data_alloc.deallocate(_nil->_data, 1);
+			_data_alloc.deallocate(_nil->data, 1);
 			_node_alloc.deallocate(_nil, 1);
 		}
 
@@ -230,14 +232,9 @@ class RedBlackTree
 		/* PUBLIC MEMBER FUNCTIONS                                                */
 		/* ---------------------------------------------------------------------- */
 
-		// void	deleteNode(int data)
-		// {
-		// 	_deleteNodeHelper(this->root, data);
-		// }
-
 		void	clean()
 		{
-			_clean_tree(_root);
+			_cleanTree(_root);
 			_root = _nil;
 			_root->left = _nil;
 			_root->right = _nil;
@@ -310,18 +307,11 @@ class RedBlackTree
 		}
 
 		// Inserting a node
-		pair_type	insert(value_type &val, node_pointer pos)
+		pair_type	insertNode(value_type &val, node_pointer pos)
 		{
 			node_pointer y = _nil;
 			node_pointer x;
-			// if (_root == _nil)
-			// {
-			// 	_root = _newNode(val);
-			// 	_nil->_min = _minimum(_root);
-			// 	_nil->_max = _maximum(_root);
-			// 	_size++;
-			// 	return pair_type(iterator(_root), BLACK);
-			// }
+
 			if (pos != _nil)
 				x = pos;
 			else
@@ -329,7 +319,7 @@ class RedBlackTree
 			while (x != _nil)
 			{
 				y = x;
-				if (_is_equal(val, *x->data))
+				if (_isEqual(val, *x->data))
 					return pair_type(iterator(x), RED);
 				else if (_key_compare(val, *x->data))
 					x = x->left;
@@ -354,18 +344,18 @@ class RedBlackTree
 
 		pair_type	insert(const value_type &val)
 		{
-			return (insert(val, _root));
+			return insertNode(val, _root);
 		}
 
-		iterator	insert_it(const_iterator it, const value_type & val)
+		iterator	insertIter(const_iterator it, const value_type & val)
 		{
 			iterator pos;
 			if (it != end() && _key_compare(val, *(it._node->data))
 			&& it._node->parent != _nil
 			&& _key_compare(*(it._node->parent->data), val))
-				pos = insert(val, /*const_cast<typename ft::node_pointer>(*/it._node).first;
+				pos = insertNode(val, const_cast<typename self::node_pointer>(it._node)).first;
 			else
-				pos = insert(val, _root).first;
+				pos = insertNode(val, _root).first;
 			return pos;
 		}
 
@@ -375,7 +365,7 @@ class RedBlackTree
 		node_pointer	searchTree(const value_type & val) const
 		{
 			node_pointer node = _root;
-			while (node != _nil && !_is_equal(val, *node->data))
+			while (node != _nil && !_isEqual(val, *node->data))
 			{
 				if (_key_compare(val, *node->data))
 					node = node->left;
@@ -388,133 +378,119 @@ class RedBlackTree
 		/* DELETE --------------------------------------------------------------- */
 		/* ---------------------------------------------------------------------- */
 
-		// void _deleteFix(node_pointer x) {
-		// 	node_pointer s;
-		// 	while (x != _root && x->color == 0) {
-		// 		if (x == x->parent->left)
-		// 		{
-		// 			s = x->parent->right;
-		// 			if (s->color == 1)
-		// 			{
-		// 				s->color = 0;
-		// 				x->parent->color = 1;
-		// 				_leftRotate(x->parent);
-		// 				s = x->parent->right;
-		// 			}
-
-		// 			if (s->left->color == 0 && s->right->color == 0)
-		// 			{
-		// 				s->color = 1;
-		// 				x = x->parent;
-		// 			}
-		// 			else
-		// 			{
-		// 				if (s->right->color == 0)
-		// 				{
-		// 					s->left->color = 0;
-		// 					s->color = 1;
-		// 					_rightRotate(s);
-		// 					s = x->parent->right;
-		// 				}
-		// 				s->color = x->parent->color;
-		// 				x->parent->color = 0;
-		// 				s->right->color = 0;
-		// 				_leftRotate(x->parent);
-		// 				x = _root;
-		// 			}
-		// 		}
-		// 		else
-		// 		{
-		// 			s = x->parent->left;
-		// 			if (s->color == 1)
-		// 			{
-		// 				s->color = 0;
-		// 				x->parent->color = 1;
-		// 				_rightRotate(x->parent);
-		// 				s = x->parent->left;
-		// 			}
-
-		// 			if (s->right->color == 0 && s->right->color == 0) {
-		// 				s->color = 1;
-		// 				x = x->parent;
-		// 			}
-		// 			else
-		// 			{
-		// 				if (s->left->color == 0)
-		// 				{
-		// 					s->right->color = 0;
-		// 					s->color = 1;
-		// 					_leftRotate(s);
-		// 					s = x->parent->left;
-		// 				}
-
-		// 				s->color = x->parent->color;
-		// 				x->parent->color = 0;
-		// 				s->left->color = 0;
-		// 				_rightRotate(x->parent);
-		// 				x = _root;
-		// 			}
-		// 		}
-		// 	}
-		// 	x->color = 0;
-		// }
-
-		// void _deleteNodeHelper(node_pointer node, key_type key)
-		// {
-		// 	node_pointer z = _nil;
-		// 	node_pointer x, y;
-
-		// 	while (node != _nil)
-		// 	{
-		// 		if (node->key == key)
-		// 			z = node;
-		// 		if (node->key <= key)
-		// 			node = node->right;
-		// 		else
-		// 			node = node->left;
-		// 	}
-
-		// 	if (z == _nil)
-		// 	{
-		// 		std::cout << "Key not found in the tree" << std::endl;
-		// 		return;
-		// 	}
-
-		// 	y = z;
-		// 	int y_original_color = y->color;
-		// 	if (z->left == _nil)
-		// 	{
-		// 		x = z->right;
-		// 		_rbTransplant(z, z->right);
-		// 	}
-		// 	else if (z->right == _nil)
-		// 	{
-		// 		x = z->left;
-		// 		_rbTransplant(z, z->left);
-		// 	}
-		// 	else
-		// 	{
-		// 		y = _minimum(z->right);
-		// 		y_original_color = y->color;
-		// 		x = y->right;
-		// 		if (y->parent == z)
-		// 			x->parent = y;
-		// 		else
-		// 		{
-		// 			_rbTransplant(y, y->right);
-		// 			y->right = z->right;
-		// 			y->right->parent = y;
-		// 		}
-
-		// 		_rbTransplant(z, y);
-		// 		y->left = z->left;
-		// 		y->left->parent = y;
-		// 		y->color = z->color;
-		// 	}
-		// 	delete z;
-		// 	if (y_original_color == 0)
-		// 		_deleteFix(x);
-		// }
+		void _deleteFix(node_pointer node)
+		{
+			while (node != _root && node->color == RED)
+			{
+				if (node == node->parent->left)
+				{
+					node_pointer tmp_w = node->parent->right;
+					if (tmp_w->color == BLACK)
+					{
+						tmp_w->color = RED;
+						node->parent->color = BLACK;
+						_rbtree_rotate_left(node->parent);
+						tmp_w = node->parent->right;
+					}
+					if (tmp_w->left->color == RED && tmp_w->right->color == RED)
+					{
+						tmp_w->color = BLACK;
+						node = node->parent;
+					}
+					else
+					{   
+						if (tmp_w->right->color == RED)
+						{
+							tmp_w->left->color = RED;
+							tmp_w->color = BLACK;
+							_rbtree_rotate_right(tmp_w);
+							tmp_w = node->parent->right;
+						}
+						tmp_w->color = node->parent->color;
+						node->parent->color = RED;
+						tmp_w->right->color = RED;
+						_rbtree_rotate_left(node->parent);
+						node = _root;
+					}
+				}
+				else
+				{
+					node_pointer tmp_w = node->parent->left;
+					if (tmp_w->color == BLACK)
+					{
+						tmp_w->color = RED;
+						node->parent->color = BLACK;
+						_rbtree_rotate_right(node->parent);
+						tmp_w = node->parent->left;
+					}
+					if (tmp_w->right->color == RED && tmp_w->left->color == RED)
+					{
+						tmp_w->color = BLACK;
+						node = node->parent;
+					}
+					else
+					{
+						
+						if (tmp_w->left->color == RED)
+						{
+							tmp_w->right->color = RED;
+							tmp_w->color = BLACK;
+							_rbtree_rotate_left(tmp_w);
+							tmp_w = node->parent->left;
+						}
+						tmp_w->color = node->parent->color;
+						node->parent->color = RED;
+						tmp_w->left->color = RED;
+						_rbtree_rotate_right(node->parent);
+						node = _root;
+					}
+				}
+			}
+			node->color = RED;
+		}
+		
+		void	deleteNode(node_pointer node)
+		{
+			node_pointer tmp_x;
+			node_pointer tmp_y;
+			tmp_y = node;
+			bool color = node->color;
+			if (node->left == _nil)
+			{
+				tmp_x = node->right;
+				_rbTransplant(node, node->right);
+			}
+			else if (node->right == _nil)
+			{
+				tmp_x = node->left;
+				_rbTransplant(node, node->left);
+			}
+			else
+			{
+				tmp_y = _minimum(node->right);
+				color = tmp_y->color;
+				tmp_x = tmp_y->right;
+				if (tmp_y->parent == node)
+					tmp_x->parent = tmp_y;
+				else
+				{
+					_rbTransplant(tmp_y, tmp_y->right);
+					tmp_y->right = node->right;
+					tmp_y->right->parent = tmp_y;
+				}
+				_rbTransplant(node, tmp_y);
+				tmp_y->left = node->left;
+				tmp_y->left->parent = tmp_y;
+				tmp_y->color = node->color;
+			}
+			_cleanNode(node);
+			if (color == RED)
+				_deleteFix(tmp_x);
+			_nil->max = _maximum(_root);
+			_nil->min = _minimum(_root);
+			_nil->parent = _nil;
+			_size--;
+		}
 
 		/* ---------------------------------------------------------------------- */
 		/* PRIVATE MEMBER FUNCTIONS                                               */
@@ -539,8 +515,8 @@ class RedBlackTree
 			if (node == _nil)
 				return _nil;
 			node_pointer	res = node;
-			while (res->_left != _nil)
-				res = res->_left;
+			while (res->left != _nil)
+				res = res->left;
 			return res;
 		}
 		node_pointer	_maximum(node_pointer node) const
@@ -548,34 +524,34 @@ class RedBlackTree
 			if (node == _nil)
 				return _nil;
 			node_pointer res = node;
-			while (res->_right != _nil)
-				res = res->_right;
+			while (res->right != _nil)
+				res = res->right;
 			return res;
 		}
 
-		bool	_is_equal(value_type const & x, value_type const & y) const
+		bool	_isEqual(value_type const & x, value_type const & y) const
 		{
 			return !_key_compare(x, y) && !_key_compare(y, x);
 		}
 
-		void	_clean_node(node_pointer node)
+		void	_cleanNode(node_pointer node)
 		{
 			if (node != _nil)
 			{
 				_data_alloc.destroy(node->data);
 				_data_alloc.deallocate(node->data, 1);
 				_node_alloc.deallocate(node, 1);
-				node = _nil;
+				node = _nil; // a suppr ?
 			}
 		}
 
-		void	_clean_tree(node_pointer node)
+		void	_cleanTree(node_pointer node)
 		{
 			if (node != _nil)
 			{
-				_clean_tree(node->left);
-				_clean_tree(node->right);
-				_clean_node(node);
+				_cleanTree(node->left);
+				_cleanTree(node->right);
+				_cleanNode(node);
 			}
 			_size = 0;
 		}
@@ -618,8 +594,8 @@ class RedBlackTree
 		{
 			if (node_a->parent == _nil)
 				_root = node_b;
-			else if (node_a->parent->_left == node_a)
-				node_a->parent->_left = node_b;
+			else if (node_a->parent->left == node_a)
+				node_a->parent->left = node_b;
 			else
 				node_a->parent->right = node_b;
 			node_b->parent = node_a->parent;
@@ -629,15 +605,15 @@ class RedBlackTree
 		// void	_print(node_pointer node, std::stringstream &buffer, bool is_tail, std::string prefix);
 		void _printHelper(node_pointer node, std::stringstream &buffer, bool is_tail, std::string prefix)
 		{
-			if (node->_right != _nil)
-				this->_print(node->_right, buffer, false, std::string(prefix).append(is_tail != 0 ? "|	" : " 	"));
+			if (node->right != _nil)
+				this->_print(node->right, buffer, false, std::string(prefix).append(is_tail != 0 ? "|	" : " 	"));
 			buffer << prefix <<  (is_tail != 0 ? "└── " : "┌── ");
-			if (node->_isRed == true)
+			if (node->color == BLACK)
 					buffer << "\033[31m";
 			if (node != _nil)
-				buffer << node->_data->first << "\033[0m" << std::endl;
-			if (node->_left != _nil)
-				this->_print(node->_left, buffer, true, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
+				buffer << node->data->first << "\033[0m" << std::endl;
+			if (node->left != _nil)
+				this->_print(node->left, buffer, BLACK, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
 		}
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redBlackIterator.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:03:41 by admin             #+#    #+#             */
-/*   Updated: 2022/05/02 14:44:11 by admin            ###   ########.fr       */
+/*   Updated: 2022/05/04 15:14:07 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,22 @@ class redBlackIterator
 
 		reference operator*()
 		{
-			return *_node->_data;
+			return *_node->data;
 		}
 
 		pointer	operator->()
 		{
-			return _node->_data;
+			return _node->data;
 		}
 
 		const_reference operator*() const
 		{
-			return *_node->_data;
+			return *_node->data;
 		}
 
 		const_pointer	operator->() const
 		{
-			return _node->_data;
+			return _node->data;
 		}
 
 		// pre-incrementation
@@ -153,7 +153,7 @@ class redBlackIterator
 		{
 			if (_node == _node->nil_node)
 			{
-				_node = _node->nil_node->_max;
+				_node = _node->nil_node->max;
 				return ;
 			}
 			if (_node->left != _node->nil_node)
