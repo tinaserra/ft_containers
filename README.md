@@ -104,35 +104,6 @@ Cet objet conteneur est une copie de l'argument `ctnr `passé au constructeur, l
 | `pair`                    | www | [exemple](https://www.cplusplus.com/reference/utility/pair/pair/) et [utility](https://www.cplusplus.com/reference/utility/pair/?kw=pair) |
 | `make_pair`               | www | [std::make_pair](https://www.cplusplus.com/reference/utility/make_pair/?kw=make_pair) |
 
-### Iterators
-
-| Categorie                    | Operation   | Prototype  |
-| :--------------------------- | :---------- | :--------- |
-| `input_iterator_tag`         | `X b(a);`   | constructeur par copie |
-|                              | `a = b`     | constructeur par assignation |
-|                              | elem = rhs     | `classIterator &operator=(const classIterator& rhs)`|
-|                              | elem == rhs | `friend bool	operator==(classIterator const & lhs, classIterator const & rhs)`|
-|                              | elem != rhs | `friend bool	operator!=(classIterator const & lhs, classIterator const & rhs)`|
-|                              | \*elem      | `reference	operator*(void) const` |
-|                              | &elem       | `pointer		operator->(void) const` |
-| `forward_iterator_tag`       | `X a;`      | constructeur par defaut |
-|                              | ++elem      | `classIterator	operator++(void)`|
-|                              | elem++      | `classIterator	operator++(int)`|
-| `bidirectional_iterator_tag` | --elem      | `classIterator&	operator--(void)`|
-|                              |elem--       | `classIterator	operator--(int)`|
-| `random_access_iterator_tag` | iter + iter | `friend difference_type	operator+(classIterator const &lhs, classIterator const &rhs)`|
-|                              | elem + rhs  | `classIterator	operator+(difference_type const & rhs) const`|
-|                              | rhs + elem  | `friend classIterator	operator+(difference_type n, classIterator const &rhs)` |
-|                              | iter - iter | `ffriend difference_type	operator-(classIterator const &lhs, classIterator const &rhs)`|
-|                              | elem - rhs  | `difference_type		operator-(randomIterator b)` |
-|                              | rhs - elem  | `friend classIterator	operator-(difference_type n, classIterator const &rhs)`|
-|                              | elem < rhs  | `friend bool	operator<(classIterator const & lhs, classIterator const & rhs)`|
-|                              | elem > rhs  | `friend bool	operator>(classIterator const & lhs, classIterator const & rhs)`|
-|                              | elem <= rhs | `friend bool	operator<=(classIterator const & lhs, classIterator const & rhs)`|
-|                              | elem >= rhs | `friend bool	operator>=(classIterator const & lhs, classIterator const & rhs)`|
-|                              | elem += rhs | `classIterator			operator+=(difference_type rhs)`|
-|                              | elem -= rhs | `classIterator			operator-=(difference_type const & rhs)`|
-|                              | elem[]      | `reference	operator[](difference_type value) const` |
 
 ### reverse iterator
 
