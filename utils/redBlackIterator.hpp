@@ -6,13 +6,15 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:03:41 by admin             #+#    #+#             */
-/*   Updated: 2022/05/04 15:14:07 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/05 13:23:29 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDBLACKITERATOR_HPP
 # define REDBLACKITERATOR_HPP
 # include "iterator_traits.hpp"
+# include "Node.hpp" //?
+# include "../RedBlackTree.hpp" // ?
 
 namespace ft {
 
