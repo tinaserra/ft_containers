@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/04 15:52:35 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/16 13:02:17 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,12 @@ class map {
 		// Copy constructor
 		map(const map & x) : _redBlackTree(x.key_comp(), x.get_allocator())
 		{
-			for (const_iterator pos = x.begin(); pos != x.end(); pos++)
-				_redBlackTree.insert(*pos);
+			// for (const_iterator pos = x.begin(); pos != x.end(); pos++)
+			// 	_redBlackTree.insert(*pos);
+
+			const_iterator pos = x.begin();
+    		while (pos != x.end())
+        		_redBlackTree._insert(*pos++);
 		}
 
 		// Destructor
@@ -119,7 +123,8 @@ class map {
 		map &	operator=(const map & rhs)
 		{
 			_redBlackTree = rhs._redBlackTree;
-			return (*this);
+			_key_comp = rhs._key_comp;
+			return *this;
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -148,7 +153,7 @@ class map {
 
 		bool		empty() const { return (_redBlackTree.empty() == 0); }
 
-		size_type	size() const { return (_redBlackTree.get_size()); } // getSize
+		size_type	size() const { return (_redBlackTree.get_size()); }
 
 		size_type	max_size() const
 		{ 
@@ -171,7 +176,7 @@ class map {
 		/* ------------------------------------------------------------------ */
 
 		// insert single element
-		ft::pair<iterator, bool>	insert(value_type const & val)
+		pair_type	insert(value_type const & val)
 		{
 			return _redBlackTree.insert(val);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RedBlackTree.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/04 15:45:42 by vserra           ###   ########.fr       */
+/*   Updated: 2022/05/16 12:50:21 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ class RedBlackTree
 		/* ------------------------------------------------------------------ */
 
 		// Default constructor
-		RedBlackTree();
+		// RedBlackTree();
 
 		// Fill constructor	
 		explicit RedBlackTree(const Cmp compare, const Alloc allocator)
@@ -351,8 +351,8 @@ class RedBlackTree
 		{
 			iterator pos;
 			if (it != end() && _key_compare(val, *(it._node->data))
-			&& it._node->parent != _nil
-			&& _key_compare(*(it._node->parent->data), val))
+					&& it._node->parent != _nil
+					&& _key_compare(*(it._node->parent->data), val))
 				pos = insertNode(val, const_cast<typename self::node_pointer>(it._node)).first;
 			else
 				pos = insertNode(val, _root).first;
