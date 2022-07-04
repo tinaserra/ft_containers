@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/16 13:02:17 by admin            ###   ########.fr       */
+/*   Updated: 2022/07/04 19:53:37 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ class map {
 
 			const_iterator pos = x.begin();
     		while (pos != x.end())
-        		_redBlackTree._insert(*pos++);
+        		_redBlackTree.insert(*pos++);
 		}
 
 		// Destructor
@@ -203,7 +203,7 @@ class map {
 			key_type key = position->first;
 			value_type val = ft::make_pair(key, mapped_type());
 
-			_redBlackTree.delete_node(_redBlackTree.searchTree(val));
+			_redBlackTree.deleteNode(_redBlackTree.searchTree(val));
 		}
 
 		// erase key
@@ -214,7 +214,7 @@ class map {
 			iterator pos(_redBlackTree.searchTree(val));
 			if (pos != end())
 			{
-				_redBlackTree.delete_node(_redBlackTree.searchTree(val));
+				_redBlackTree.deleteNode(_redBlackTree.searchTree(val));
 				return 1;
 			}
 			return 0;
@@ -226,7 +226,7 @@ class map {
 			if (first != end())
 			{
 				while(first != last)
-					_redBlackTree.delete_node(_redBlackTree.searchTree(*first++));
+					_redBlackTree.deleteNode(_redBlackTree.searchTree(*first++));
 			}
 		}
 

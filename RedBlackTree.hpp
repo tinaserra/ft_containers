@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RedBlackTree.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/16 12:50:21 by admin            ###   ########.fr       */
+/*   Updated: 2022/07/04 21:04:59 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ class RedBlackTree
 		{
 			_size = 0;
 			_nil = _node_alloc.allocate(1);
-			_nil->color = RED;
-			_nil->data = _data_alloc.allocate(1); // NULL?
+			_nil->color = BLACK;
+			_nil->data = _data_alloc.allocate(1); // NULL? _data_alloc.allocate(1)
 			_nil->nil_node = _nil;
 			_nil->parent = _nil;
 			_nil->left = _nil;
@@ -254,38 +254,17 @@ class RedBlackTree
 
 		void _insertFix(node_pointer node)
 		{
-			while (node->parent->color == BLACK)
+			node_pointer y;
+			while (node->parent->color == RED)
 			{
-				if (node->parent == node->parent->parent->left) // if aunt is red
+				if (node->parent == node->parent->parent->right) // if uncle 
 				{
-					node_pointer y = node->parent->parent->right; // check uncle
-					if (y->color == BLACK)
+					y = node->parent->parent->left;
+					if (y->color == RED)
 					{
-						node->parent->color = RED;
-						y->color = RED;
-						node->parent->parent->color = BLACK;
-						node = node->parent->parent;
-					}
-					else
-					{
-						if (node == node->parent->right)
-						{    
-							node = node->parent;
-							_leftRotate(node);
-						}
-						node->parent->color = RED;
-						node->parent->parent->color = BLACK;
-						_rightRotate(node->parent->parent);
-					}
-				}
-				else // if uncle 
-				{
-					node_pointer y = node->parent->parent->left;
-					if (y->color == BLACK)
-					{
-						node->parent->color = RED;
-						y->color = RED;
-						node->parent->parent->color = BLACK;
+						node->parent->color = BLACK;
+						y->color = BLACK;
+						node->parent->parent->color = RED;
 						node = node->parent->parent;
 					}
 					else
@@ -300,14 +279,38 @@ class RedBlackTree
 						_leftRotate(node->parent->parent);
 					}
 				}
+				else // if aunt is red
+				{
+					y = node->parent->parent->right; // check uncle
+					if (y->color == RED)
+					{
+						node->parent->color = BLACK;
+						y->color = BLACK;
+						node->parent->parent->color = RED;
+						node = node->parent->parent;
+					}
+					else
+					{
+						if (node == node->parent->right)
+						{    
+							node = node->parent;
+							_leftRotate(node);
+						}
+						node->parent->color = BLACK;
+						node->parent->parent->color = RED;
+						_rightRotate(node->parent->parent);
+					}
+				}
+				if (node == _root)
+					break;
 			}
-			_root->color = RED;
+			_root->color = BLACK;
 			_nil->max = _maximum(_root);
 			_nil->min = _minimum(_root);
 		}
 
 		// Inserting a node
-		pair_type	insertNode(value_type &val, node_pointer pos)
+		pair_type	insertNode(const value_type &val, node_pointer pos)
 		{
 			node_pointer y = _nil;
 			node_pointer x;
@@ -320,7 +323,7 @@ class RedBlackTree
 			{
 				y = x;
 				if (_isEqual(val, *x->data))
-					return pair_type(iterator(x), RED);
+					return pair_type(iterator(x), BLACK);
 				else if (_key_compare(val, *x->data))
 					x = x->left;
 				else
@@ -328,18 +331,27 @@ class RedBlackTree
 			}
 			node_pointer new_node = _newNode(val);
 			new_node->parent = y;
+			new_node->left = _nil;
+			new_node->right = _nil;
+			new_node->color = RED;
 			if (y == _nil)
 				_root = new_node;
 			else if (_key_compare(val, *y->data))
 				y->left = new_node;
 			else
 				y->right = new_node;
-			new_node->left = _nil;
-			new_node->right = _nil;
-			new_node->color = BLACK;
+			// if (new_node->parent == _nil) {
+			// 	new_node->color = BLACK;
+			// 	return pair_type(iterator(new_node), RED);
+			// }
+
+			// if (new_node->parent->parent == _nil)
+				// return pair_type(iterator(new_node), RED);
 			_insertFix(new_node);
 			_size++;
-			return pair_type(iterator(new_node), BLACK);
+			printTree();
+			std::cout << "-----------------------------" << val.first << std::endl;
+			return pair_type(iterator(new_node), RED);
 		}
 
 		pair_type	insert(const value_type &val)
@@ -380,73 +392,74 @@ class RedBlackTree
 
 		void _deleteFix(node_pointer node)
 		{
-			while (node != _root && node->color == RED)
+			node_pointer tmp_w;
+			while (node != _root && node->color == BLACK)
 			{
 				if (node == node->parent->left)
 				{
-					node_pointer tmp_w = node->parent->right;
-					if (tmp_w->color == BLACK)
+					tmp_w = node->parent->right;
+					if (tmp_w->color == RED)
 					{
-						tmp_w->color = RED;
-						node->parent->color = BLACK;
-						_rbtree_rotate_left(node->parent);
+						tmp_w->color = BLACK;
+						node->parent->color = RED;
+						_leftRotate(node->parent);
 						tmp_w = node->parent->right;
 					}
-					if (tmp_w->left->color == RED && tmp_w->right->color == RED)
+					if (tmp_w->left->color == BLACK && tmp_w->right->color == BLACK)
 					{
 						tmp_w->color = BLACK;
 						node = node->parent;
 					}
 					else
 					{   
-						if (tmp_w->right->color == RED)
+						if (tmp_w->right->color == BLACK)
 						{
-							tmp_w->left->color = RED;
-							tmp_w->color = BLACK;
-							_rbtree_rotate_right(tmp_w);
+							tmp_w->left->color = BLACK;
+							tmp_w->color = RED;
+							_rightRotate(tmp_w);
 							tmp_w = node->parent->right;
 						}
 						tmp_w->color = node->parent->color;
-						node->parent->color = RED;
-						tmp_w->right->color = RED;
-						_rbtree_rotate_left(node->parent);
+						node->parent->color = BLACK;
+						tmp_w->right->color = BLACK;
+						_leftRotate(node->parent);
 						node = _root;
 					}
 				}
 				else
 				{
-					node_pointer tmp_w = node->parent->left;
-					if (tmp_w->color == BLACK)
-					{
-						tmp_w->color = RED;
-						node->parent->color = BLACK;
-						_rbtree_rotate_right(node->parent);
-						tmp_w = node->parent->left;
-					}
-					if (tmp_w->right->color == RED && tmp_w->left->color == RED)
+					tmp_w = node->parent->left;
+					if (tmp_w->color == RED)
 					{
 						tmp_w->color = BLACK;
+						node->parent->color = RED;
+						_rightRotate(node->parent);
+						tmp_w = node->parent->left;
+					}
+					if (tmp_w->right->color == BLACK && tmp_w->left->color == BLACK)
+					{
+						tmp_w->color = RED;
 						node = node->parent;
 					}
 					else
 					{
 						
-						if (tmp_w->left->color == RED)
+						if (tmp_w->left->color == BLACK)
 						{
-							tmp_w->right->color = RED;
-							tmp_w->color = BLACK;
-							_rbtree_rotate_left(tmp_w);
+							tmp_w->right->color = BLACK;
+							tmp_w->color = RED;
+							_leftRotate(tmp_w);
 							tmp_w = node->parent->left;
 						}
 						tmp_w->color = node->parent->color;
-						node->parent->color = RED;
-						tmp_w->left->color = RED;
-						_rbtree_rotate_right(node->parent);
+						node->parent->color = BLACK;
+						tmp_w->left->color = BLACK;
+						_rightRotate(node->parent);
 						node = _root;
 					}
 				}
 			}
-			node->color = RED;
+			node->color = BLACK;
 		}
 		
 		void	deleteNode(node_pointer node)
@@ -563,7 +576,7 @@ class RedBlackTree
 			if (y->left != _nil)
 				y->left->parent = x;
 			y->parent = x->parent;
-			if (x->parent == nullptr)
+			if (x->parent == _nil)
 				this->_root = y;
 			else if (x == x->parent->left)
 				x->parent->left = y;
@@ -580,7 +593,7 @@ class RedBlackTree
 			if (y->right != _nil)
 				y->right->parent = x;
 			y->parent = x->parent;
-			if (x->parent == nullptr)
+			if (x->parent == _nil)
 				this->_root = y;
 			else if (x == x->parent->right)
 				x->parent->right = y;
@@ -603,17 +616,34 @@ class RedBlackTree
 
 
 		// void	_print(node_pointer node, std::stringstream &buffer, bool is_tail, std::string prefix);
-		void _printHelper(node_pointer node, std::stringstream &buffer, bool is_tail, std::string prefix)
-		{
-			if (node->right != _nil)
-				this->_print(node->right, buffer, false, std::string(prefix).append(is_tail != 0 ? "|	" : " 	"));
-			buffer << prefix <<  (is_tail != 0 ? "└── " : "┌── ");
-			if (node->color == BLACK)
-					buffer << "\033[31m";
-			if (node != _nil)
-				buffer << node->data->first << "\033[0m" << std::endl;
-			if (node->left != _nil)
-				this->_print(node->left, buffer, BLACK, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
+		// void _printHelper(node_pointer node, std::stringstream &buffer, bool is_tail, std::string prefix)
+		// {
+		// 	if (node->right != _nil)
+		// 		this->_printHelper(node->right, buffer, false, std::string(prefix).append(is_tail != 0 ? "|	" : " 	"));
+		// 	buffer << prefix <<  (is_tail != 0 ? "└── " : "┌── ");
+		// 	if (node->color == BLACK)
+		// 			buffer << "\033[31m";
+		// 	if (node != _nil)
+		// 		buffer << node->data->first << "\033[0m" << std::endl;
+		// 	if (node->left != _nil)
+		// 		this->_printHelper(node->left, buffer, BLACK, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
+		// }
+		void _printHelper(node_pointer root, std::stringstream &buffer, bool last, std::string indent) {
+			if (root != _nil) {
+			buffer << indent;
+			if (last) {
+				buffer << "R----";
+				indent += "   ";
+			} else {
+				buffer << "L----";
+				indent += "|  ";
+			}
+
+			std::string sColor = root->color ? "RED" : "BLACK";
+			buffer << (root->data)->first << "(" << sColor << ")" << std::endl;
+			_printHelper(root->left, buffer, false, indent);
+			_printHelper(root->right, buffer, true,indent);
+			}
 		}
 
 

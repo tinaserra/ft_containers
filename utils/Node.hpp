@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Node.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:26:19 by vserra            #+#    #+#             */
-/*   Updated: 2022/05/03 15:35:54 by vserra           ###   ########.fr       */
+/*   Updated: 2022/07/04 20:19:39 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_HPP
 # define NODE_HPP
 
-# define RED false
-# define BLACK true
+# define RED true
+# define BLACK false
 
 # include <iostream>
 

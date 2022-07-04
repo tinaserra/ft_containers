@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
+#    By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/05/16 13:07:36 by admin            ###   ########.fr        #
+#    Updated: 2022/07/04 16:25:06 by tinaserra        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@
 # mapAccessOperator.cpp
 SRC =	main.cpp \
 		mapAssignation.cpp \
+		mapAccessOperator.cpp \
 		mapBeginEnd.cpp \
 		mapClear.cpp \
 		mapConstructor.cpp \
@@ -60,7 +61,7 @@ SRC =	main.cpp \
 NAME = ft_containers
 
 # override -> permet de reecrire la suite de la variable
-override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++11
+override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++98
 
 OBJ_DIR = obj
 SRC_DIR = _main_test
