@@ -62,6 +62,17 @@ class Node
 
 };
 
+// Calculer la max size
+template<typename T>
+struct NodeTmp
+{
+		bool            	color;
+		struct NodeTmp*    parent;
+		struct NodeTmp*    left;
+		struct NodeTmp*    right;
+		T   				data;
+};
+
 template<typename T>
 std::ostream	&operator<<(std::ostream &stream, const Node<T> & n)
 {

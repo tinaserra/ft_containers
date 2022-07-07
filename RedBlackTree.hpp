@@ -45,6 +45,7 @@ class RedBlackTree
 		// typedef ft::rb_tree_node<T>												node_type;
 		typedef	Node<T>*														node_pointer;
 		// typedef ft::rb_tree_node<T>*											node_pointer;
+		typedef typename Alloc::template rebind<NodeTmp<value_type> >::other	tmp_allocator;
 		typedef typename Alloc::template rebind<value_type>::other				data_allocator;
         typedef typename Alloc::template rebind<Node<value_type> >::other		node_allocator;
 
@@ -146,7 +147,11 @@ class RedBlackTree
 
 		size_type		get_size() const { return _size; }
 
-		size_type		get_max_size() const { return _node_alloc.max_size() ; }
+		// size_type		get_max_size() const { return (_node_alloc.max_size() * sizeof(node_type)) / (sizeof(node_type) - sizeof(void*) + sizeof(value_type)) ; }
+		size_type		get_max_size() const { 
+			tmp_allocator node_size;
+			return (node_size.max_size()) ;
+		}
 
 		data_allocator	get_data_allocator() const { return _data_alloc; }
 
