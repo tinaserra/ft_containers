@@ -19,11 +19,13 @@
 #  define VECTORFILE	"stdVectorOutput"
 #  define STACKFILE		"stdStackOutput"
 #  define MAPFILE		"stdMapOutput"
+#  define SETFILE		"stdSetOutput"
 # else
 #  define WOO			ft
 #  define VECTORFILE	"ftVectorOutput"
 #  define STACKFILE		"ftStackOutput"
 #  define MAPFILE		"ftMapOutput"
+#  define SETFILE		"ftSetOutput"
 # endif
 
 int		vectorAccessOperator(std::ofstream &outfile);
@@ -71,6 +73,24 @@ int		mapRbeginRend(std::ofstream &outfile);
 int		mapSize(std::ofstream &outfile);
 int		mapSwap(std::ofstream &outfile);
 int		mapValueComp(std::ofstream &outfile);
+
+int     setAssignation(std::ofstream &outfile);
+int 	setBeginEnd(std::ofstream &outfile);
+int 	setClear(std::ofstream &outfile);
+int 	setCount(std::ofstream &outfile);
+int 	setEmpty(std::ofstream &outfile);
+int 	setEqualRange(std::ofstream &outfile);
+int 	setErase(std::ofstream &outfile);
+int 	setFind(std::ofstream &outfile);
+int 	setGetAllocator(std::ofstream &outfile);
+int 	setInsert(std::ofstream &outfile);
+int 	setKeyComp(std::ofstream &outfile);
+int 	setLowerUpperBound(std::ofstream &outfile);
+int 	setMaxSize(std::ofstream &outfile);
+int 	setRbeginRend(std::ofstream &outfile);
+int 	setSize(std::ofstream &outfile);
+int 	setSwap(std::ofstream &outfile);
+int 	setValueComp(std::ofstream &outfile);
 
 
 #endif

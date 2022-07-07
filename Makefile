@@ -32,6 +32,23 @@ SRC =	main.cpp \
 		mapSize.cpp \
 		mapSwap.cpp \
 		mapValueComp.cpp \
+		setAssignation.cpp \
+		setBeginEnd.cpp \
+		setClear.cpp \
+		setCount.cpp \
+		setEmpty.cpp \
+		setEqualRange.cpp \
+		setErase.cpp \
+		setFind.cpp \
+		setGetAllocator.cpp \
+		setInsert.cpp \
+		setKeyComp.cpp \
+		setLowerUpperBound.cpp \
+		setMaxSize.cpp \
+		setRbeginRend.cpp \
+		setSize.cpp \
+		setSwap.cpp \
+		setValueComp.cpp \
 		stackConstructor.cpp \
 		stackEmpty.cpp \
 		stackPushPop.cpp \
