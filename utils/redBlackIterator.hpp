@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redBlackIterator.hpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:03:41 by admin             #+#    #+#             */
-/*   Updated: 2022/05/05 13:23:29 by vserra           ###   ########.fr       */
+/*   Updated: 2022/07/07 15:35:45 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,19 +136,23 @@ class redBlackIterator
 				return ;
 			if (_node->right != _node->nil_node)
 			{
-				_node = _node->right;
-				while (_node->left != _node->nil_node)
-					_node = _node->left;
+				_node = _minimum(_node->right);
+				return;
+				// while (_node->left != _node->nil_node)
+				// 	_node = _node->left;
 			}
 			else
 			{
 				node_pointer tmp = _node->parent;
-				while (tmp != _node->nil_node && _node == tmp->right)
+				while (tmp != _node->nil_node && tmp != 0 && _node == tmp->right)
 				{
 					_node = tmp;
 					tmp = tmp->parent;
 				}
-				_node = tmp;
+				if (tmp == 0)
+					_node = _node->nil_node;
+				else
+					_node = tmp;
 			}
 		}
 		void	decrement()
@@ -160,20 +164,39 @@ class redBlackIterator
 			}
 			if (_node->left != _node->nil_node)
 			{
-				_node = _node->left;
-				while (_node->right != _node->nil_node)
-					_node = _node->right;
+				_node = _maximum(_node->left);
+				// while (_node->right != _node->nil_node)
+				// 	_node = _node->right;
+				return;
 			}
 			else
 			{
 				node_pointer tmp = _node->parent;
-				while(tmp != _node->nil_node && _node == tmp->left)
+				while(tmp != _node->nil_node && tmp != 0 && _node == tmp->left)
 				{
 					_node = tmp;
 					tmp = tmp->parent;
 				}
-				_node = tmp;
+				if (tmp == 0)
+					_node = _node->nil_node;
+				else
+					_node = tmp;
 			}
+		}
+	private:
+		
+		node_pointer	_minimum(node_pointer node) const
+		{
+			while (node->left != node->nil_node)
+				node = node->left;
+			return node;
+		}
+		
+		node_pointer	_maximum(node_pointer node) const
+		{
+			while (node->right != node->nil_node)
+				node = node->right;
+			return node;
 		}
 };
 

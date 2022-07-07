@@ -51,24 +51,24 @@ static void mapTests()
 	outfile.open(MAPFILE);
 
 	mapAccessOperator(outfile);
-	// mapAssignation(outfile);
-	// mapBeginEnd(outfile);
-	// mapClear(outfile);
-	// mapConstructor(outfile);
-	// mapCount(outfile);
-	// mapEmpty(outfile);
-	// mapEqualRange(outfile);
-	// mapErase(outfile);
-	// mapFind(outfile);
-	// mapGetAllocator(outfile);
-	// mapInsert(outfile);
-	// mapKeyComp(outfile);
-	// mapLowerUpperBound(outfile);
-	// mapMaxSize(outfile);
-	// mapRbeginRend(outfile);
-	// mapSize(outfile);
-	// mapSwap(outfile);
-	// mapValueComp(outfile);
+	mapAssignation(outfile);
+	mapBeginEnd(outfile);
+	mapClear(outfile);
+	mapConstructor(outfile);
+	mapCount(outfile);
+	mapEmpty(outfile);
+	mapEqualRange(outfile);
+	mapErase(outfile);
+	mapFind(outfile);
+	mapGetAllocator(outfile);
+	mapInsert(outfile);
+	mapKeyComp(outfile);
+	mapLowerUpperBound(outfile);
+	mapMaxSize(outfile);
+	mapRbeginRend(outfile);
+	mapSize(outfile);
+	mapSwap(outfile);
+	mapValueComp(outfile);
 
 	outfile.close();
 

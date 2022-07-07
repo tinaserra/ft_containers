@@ -6,7 +6,7 @@
 #    By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/07/04 16:25:06 by tinaserra        ###   ########.fr        #
+#    Updated: 2022/07/07 14:12:42 by tinaserra        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRC =	main.cpp \
 NAME = ft_containers
 
 # override -> permet de reecrire la suite de la variable
-override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++98
+override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++98 -fsanitize=address -g3
 
 OBJ_DIR = obj
 SRC_DIR = _main_test

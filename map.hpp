@@ -6,7 +6,7 @@
 /*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/07/04 19:53:37 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/07/07 16:56:29 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,14 +151,13 @@ class map {
 		/* CAPACITY                                                           */
 		/* ------------------------------------------------------------------ */
 
-		bool		empty() const { return (_redBlackTree.empty() == 0); }
+		bool		empty() const { return (_redBlackTree.empty() == true); }
 
 		size_type	size() const { return (_redBlackTree.get_size()); }
 
 		size_type	max_size() const
-		{ 
-			Alloc tmp;
-			return tmp.max_size();
+		{
+			return _redBlackTree.get_max_size();
 		}
 
 		/* ------------------------------------------------------------------ */
