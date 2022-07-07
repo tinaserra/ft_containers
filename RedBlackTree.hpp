@@ -148,9 +148,22 @@ class RedBlackTree
 		size_type		get_size() const { return _size; }
 
 		// size_type		get_max_size() const { return (_node_alloc.max_size() * sizeof(node_type)) / (sizeof(node_type) - sizeof(void*) + sizeof(value_type)) ; }
-		size_type		get_max_size() const { 
+		// size_type		get_max_size() const
+		// {
+		// 	// std::cout << sizeof(NodeTmp<value_type>) << std::endl;
+		// 	// std::cout << sizeof(Node<value_type>) << std::endl;
+		// 	// std::cout << sizeof(value_type) << std::endl;
+		// 	// std::cout << sizeof(void*) << std::endl;
+		// 	// std::cout << sizeof(node_pointer) << std::endl;
+
+		// 	return (_node_alloc.max_size() * 40 / 64) * 2.13333333333333333333;
+		// }
+		
+		size_type		get_max_size() const
+		{
 			tmp_allocator node_size;
-			return (node_size.max_size()) ;
+			// return (10 * _node_alloc.max_size() / node_size.max_size()) ;
+			return node_size.max_size();
 		}
 
 		data_allocator	get_data_allocator() const { return _data_alloc; }

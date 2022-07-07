@@ -71,11 +71,6 @@ class map {
 		typedef typename iterator_traits<iterator>::difference_type			difference_type;
 		typedef size_t														size_type;
 		
-		// typedef Node<value_type>											node_type;
-		// typedef node_type*												node_pointer;
-		// typedef std::ptrdiff_t											difference_type;
-		// typedef typename allocator_type::template rebind<node_type>::other	node_allocator;
-
 	/* ---------------------------------------------------------------------- */
 	/* PRIVATE MEMBERS                                                        */
 	/* ---------------------------------------------------------------------- */
@@ -108,9 +103,6 @@ class map {
 		// Copy constructor
 		map(const map & x) : _redBlackTree(x.key_comp(), x.get_allocator())
 		{
-			// for (const_iterator pos = x.begin(); pos != x.end(); pos++)
-			// 	_redBlackTree.insert(*pos);
-
 			const_iterator pos = x.begin();
     		while (pos != x.end())
         		_redBlackTree.insert(*pos++);
