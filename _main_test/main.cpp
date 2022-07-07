@@ -74,6 +74,34 @@ static void mapTests()
 
 }
 
+static void setTests()
+{
+	std::ofstream outfile;
+
+	outfile.open(SETFILE);
+
+	setAssignation(outfile);
+	setBeginEnd(outfile);
+	setClear(outfile);
+	setCount(outfile);
+	setEmpty(outfile);
+	setEqualRange(outfile);
+	setErase(outfile);
+	setFind(outfile);
+	setGetAllocator(outfile);
+	setInsert(outfile);
+	setKeyComp(outfile);
+	setLowerUpperBound(outfile);
+	setMaxSize(outfile);
+	setRbeginRend(outfile);
+	setSize(outfile);
+	setSwap(outfile);
+	setValueComp(outfile);
+
+	outfile.close();
+
+}
+
 int main(int ac, char **av)
 {
 	std::string input;
@@ -90,5 +118,9 @@ int main(int ac, char **av)
 		stackTests();
 	else if (input.compare("map") == 0)
 		mapTests();
+	else if (input.compare("set") == 0)
+		setTests();
+	else
+		std::cout << "bad argument" << std::endl;
 	return (0);
 }
