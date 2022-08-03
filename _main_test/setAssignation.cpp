@@ -1,9 +1,6 @@
 // assignment operator with sets
 #include "tests.hpp"
 
-#include <iostream>
-#include <set>
-
 int setAssignation (std::ofstream &outfile)
 {
     outfile << std::endl << "* [SET] setAssignation  --- *" << std::endl;

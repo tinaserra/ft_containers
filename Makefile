@@ -78,7 +78,7 @@ SRC =	main.cpp \
 NAME = ft_containers
 
 # override -> permet de reecrire la suite de la variable
-override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++98 -fsanitize=address -g3
+override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++98 #-fsanitize=address -g3
 
 OBJ_DIR = obj
 SRC_DIR = _main_test

@@ -7,10 +7,12 @@
 # include <vector>
 # include <map>
 # include <stack>
-# include <deque> 
+# include <deque>
+# include <set>
 
 # include "vector.hpp"
 # include "stack.hpp"
+# include "set.hpp"
 # include "utils/reverseIterator.hpp"
 # include "map.hpp"
 

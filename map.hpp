@@ -314,7 +314,7 @@ class map {
 	private:
 
 		void	_print() { _redBlackTree.printTree(); }
-	};
+};
 
 /* -------------------------------------------------------------------------- */
 /* NON-MEMBER FUNCTION OVERLOADS                                              */

@@ -1,7 +1,9 @@
 #ifndef SET_HPP
 #define SET_HPP
 
+# include <functional>
 # include <memory>
+# include <algorithm>
 # include <stdexcept>
 # include "utils/pair.hpp"
 # include "utils/iterator_traits.hpp"
@@ -19,7 +21,7 @@ class set {
 	public:
 		typedef	T 														key_type;
 		typedef T														value_type;
-		typedef Compare													key_compare
+		typedef Compare													key_compare;
 		typedef Compare													value_compare;
 		typedef Alloc													allocator_type;
 
@@ -31,8 +33,8 @@ class set {
 		typedef	RedBlackTree<const value_type, value_compare, allocator_type>	tree_type;
 		typedef typename tree_type::const_iterator						iterator;
 		typedef typename tree_type::const_iterator						const_iterator;
-		typedef ft::reverse_iterator<iterator>							reverse_iterator;
-		typedef ft::reverse_iterator<const_iterator>					const_reverse_iterator;
+		typedef typename tree_type::reverse_iterator					reverse_iterator;
+		typedef typename tree_type::const_reverse_iterator				const_reverse_iterator;
 
 		typedef typename iterator_traits<iterator>::difference_type		difference_type;
 		typedef std::size_t												size_type;
@@ -120,7 +122,7 @@ class set {
 			return (false);
 		}
 
-		size_type	size() const { return _redBlackTree.size(); }
+		size_type	size() const { return _redBlackTree.get_size(); }
 
 		size_type	max_size() const {}
 
@@ -153,10 +155,10 @@ class set {
 
 		size_type erase (const key_type& k)
 		{
-			iterator pos(_redBlackTree._search_tree(key));
+			iterator pos(_redBlackTree._search_tree(k));
 			if (pos != end())
 			{
-				_redBlackTree._delete_node(_redBlackTree._search_tree(key));
+				_redBlackTree._delete_node(_redBlackTree._search_tree(k));
 				return 1;
 			}
 			return 0;
@@ -175,7 +177,7 @@ class set {
 
 		void clear()
 		{
-			_redBlackTree._clear_tree();
+			_redBlackTree.clean();
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -245,7 +247,8 @@ class set {
 /* NON-MEMBER FUNCTION OVERLOADS                                              */
 /* -------------------------------------------------------------------------- */
 
-friend bool operator==(const set<T,Compare,Alloc>& lhs,
+template <class T, class Compare, class Alloc>
+bool operator==(const set<T,Compare,Alloc>& lhs,
 					const set<T,Compare,Alloc>& rhs)
 {
 	if (lhs.size() != rhs.size())
@@ -253,31 +256,36 @@ friend bool operator==(const set<T,Compare,Alloc>& lhs,
 	return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 }
 
-friend bool operator!=(const set<T,Compare,Alloc>& lhs,
+template <class T, class Compare, class Alloc>
+bool operator!=(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
 	return !(lhs == rhs);
 }
 
-friend bool operator<(const set<T,Compare,Alloc>& lhs,
+template <class T, class Compare, class Alloc>
+bool operator<(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
 	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
-friend bool operator<=(const set<T,Compare,Alloc>& lhs,
+template <class T, class Compare, class Alloc>
+bool operator<=(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
 	return !(lhs > rhs);
 }
 
-friend bool operator>(const set<T,Compare,Alloc>& lhs,
+template <class T, class Compare, class Alloc>
+bool operator>(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
 	return rhs < lhs;
 }
 
-friend bool operator>=(const set<T,Compare,Alloc>& lhs,
+template <class T, class Compare, class Alloc>
+bool operator>=(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
 	return !(lhs < rhs);
