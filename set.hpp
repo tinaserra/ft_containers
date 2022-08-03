@@ -35,7 +35,7 @@ class set {
 		typedef ft::reverse_iterator<const_iterator>					const_reverse_iterator;
 
 		typedef typename iterator_traits<iterator>::difference_type		difference_type;
-		typedef std::size_t											size_type;
+		typedef std::size_t												size_type;
 
 	/* ---------------------------------------------------------------------- */
 	/* PRIVATE MEMBERS                                                        */
@@ -43,7 +43,7 @@ class set {
 
 	private:
 		tree_type		_redBlackTree;
-		key_compare		_key_comp; // _key_comp
+		key_compare		_key_comp; // _cmp
 
 	/* ---------------------------------------------------------------------- */
 	/* PUBLIC MEMBER FUNCTIONS                                                */
@@ -62,7 +62,7 @@ class set {
 			const allocator_type& alloc = allocator_type()) : _redBlackTree(comp, alloc)
 		{
 			while (first != last)
-				insert(*first++);
+				_redBlackTree.insert(*first++);
 		}
 
 		// Copy constructor
@@ -70,7 +70,7 @@ class set {
 		{
 			const_iterator pos = x.begin();
 			while (pos != x.end())
-				insert(*pos++);
+				_redBlackTree.insert(*pos++); // insert de set ? ou de redblacktree ?
 		}
 
 		// Destructor
@@ -130,28 +130,36 @@ class set {
 
 		pair<iterator,bool> insert (const value_type& val)
 		{
-
+			return _redBlackTree.insert(val);
 		}
 
 		iterator insert (iterator position, const value_type& val)
 		{
-
+			return _redBlackTree.insertIter(position, val);
 		}
 
 		template <class InputIterator>
 		void insert (InputIterator first, InputIterator last)
 		{
-
+			while(first != last)
+				_redBlackTree.insert(*first++);
 		}
 
-		void erase (iterator position)
+		void erase (iterator position) // TO DOOOO
 		{
-			_redBlackTree.deleteNode(*(position));
+			// _redBlackTree.deleteNode(*(position));
+			_redBlackTree._delete_node(_redBlackTree._search_tree(*position));
 		}
 
 		size_type erase (const key_type& k)
 		{
-
+			iterator pos(_redBlackTree._search_tree(key));
+			if (pos != end())
+			{
+				_redBlackTree._delete_node(_redBlackTree._search_tree(key));
+				return 1;
+			}
+			return 0;
 		}
 
 		void erase (iterator first, iterator last)
@@ -183,12 +191,12 @@ class set {
 
 		iterator	find (const key_type & k)
 		{
-			return _redBlackTree.searchTree(k);
+			return iterator(_redBlackTree.searchTree(k)); // cast it
 		}
 
 		const_iterator	find (const key_type & k) const
 		{
-			return _redBlackTree.searchTree(k);
+			return const_iterator(_redBlackTree.searchTree(k));
 		}
 
 		size_type	count (const key_type & k) const
@@ -198,19 +206,29 @@ class set {
 			return (1);
 		}
 
-		iterator	lower_bound (const key_type & k) const
+		iterator	lower_bound (const key_type & k)
 		{
-			return (_redBlackTree.lower_bound(k));
+			return _redBlackTree.lower_bound(k);
 		}
 
-		iterator	upper_bound (const key_type & k) const
+		const_iterator	lower_bound (const key_type & k) const
 		{
-			return (_redBlackTree.upper_bound(k));
+			return _redBlackTree.lower_bound(k);
 		}
 
-		pair<iterator,iterator>	equal_range (const key_type & k) const
+		iterator	upper_bound (const key_type & k)
 		{
+			return _redBlackTree.upper_bound(k);
+		}
 
+		const_iterator	upper_bound (const key_type & k) const
+		{
+			return _redBlackTree.upper_bound(k);
+		}
+
+		pair<iterator,iterator>	equal_range (const key_type & k) const // const_pair_range ?
+		{
+			return _redBlackTree.equal_range(k);
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -230,37 +248,39 @@ class set {
 friend bool operator==(const set<T,Compare,Alloc>& lhs,
 					const set<T,Compare,Alloc>& rhs)
 {
-	return (!(lhs < rhs || rhs < lhs));
+	if (lhs.size() != rhs.size())
+		return (false);
+	return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
 }
 
 friend bool operator!=(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
-	return (lhs < rhs || rhs < lhs);
+	return !(lhs == rhs);
 }
 
 friend bool operator<(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
-	return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
 friend bool operator<=(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
-	return (!(lhs > rhs));
+	return !(lhs > rhs);
 }
 
 friend bool operator>(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
-	return (rhs < lhs);
+	return rhs < lhs;
 }
 
-friend bool operator>(const set<T,Compare,Alloc>& lhs,
+friend bool operator>=(const set<T,Compare,Alloc>& lhs,
 	const set<T,Compare,Alloc>& rhs)
 {
-	return (!(lhs < rhs));
+	return !(lhs < rhs);
 }
 
 template <class Key, class T, class Compare, class Alloc>
