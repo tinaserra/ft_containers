@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 18:24:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/08/04 13:02:28 by vserra           ###   ########.fr       */
+/*   Updated: 2022/08/04 18:09:45 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ class reverseIterator: public iterator< typename iterator_traits<Iterator>::valu
 		//copy form InputIterator : on construit un itérateur inverse à partir d'un autre itérateur inverse
 		template<typename InputIterator> //template <class Iter>
 		reverseIterator(reverseIterator<InputIterator> const & rev_it) : current(rev_it.base()) {}
-
 
 		/* ------------------------------------------------------------------ */
 		/* MEMBER FUNCTIONS                                                   */

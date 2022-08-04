@@ -33,7 +33,7 @@ class set {
 
 		typedef	RedBlackTree<key_type, key_compare, allocator_type>		tree_type;
 
-		typedef typename tree_type::const_iterator						iterator;
+		typedef typename tree_type::iterator							iterator;
 		typedef typename tree_type::const_iterator						const_iterator;
 		typedef typename tree_type::reverse_iterator					reverse_iterator;
 		typedef typename tree_type::const_reverse_iterator				const_reverse_iterator;
