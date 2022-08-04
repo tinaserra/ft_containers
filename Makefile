@@ -3,15 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+         #
+#    By: vserra <vserra@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:14:20 by vserra            #+#    #+#              #
-#    Updated: 2022/07/07 14:12:42 by tinaserra        ###   ########.fr        #
+#    Updated: 2022/08/04 11:58:41 by vserra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-# mapAccessOperator.cpp
 SRC =	main.cpp \
 		mapAssignation.cpp \
 		mapAccessOperator.cpp \

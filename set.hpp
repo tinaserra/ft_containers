@@ -18,8 +18,9 @@ namespace ft {
 		
 template < class T, class Compare = std::less<T>, class Alloc = std::allocator<T> >
 class set {
+
 	public:
-		typedef	T 														key_type;
+		typedef	T														key_type;
 		typedef T														value_type;
 		typedef Compare													key_compare;
 		typedef Compare													value_compare;
@@ -30,11 +31,16 @@ class set {
 		typedef typename allocator_type::pointer						pointer;
 		typedef typename allocator_type::const_pointer					const_pointer;
 
-		typedef	RedBlackTree<const value_type, value_compare, allocator_type>	tree_type;
+		typedef	RedBlackTree<key_type, key_compare, allocator_type>		tree_type;
+
 		typedef typename tree_type::const_iterator						iterator;
 		typedef typename tree_type::const_iterator						const_iterator;
 		typedef typename tree_type::reverse_iterator					reverse_iterator;
 		typedef typename tree_type::const_reverse_iterator				const_reverse_iterator;
+
+		typedef typename tree_type::pair_type               pair_type;
+		typedef typename tree_type::pair_range              pair_range;
+		typedef typename tree_type::const_pair_range        const_pair_range;
 
 		typedef typename iterator_traits<iterator>::difference_type		difference_type;
 		typedef std::size_t												size_type;
@@ -45,7 +51,7 @@ class set {
 
 	private:
 		tree_type		_redBlackTree;
-		key_compare		_key_comp; // _cmp
+		key_compare		_key_comp;
 
 	/* ---------------------------------------------------------------------- */
 	/* PUBLIC MEMBER FUNCTIONS                                                */
@@ -124,7 +130,10 @@ class set {
 
 		size_type	size() const { return _redBlackTree.get_size(); }
 
-		size_type	max_size() const {}
+		size_type	max_size() const
+		{
+			return _redBlackTree.get_max_size();
+		}
 
 		/* ------------------------------------------------------------------ */
 		/* MODIFIERS                                                          */
@@ -150,15 +159,15 @@ class set {
 		void erase (iterator position) // TO DOOOO
 		{
 			// _redBlackTree.deleteNode(*(position));
-			_redBlackTree._delete_node(_redBlackTree._search_tree(*position));
+			_redBlackTree.deleteNode(_redBlackTree.searchTree(*position));
 		}
 
 		size_type erase (const key_type& k)
 		{
-			iterator pos(_redBlackTree._search_tree(k));
+			iterator pos(_redBlackTree.searchTree(k));
 			if (pos != end())
 			{
-				_redBlackTree._delete_node(_redBlackTree._search_tree(k));
+				_redBlackTree.deleteNode(_redBlackTree.searchTree(k));
 				return 1;
 			}
 			return 0;
@@ -184,8 +193,9 @@ class set {
 		/* OBSERVERS                                                          */
 		/* ------------------------------------------------------------------ */
 
-		key_compare key_comp() const{return (_key_comp);}
-		value_compare value_comp() const {return (_redBlackTree.getComp());}
+		key_compare key_comp() const{ return (_key_comp); }
+
+		value_compare value_comp() const { return (_redBlackTree.get_key_compare()); }
 
 		/* ------------------------------------------------------------------ */
 		/* OPERATIONS                                                         */
@@ -210,27 +220,27 @@ class set {
 
 		iterator	lower_bound (const key_type & k)
 		{
-			return _redBlackTree.lower_bound(k);
+			return _redBlackTree.get_lower_bound(k);
 		}
 
 		const_iterator	lower_bound (const key_type & k) const
 		{
-			return _redBlackTree.lower_bound(k);
+			return _redBlackTree.get_lower_bound(k);
 		}
 
 		iterator	upper_bound (const key_type & k)
 		{
-			return _redBlackTree.upper_bound(k);
+			return _redBlackTree.get_upper_bound(k);
 		}
 
 		const_iterator	upper_bound (const key_type & k) const
 		{
-			return _redBlackTree.upper_bound(k);
+			return _redBlackTree.get_upper_bound(k);
 		}
 
 		pair<iterator,iterator>	equal_range (const key_type & k) const // const_pair_range ?
 		{
-			return _redBlackTree.equal_range(k);
+			return _redBlackTree.get_equal_range(k);
 		}
 
 		/* ------------------------------------------------------------------ */
@@ -238,7 +248,7 @@ class set {
 		/* ------------------------------------------------------------------ */
 
 		allocator_type get_allocator() const {
-			return (_redBlackTree.getAllocator());
+			return (_redBlackTree.get_data_allocator());
 		}
 		
 };
