@@ -33,14 +33,14 @@ class set {
 
 		typedef	RedBlackTree<key_type, key_compare, allocator_type>		tree_type;
 
-		typedef typename tree_type::iterator							iterator;
+		typedef typename tree_type::const_iterator						iterator;
 		typedef typename tree_type::const_iterator						const_iterator;
 		typedef typename tree_type::reverse_iterator					reverse_iterator;
 		typedef typename tree_type::const_reverse_iterator				const_reverse_iterator;
 
-		typedef typename tree_type::pair_type               pair_type;
-		typedef typename tree_type::pair_range              pair_range;
-		typedef typename tree_type::const_pair_range        const_pair_range;
+		typedef typename tree_type::pair_type               			pair_type;
+		typedef typename tree_type::pair_range              			pair_range;
+		typedef typename tree_type::const_pair_range        			const_pair_range;
 
 		typedef typename iterator_traits<iterator>::difference_type		difference_type;
 		typedef std::size_t												size_type;
@@ -89,11 +89,14 @@ class set {
 		{
 			if (!empty())
 				clear();
-			_key_comp = x.key_comp();
-			const_iterator pos = x.begin();
-			while (pos != x.end())
-				insert(*pos++);
-			return *this;
+			// _key_comp = x.key_comp();
+			// const_iterator pos = x.begin();
+			// while (pos != x.end())
+			// 	insert(*pos++);
+			// return *this;
+			_redBlackTree = x._redBlackTree;
+    		_key_comp = x._key_comp;
+   			 return *this;
 		}
 		
 		/* ------------------------------------------------------------------ */
@@ -108,13 +111,13 @@ class set {
 
 		const_iterator			end() const { return (_redBlackTree.end()); }
 
-		reverse_iterator		rbegin() { return (reverse_iterator(_redBlackTree.end())); }
+		reverse_iterator		rbegin() { return reverse_iterator(_redBlackTree.end()); }
 
-		const_reverse_iterator	rbegin() const { return (const_reverse_iterator(_redBlackTree.end())); }
+		const_reverse_iterator	rbegin() const { return const_reverse_iterator(_redBlackTree.end()); }
 
-		reverse_iterator		rend() { return (reverse_iterator(_redBlackTree.begin())); }
+		reverse_iterator		rend() { return reverse_iterator(_redBlackTree.begin()); }
 
-		const_reverse_iterator	rend() const { return (const_reverse_iterator(_redBlackTree.begin())); }
+		const_reverse_iterator	rend() const { return const_reverse_iterator(_redBlackTree.begin()); }
 
 
 		/* ------------------------------------------------------------------ */
@@ -156,7 +159,7 @@ class set {
 				_redBlackTree.insert(*first++);
 		}
 
-		void erase (iterator position) // TO DOOOO
+		void erase (iterator position)
 		{
 			// _redBlackTree.deleteNode(*(position));
 			_redBlackTree.deleteNode(_redBlackTree.searchTree(*position));
@@ -193,7 +196,7 @@ class set {
 		/* OBSERVERS                                                          */
 		/* ------------------------------------------------------------------ */
 
-		key_compare key_comp() const{ return (_key_comp); }
+		key_compare key_comp() const { return (_key_comp); }
 
 		value_compare value_comp() const { return (_redBlackTree.get_key_compare()); }
 
@@ -203,7 +206,7 @@ class set {
 
 		iterator	find (const key_type & k)
 		{
-			return iterator(_redBlackTree.searchTree(k)); // cast it
+			return iterator(_redBlackTree.searchTree(k));
 		}
 
 		const_iterator	find (const key_type & k) const
@@ -238,7 +241,12 @@ class set {
 			return _redBlackTree.get_upper_bound(k);
 		}
 
-		pair<iterator,iterator>	equal_range (const key_type & k) const // const_pair_range ?
+		pair_range	equal_range (const key_type & k)
+		{
+			return _redBlackTree.get_equal_range(k);
+		}
+
+		const_pair_range	equal_range (const key_type & k) const // const_pair_range ?
 		{
 			return _redBlackTree.get_equal_range(k);
 		}
@@ -247,7 +255,8 @@ class set {
 		/* ALLOCATOR                                                          */
 		/* ------------------------------------------------------------------ */
 
-		allocator_type get_allocator() const {
+		allocator_type get_allocator() const
+		{
 			return (_redBlackTree.get_data_allocator());
 		}
 		
