@@ -80,6 +80,7 @@ static void setTests()
 
 	outfile.open(SETFILE);
 
+	setAAAmine(outfile);
 	setAssignation(outfile);
 	setBeginEnd(outfile);
 	setClear(outfile);

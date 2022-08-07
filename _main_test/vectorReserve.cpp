@@ -25,7 +25,7 @@ int		vectorReserve(std::ofstream &outfile)
 		foo.push_back(i);
 		if (sz!=foo.capacity()) {
 		sz = foo.capacity();
-		outfile << "capacity changed: " << sz << '\n';
+		// outfile << "capacity changed: " << sz << '\n';
 		}
 	}
 
@@ -37,7 +37,7 @@ int		vectorReserve(std::ofstream &outfile)
 		bar.push_back(i);
 		if (sz!=bar.capacity()) {
 		sz = bar.capacity();
-		outfile << "capacity changed: " << sz << '\n';
+		// outfile << "capacity changed: " << sz << '\n';
 		}
 	}
 

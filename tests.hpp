@@ -76,6 +76,7 @@ int		mapSize(std::ofstream &outfile);
 int		mapSwap(std::ofstream &outfile);
 int		mapValueComp(std::ofstream &outfile);
 
+int     setAAAmine (std::ofstream &outfile);
 int     setAssignation(std::ofstream &outfile);
 int 	setBeginEnd(std::ofstream &outfile);
 int 	setClear(std::ofstream &outfile);

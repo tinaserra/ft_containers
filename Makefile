@@ -30,6 +30,7 @@ SRC =	main.cpp \
 		mapSize.cpp \
 		mapSwap.cpp \
 		mapValueComp.cpp \
+		setAAAmine.cpp \
 		setAssignation.cpp \
 		setBeginEnd.cpp \
 		setClear.cpp \
@@ -104,8 +105,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | .gitignore
 		@echo $(NAME) > .gitignore
 		@echo $(OBJ_DIR) >> .gitignore
 
-stl : fclean
-	make all CXXFLAGS:="-DSTL"
+stl :
+	@rm -rf $(OBJ_DIR)
+	@echo "obj $(_DELETED)"
+	@rm -rf $(NAME)
+	@echo "[$(NAME)]: $(_DELETED)"
+	@$(MAKE) all CXXFLAGS:="-DSTL"
 
 clean:
 	@rm -rf $(OBJ_DIR)
@@ -113,9 +118,7 @@ clean:
 
 fclean:	clean
 	@rm -rf $(NAME)
-	@rm -rf stdMapOutput
-	@rm -rf stdStackOutput
-	@rm -rf stdVectorOutput
+	@rm -rf *Output
 	@echo "[$(NAME)]: $(_DELETED)"
 
 re: fclean all

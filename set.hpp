@@ -35,8 +35,8 @@ class set {
 
 		typedef typename tree_type::const_iterator						iterator;
 		typedef typename tree_type::const_iterator						const_iterator;
-		typedef ft::reverseIterator<iterator>					reverse_iterator;
-		typedef ft::reverseIterator<const_iterator>		const_reverse_iterator;
+		typedef ft::reverseIterator<iterator>							reverse_iterator;
+		typedef ft::reverseIterator<const_iterator>						const_reverse_iterator;
 
 		typedef typename tree_type::pair_type               			pair_type;
 		typedef typename tree_type::pair_range              			pair_range;
