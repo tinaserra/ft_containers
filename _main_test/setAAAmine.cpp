@@ -9,8 +9,7 @@ int setAAAmine (std::ofstream &outfile)
     (void) outfile;
     std::cout << std::endl << "* [SET] AAAmine  --- *" << std::endl;
     WOO::set<int> myset;
-    WOO::set<int>::iterator it;
-    WOO::pair<WOO::set<int>::iterator,bool> ret;
+    WOO::set<int>::reverse_iterator it;
 
     for (int i=1; i<=3; ++i) myset.insert(i*10);
 
@@ -20,7 +19,7 @@ int setAAAmine (std::ofstream &outfile)
 
     std::cout << "myset :";
     for (it=myset.begin(); it!=myset.end(); ++it)
-      std::cout << "key :" << *it << " ";
+      std::cout << "key -> " << *it << " ";
     std::cout << '\n';
 
     return 0;
