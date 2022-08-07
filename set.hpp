@@ -87,8 +87,8 @@ class set {
 		//Assignation operator
 		set& operator= (const set& x)
 		{
-			if (!empty())
-				clear();
+			// if (!empty())
+			// 	clear();
 			// _key_comp = x.key_comp();
 			// const_iterator pos = x.begin();
 			// while (pos != x.end())
