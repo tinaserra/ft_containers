@@ -18,7 +18,7 @@ int setAAAmine (std::ofstream &outfile)
     for (int i=1; i<=3; ++i) myset.insert(i*4);  
 
     std::cout << "myset :";
-    for (it=myset.begin(); it!=myset.end(); ++it)
+    for (it=myset.rbegin(); it!=myset.rend(); ++it)
       std::cout << "key -> " << *it << " ";
     std::cout << '\n';
 
