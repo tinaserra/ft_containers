@@ -29,6 +29,10 @@ class stack
 		/* MEMBER FUNCTIONS                                                   */
 		/* ------------------------------------------------------------------ */
 
+		// explicite :
+		// les types d'arguments sont converti implicitement par le compilateur 
+		// en la classe contenant ce constructeur.
+
 		explicit stack(container_type const &ctnr = container_type()) : _ctnr(ctnr) {}
 
 		/* ------------------------------------------------------------------ */
