@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/04/19 09:23:23 by vserra           ###   ########.fr       */
+/*   Updated: 2022/08/08 01:15:30 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,15 +312,19 @@ class vector
 			this->_size = n;
 		}
 
-		void push_back (const value_type& val)
+		void	push_back (const value_type& val)
 		{
-			if (this->_size == this->_capacity)
-				this->resize(this->_size + 1, val);
-			else
-			{
-				this->_alloc.construct(this->_start + this->_size, val);
-				this->_size++;
-			}
+			// if (this->_size == this->_capacity)
+			// 	this->resize(this->_size + 1, val);
+			// else
+			// {
+			// 	this->_alloc.construct(this->_start + this->_size, val);
+			// 	this->_size++;
+			// }
+			if (_size + 1 > _capacity)
+				reserve((_capacity * 2 != 0)? _capacity * 2 : 1);
+			this->_alloc.construct(this->_start + this->_size, val);
+			this->_size++;
 		}
 
 		void	pop_back()
@@ -349,7 +353,16 @@ class vector
 			iterator			prevEnd;
 			iterator			end;
 
-			this->resize(this->_size + n);
+			// std::cout << "OOO" << std::endl;
+			// this->resize(this->_size + n);
+			if (_size + n > _capacity)
+			{
+				if (this->_size * 2 > _size + n)
+					reserve(_size * 2);
+				else
+					this->reserve(this->_size + n);	
+			}
+			_size = prevSize + n;
 			prevEnd = this->begin() + prevSize;
 			position = this->begin() + beginToPos;
 			end = this->_start + this->_size;
@@ -375,8 +388,16 @@ class vector
 			iterator			prevEnd;
 			iterator			end;
 
-			this->resize(this->_size + newSize);
-
+			// this->resize(this->_size + n);
+			
+			if (_size + n > _capacity)
+			{
+				if (this->_size * 2 > _size + n)
+					reserve(_size * 2);
+				else
+					this->reserve(this->_size + n);	
+			}
+			_size = prevSize + n;
 			prevEnd = this->begin() + prevSize;
 			position = this->begin() + beginToPos;
 			end = this->end();

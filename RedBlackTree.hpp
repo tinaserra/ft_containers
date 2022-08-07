@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RedBlackTree.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/08/04 20:19:14 by vserra           ###   ########.fr       */
+/*   Updated: 2022/08/08 01:13:01 by tinaserra        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,8 +255,9 @@ class RedBlackTree
 		{
 			_cleanTree(_root);
 			_root = _nil;
-			_root->left = _nil;
-			_root->right = _nil;
+			_nil->max = _nil;
+			_nil->min = _nil;
+			_size = 0;
 		}
 
 		void	printTree()
@@ -342,7 +343,11 @@ class RedBlackTree
 			{
 				y = x;
 				if (_isEqual(val, *x->data))
+				{
+					_nil->max = _maximum(_root);
+					_nil->min = _minimum(_root);	
 					return pair_type(iterator(x), BLACK);
+				}
 				else if (_key_compare(val, *x->data))
 					x = x->left;
 				else
@@ -357,12 +362,19 @@ class RedBlackTree
 			else
 				y->right = new_node;
 			_size++;
-			if (new_node->parent == 0) {
+			if (new_node->parent == 0)
+			{
 				new_node->color = BLACK;
+				_nil->max = _maximum(_root);
+				_nil->min = _minimum(_root);
 				return pair_type(iterator(new_node), RED);
 			}
 			if (new_node->parent->parent == 0)
+			{
+				_nil->max = _maximum(_root);
+				_nil->min = _minimum(_root);
 				return pair_type(iterator(new_node), RED);
+			}
 			_insertFix(new_node);
 			return pair_type(iterator(new_node), RED);
 		}
@@ -569,7 +581,6 @@ class RedBlackTree
 				_data_alloc.destroy(node->data);
 				_data_alloc.deallocate(node->data, 1);
 				_node_alloc.deallocate(node, 1);
-				node = _nil; // a suppr ?
 			}
 		}
 
@@ -581,7 +592,6 @@ class RedBlackTree
 				_cleanTree(node->right);
 				_cleanNode(node);
 			}
-			_size = 0;
 		}
 
 		void _leftRotate(node_pointer x)
