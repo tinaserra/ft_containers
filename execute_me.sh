@@ -1,11 +1,11 @@
-echo "\nCompiling [FT_CONTAINERS]... 🏗 🔨 🚧\n"
+echo "\n\033[1;33mCompiling [FT_CONTAINERS]... 🏗 🔨 🚧\033[0m\n"
 make re
 ./ft_containers "vector"
 ./ft_containers "stack"
 ./ft_containers "map"
 ./ft_containers "set"
 
-echo "\nCompiling [SLT]... 🏗 🔨 🚧\n"
+echo "\n\033[1;33mCompiling [SLT]... 🏗 🔨 🚧\033[0m\n"
 make stl
 ./ft_containers "vector"
 ./ft_containers "stack"
@@ -15,31 +15,31 @@ make stl
 # VECTOR
 if diff ftVectorOutput stdVectorOutput
 then
-    echo "[VECTOR] OK ✅\n"
+    echo "\033[1m[VECTOR]\033[0m OK ✅\n"
 else
-    echo "\n[VECTOR] NO ❌\n"
+    echo "\n\033[1m[VECTOR]\033[0m NO ❌\n"
 fi
 
 # STACK
 if diff ftStackOutput stdStackOutput
 then
-    echo "[STACK] OK ✅\n"
+    echo "\033[1m[STACK]\033[0m OK ✅\n"
 else
-    echo "\n[STACK] NO ❌\n"
+    echo "\n\033[1m[STACK]\033[0m NO ❌\n"
 fi
 
 # MAP
 if diff ftMapOutput stdMapOutput
 then
-    echo "[MAP] OK ✅\n"
+    echo "\033[1m[MAP]\033[0m OK ✅\n"
 else
-    echo "\n[MAP] NO ❌\n"
+    echo "\n\033[1m[MAP]\033[0m NO ❌\n"
 fi
 
 # SET
 if diff ftSetOutput stdSetOutput
 then
-    echo "[SET] OK ✅\n"
+    echo "\033[1m[SET]\033[0m OK ✅\n"
 else
-    echo "\n[SET] NO ❌\n"
+    echo "\n\033[1m[SET]\033[0m NO ❌\n"
 fi

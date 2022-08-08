@@ -6,8 +6,7 @@
 
 int setAAAmine (std::ofstream &outfile)
 {
-		(void) outfile;
-		std::cout << std::endl << "* [SET] AAAmine  --- *" << std::endl;
+		outfile << std::endl << "* [SET] AAAmine  --- *" << std::endl;
 		WOO::set<int> myset;
 		WOO::set<int>::reverse_iterator it;
 
@@ -17,14 +16,14 @@ int setAAAmine (std::ofstream &outfile)
 
 		for (int i=1; i<=3; ++i) myset.insert(i*4);  
 
-		std::cout << "myset :";
+		outfile << "myset :";
 		for (it=myset.rbegin(); it!=myset.rend(); ++it)
-			std::cout << "key -> " << *it << " ";
-		std::cout << '\n';
+			outfile << "key -> " << *it << " ";
+		outfile << '\n';
 
 
-		ft::set<int> a;
-		ft::set<int> b;
+		WOO::set<int> a;
+		WOO::set<int> b;
 
 		std::srand(42);
 		a.insert(int(std::rand() % 1024));
@@ -34,8 +33,8 @@ int setAAAmine (std::ofstream &outfile)
 		a.insert(int(std::rand() % 1024));
 		a.insert(int(std::rand() % 1024));
 		a.insert(int(std::rand() % 1024));
-		ft::set<int>::const_reverse_iterator it2 = a.rbegin();
-		std::cout << "\nlove const_reverse_iterator " << *it2 << std::endl;
+		WOO::set<int>::const_reverse_iterator it2 = a.rbegin();
+		outfile << "\nlove const_reverse_iterator " << *it2 << std::endl;
 
 
 		a.clear();
@@ -48,8 +47,8 @@ int setAAAmine (std::ofstream &outfile)
 		a.insert(4);
 		a.insert(5);
 		a.insert(2);
-		ft::set<int>::const_reverse_iterator it3 = a.rbegin();
-		std::cout << "\nlove const_reverse_iterator " << *it3 << std::endl;
+		WOO::set<int>::const_reverse_iterator it3 = a.rbegin();
+		outfile << "\nlove const_reverse_iterator " << *it3 << std::endl;
 
 		return 0;
 }

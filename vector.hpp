@@ -16,11 +16,11 @@
 # include <memory>
 # include <iostream> // a supprimer ?
 # include <cstddef>
-# include "utils/reverseIterator.hpp"
-# include "utils/enable_if.hpp"
-# include "utils/is_integral.hpp"
-# include "utils/equal.hpp"
-# include "utils/lexicographical_compare.hpp"
+# include "reverseIterator.hpp"
+# include "enable_if.hpp"
+# include "is_integral.hpp"
+# include "equal.hpp"
+# include "lexicographical_compare.hpp"
 
 namespace ft {
 
@@ -384,7 +384,7 @@ class vector
 		{
 			difference_type		beginToPos = std::distance(this->begin(), position);
 			difference_type		prevSize = this->_size;
-			difference_type		newSize = std::distance(first, last);
+			difference_type		n = std::distance(first, last);
 			iterator			prevEnd;
 			iterator			end;
 

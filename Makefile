@@ -77,7 +77,7 @@ SRC =	main.cpp \
 NAME = ft_containers
 
 # override -> permet de reecrire la suite de la variable
-override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++98 #-fsanitize=address -g3
+override CXXFLAGS +=  -Wall -Wextra -Werror -MMD -std=c++98 -fsanitize=address -g3
 
 OBJ_DIR = obj
 SRC_DIR = _main_test
@@ -86,7 +86,7 @@ INC_DIR = .
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.o))
 DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.cpp=.d))
 
-_CREATED = \033[32mCreated !\033[0m
+_CREATED = \033[1;32mCreated !\033[0m
 _DELETED = \033[1;34mdeleted\033[0m
 
 all: $(NAME)
