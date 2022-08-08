@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RedBlackTree.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/08/08 01:13:01 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/08/08 14:56:10 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@
 # include "equal.hpp"
 # include "redBlackIterator.hpp"
 
-// namespace ft
-// {
-
 template<class T, class Cmp, class Alloc>
 class RedBlackTree
 {
@@ -41,14 +38,11 @@ class RedBlackTree
 		typedef ptrdiff_t														difference_type;
 
 		typedef Node<T>															node_type;
-		// typedef ft::rb_tree_node<T>												node_type;
 		typedef	Node<T>*														node_pointer;
-		// typedef ft::rb_tree_node<T>*											node_pointer;
 		typedef typename Alloc::template rebind<NodeTmp<value_type> >::other	tmp_allocator;
 		typedef typename Alloc::template rebind<value_type>::other				data_allocator;
         typedef typename Alloc::template rebind<Node<value_type> >::other		node_allocator;
 
-		// typedef typename Alloc::template rebind<node_type>::other				node_allocator;
 		typedef ft::redBlackIterator<value_type, node_type>						iterator;
 		typedef	ft::redBlackIterator<value_type const, node_type const>			const_iterator;
 		typedef ft::reverseIterator<iterator>									reverse_iterator;
@@ -86,7 +80,7 @@ class RedBlackTree
 			_size = 0;
 			_nil = _node_alloc.allocate(1);
 			_nil->color = BLACK;
-			_nil->data = _data_alloc.allocate(1); // NULL? _data_alloc.allocate(1)
+			_nil->data = _data_alloc.allocate(1);
 			_nil->nil_node = _nil;
 			_nil->parent = 0;
 			_nil->left = 0;
@@ -145,23 +139,10 @@ class RedBlackTree
 		/* ---------------------------------------------------------------------- */
 
 		size_type		get_size() const { return _size; }
-
-		// size_type		get_max_size() const { return (_node_alloc.max_size() * sizeof(node_type)) / (sizeof(node_type) - sizeof(void*) + sizeof(value_type)) ; }
-		// size_type		get_max_size() const
-		// {
-		// 	// std::cout << sizeof(NodeTmp<value_type>) << std::endl;
-		// 	// std::cout << sizeof(Node<value_type>) << std::endl;
-		// 	// std::cout << sizeof(value_type) << std::endl;
-		// 	// std::cout << sizeof(void*) << std::endl;
-		// 	// std::cout << sizeof(node_pointer) << std::endl;
-
-		// 	return (_node_alloc.max_size() * 40 / 64) * 2.13333333333333333333;
-		// }
 		
 		size_type		get_max_size() const
 		{
 			tmp_allocator node_size;
-			// return (10 * _node_alloc.max_size() / node_size.max_size()) ;
 			return node_size.max_size();
 		}
 
@@ -638,139 +619,27 @@ class RedBlackTree
 			node_b->parent = node_a->parent;
 		}
 
+		void _printHelper(node_pointer root, std::stringstream &buffer, bool last, std::string indent)
+		{
+			if (root != _nil) 
+			{
+				buffer << indent;
+				if (last) {
+					buffer << "R----";
+					indent += "   ";
+				} else {
+					buffer << "L----";
+					indent += "|  ";
+				}
 
-		// void	_print(node_pointer node, std::stringstream &buffer, bool is_tail, std::string prefix);
-		// void _printHelper(node_pointer node, std::stringstream &buffer, bool is_tail, std::string prefix)
-		// {
-		// 	if (node->right != _nil)
-		// 		this->_printHelper(node->right, buffer, false, std::string(prefix).append(is_tail != 0 ? "|	" : " 	"));
-		// 	buffer << prefix <<  (is_tail != 0 ? "└── " : "┌── ");
-		// 	if (node->color == BLACK)
-		// 			buffer << "\033[31m";
-		// 	if (node != _nil)
-		// 		buffer << node->data->first << "\033[0m" << std::endl;
-		// 	if (node->left != _nil)
-		// 		this->_printHelper(node->left, buffer, BLACK, std::string(prefix).append(is_tail != 0 ? "    " : "│   "));
-		// }
-		void _printHelper(node_pointer root, std::stringstream &buffer, bool last, std::string indent) {
-			if (root != _nil) {
-			buffer << indent;
-			if (last) {
-				buffer << "R----";
-				indent += "   ";
-			} else {
-				buffer << "L----";
-				indent += "|  ";
-			}
-
-			std::string sColor = root->color ? "🔴" : "⚫️";
-			buffer << (root->data)->first << "(" << sColor << ")" << std::endl;
-			_printHelper(root->left, buffer, false, indent);
-			_printHelper(root->right, buffer, true,indent);
+				std::string sColor = root->color ? "🔴" : "⚫️";
+				buffer << (root->data)->first << "(" << sColor << ")" << std::endl;
+				_printHelper(root->left, buffer, false, indent);
+				_printHelper(root->right, buffer, true,indent);
 			}
 		}
 
 
 };
 
-// };
-
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		// node_pointer _successor(node_pointer x)
-		// {
-		// 	if (x->right != _nil)
-		// 		return _minimum(x->right);
-
-		// 	node_pointer y = x->parent;
-		// 	while (y != _nil && x == y->right)
-		// 	{
-		// 		x = y;
-		// 		y = y->parent;
-		// 	}
-		// 	return y;
-		// }
-
-		// node_pointer _predecessor(node_pointer x)
-		// {
-		// 	if (x->left != _nil)
-		// 		return _maximum(x->left);
-		// 	node_pointer y = x->parent;
-		// 	while (y != _nil && x == y->left)
-		// 	{
-		// 		x = y;
-		// 		y = y->parent;
-		// 	}
-		// 	return y;
-		// }
-
-
-		// // Preorder
-		// void _preOrderHelper(node_pointer node) {
-		// 	if (node != _nil) {
-		// 		cout << node->key << " ";
-		// 		_preOrderHelper(node->left);
-		// 		_preOrderHelper(node->right);
-		// 	}
-		// }
-
-		// // Inorder
-		// void _inOrderHelper(node_pointer node) {
-		// 	if (node != _nil) {
-		// 		_inOrderHelper(node->left);
-		// 		cout << node->key << " ";
-		// 		_inOrderHelper(node->right);
-		// 	}
-		// }
-
-		// // Post order
-		// void _postOrderHelper(node_pointer node) {
-		// 	if (node != _nil) {
-		// 		_postOrderHelper(node->left);
-		// 		_postOrderHelper(node->right);
-		// 		cout << node->key << " ";
-		// 	}
-		// }
-
-		// void _preorder()
-		// {
-		// 	_preOrderHelper(this->root);
-		// }
-
-		// void _inorder()
-		// {
-		// 	_inOrderHelper(this->root);
-		// }
-
-		// void _postorder()
-		// {
-		// 	_postOrderHelper(this->root);
-		// }
