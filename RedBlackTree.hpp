@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:25:59 by vserra            #+#    #+#             */
-/*   Updated: 2022/08/08 14:56:10 by vserra           ###   ########.fr       */
+/*   Updated: 2022/08/09 11:53:07 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ class RedBlackTree
 		/* ------------------------------------------------------------------ */
 		/* CONSTRUCTORS & DESTRUCTORS                                         */
 		/* ------------------------------------------------------------------ */
-
-		// Default constructor
-		// RedBlackTree();
 
 		// Fill constructor	
 		explicit RedBlackTree(const Cmp compare, const Alloc allocator)

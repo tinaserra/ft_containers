@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/09 11:38:30 by vserra            #+#    #+#             */
+/*   Updated: 2022/08/09 11:42:46 by vserra           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SET_HPP
 #define SET_HPP
 
@@ -87,13 +99,6 @@ class set {
 		//Assignation operator
 		set& operator= (const set& x)
 		{
-			// if (!empty())
-			// 	clear();
-			// _key_comp = x.key_comp();
-			// const_iterator pos = x.begin();
-			// while (pos != x.end())
-			// 	insert(*pos++);
-			// return *this;
 			_redBlackTree = x._redBlackTree;
     		_key_comp = x._key_comp;
    			 return *this;
@@ -162,7 +167,6 @@ class set {
 
 		void erase (iterator position)
 		{
-			// _redBlackTree.deleteNode(*(position));
 			_redBlackTree.deleteNode(_redBlackTree.searchTree(*position));
 		}
 
@@ -247,7 +251,7 @@ class set {
 			return _redBlackTree.get_equal_range(k);
 		}
 
-		const_pair_range	equal_range (const key_type & k) const // const_pair_range ?
+		const_pair_range	equal_range (const key_type & k) const
 		{
 			return _redBlackTree.get_equal_range(k);
 		}

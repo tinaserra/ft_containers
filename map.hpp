@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:11 by vserra            #+#    #+#             */
-/*   Updated: 2022/07/07 16:56:29 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/08/09 11:39:00 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <functional>
 # include <memory>
 # include <algorithm>
-// # include <iostream>
-// # include <sstream>
 # include "pair.hpp"
 # include "iterator_traits.hpp"
 # include "reverseIterator.hpp"
@@ -25,7 +23,7 @@
 # include "is_integral.hpp"
 # include "lexicographical_compare.hpp"
 # include "equal.hpp"
-# include "RedBlackTree.hpp" // a mettre dans utils/
+# include "RedBlackTree.hpp"
 
 namespace ft {
 

@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 15:14:13 by vserra            #+#    #+#             */
-/*   Updated: 2022/08/08 21:53:44 by vserra           ###   ########.fr       */
+/*   Updated: 2022/08/09 11:43:43 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define VECTOR_HPP
 
 # include <memory>
-# include <iostream> // a supprimer ?
+# include <iostream>
 # include <cstddef>
 # include "reverseIterator.hpp"
 # include "enable_if.hpp"
@@ -389,18 +389,12 @@ class vector
 		void	insert(iterator position, InputIterator first, InputIterator last,
 				typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
 		{
-			// std::cout << "pos = " << position << std::endl;
 			difference_type		beginToPos = std::distance(this->begin(), position);
 			difference_type		prevSize = this->_size;
 			difference_type		n = std::distance(first, last);
 			iterator			prevEnd;
 			iterator			end;
 			
-			// std::cout << "beginToPos = " << beginToPos << std::endl;
-			// std::cout << "prevSize = " << prevSize << std::endl;
-			// std::cout << "n = " << n << std::endl;
-			// std::cout << "prevEnd = " << prevEnd << std::endl;
-			// std::cout << "end = " << end << std::endl;
 			if (!n)
 				return;
 			if (_size + n > _capacity)
@@ -411,8 +405,6 @@ class vector
 					this->reserve(this->_size + n);	
 			}
 			_size = prevSize + n;
-			// for (difference_type i = _size - 1; i >= prevSize; i--)
-			// 	_alloc.construct(this->_start + i, value_type());
 			prevEnd = this->begin() + prevSize;
 			position = this->begin() + beginToPos;
 			end = this->end();
@@ -420,14 +412,11 @@ class vector
 			{
 				--end;
 				--prevEnd;
-				// *(end) = *(prevEnd);
 				_alloc.construct(end, *(prevEnd));
 				_alloc.destroy(prevEnd);
 			}
-			// std::cout << "EEEEE " <<std::endl;
 			while (first != last)
 			{
-				// *position = *first;
 				_alloc.construct(position, *first);
 				position++;
 				first++;

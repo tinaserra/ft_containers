@@ -6,7 +6,7 @@
 /*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:03:41 by admin             #+#    #+#             */
-/*   Updated: 2022/08/04 16:22:18 by vserra           ###   ########.fr       */
+/*   Updated: 2022/08/09 11:41:36 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@ class redBlackIterator
 			{
 				_node = _minimum(_node->right);
 				return;
-				// while (_node->left != _node->nil_node)
-				// 	_node = _node->left;
 			}
 			else
 			{
@@ -165,8 +163,6 @@ class redBlackIterator
 			if (_node->left != _node->nil_node)
 			{
 				_node = _maximum(_node->left);
-				// while (_node->right != _node->nil_node)
-				// 	_node = _node->right;
 				return;
 			}
 			else

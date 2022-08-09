@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Node.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tinaserra <tinaserra@student.42.fr>        +#+  +:+       +#+        */
+/*   By: vserra <vserra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:26:19 by vserra            #+#    #+#             */
-/*   Updated: 2022/07/07 14:09:50 by tinaserra        ###   ########.fr       */
+/*   Updated: 2022/08/09 11:55:33 by vserra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ class Node
 
 };
 
-// Calculer la max size
 template<typename T>
 struct NodeTmp
 {
