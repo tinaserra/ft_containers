@@ -104,6 +104,31 @@ C'est une structure dans laquelle tu peux stocker des donnes. Pour permettre de 
 
 On va inserer ces valeurs les unes apres les autres : `9`, `15`, `20`, `8`, `7`, `13`, `10`, `11`
 
+1. On insere `9`, c'est le `root`
+
+![BST1](/links/BST1.png)
+
+2. Valeur a inserer : `15`. </br> 
+Il faut comparer `15` avec les autres valeurs de l'arbre en commancant par le root. </br> 
+`15 > 9` alors on place `15` a droite de `9`.
+
+![BST2](/links/BST1.png)
+
+3. Valeur a inserer : `20`.</br>
+`20 > 9` on le placera a droite. </br> 
+`20 > 15` alors on place `20` a droite de `9`.
+
+![BST25](/links/BST1.png)
+
+4. Valeur a inserer : `8`.</br>
+`8 < 9` alors on place `8` a gauche de `9`.
+
+![BST3](/links/BST1.png)
+
+5. Ainsi dessuide pour les autres valeurs. si la valeur que l'on veut inserer est inferieure a la valeur comparee, on l'insere a gauche, si elle est supperieure on l'insere a droite.
+
+![BST4](/links/BST1.png)
+
 
 
 ### Le red Black Tree
