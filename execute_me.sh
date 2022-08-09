@@ -11,6 +11,7 @@ make stl
 ./ft_containers "stack"
 ./ft_containers "map"
 ./ft_containers "set"
+echo "\n"
 
 # VECTOR
 if diff ftVectorOutput stdVectorOutput

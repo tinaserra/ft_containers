@@ -1,19 +1,21 @@
 # ft_containers
 Implementing containters Vector, Map and Stack from STL.
 
+
+
 ## Testers
 
-* [mli](https://github.com/mli42/containers_test) 
-* [5atchm1n](https://github.com/5atchm1n/ft_containers-tester-42)
-* [Mazoise](https://github.com/Mazoise/42TESTERS-CONTAINERS)
+* [mli](https://github.com/mli42/containers_test) ✅
+* [5atchm1n](https://github.com/5atchm1n/ft_containers-tester-42) ✅
+* [Mazoise](https://github.com/Mazoise/42TESTERS-CONTAINERS) ✅
 
 ## Sujet
 
 Les containers C++, tout simplement.
 
-### Vector
+## Vector
 
-|                  |  a implementer      | description |
+<!-- |                  |  a implementer      | description |
 | :--------------- | :------------------ | :---------- |
 | Member functions |                     |             |
 | ✅               | Default constructor | Construit un conteneur vide, sans éléments. |
@@ -60,18 +62,18 @@ Les containers C++, tout simplement.
 | ✅               | `Operator <=`           | |
 | ✅               | `Operator >`            | |
 | ✅               | `Operator >=`           | |
-| ✅               | No member Swap overload | |
+| ✅               | No member Swap overload | | -->
 
 
 
-### Stack
+## Stack
 
 Un **adaptateur de conteneur** conserve en interne un objet conteneur sous forme de données.
 Cet objet conteneur est une copie de l'argument `ctnr `passé au constructeur, le cas échéant, sinon c'est un conteneur vide.
 
 `container_type` est le type du type de conteneur sous-jacent, défini comme un alias du deuxième paramètre de modèle de classe: `Container`
 
-|                  |  a implementer      | description |
+<!-- |                  |  a implementer      | description |
 | :--------------- | :------------------ | :---------- |
 | Constructor      |                     |             |
 | ✅               | Default constructor | Construit un objet *stack* adaptateur de conteneur. |
@@ -87,13 +89,32 @@ Cet objet conteneur est une copie de l'argument `ctnr `passé au constructeur, l
 | ✅               | `Operator <`        | |
 | ✅               | `Operator <=`       | |
 | ✅               | `Operator >`        | |
-| ✅               | `Operator >=`       | |
+| ✅               | `Operator >=`       | | -->
 
 
-### Map
-- [ ] une belle carte
+## Map
 
-### Utils
+Pour implementer map, il faut d'abord faire un **BST** (Binary Search Tree).
+
+### C'est quoi ?
+
+C'est une structure dans laquelle tu peux stocker des donnes. Pour permettre de retrouver tes donnees plus rapidement on ne va pas les ajouter simplement a la suite les unes des autres, mais on va suivre certaines regles au moment d'inserer les donnees dans l'arbre.
+
+### Exemple d'un arbre binaire classique
+
+On va inserer ces valeurs les unes apres les autres : `9`, `15`, `20`, `8`, `7`, `13`, `10`, `11`
+
+
+
+### Le red Black Tree
+
+Map utilise un **Red Black Tree**, c'est un arbre qui s'equillibre automatiquement au fur et a mesure que tu lui ajoute des valeurs et qui est donc plus rapide.
+
+* [Tuto](https://www.programiz.com/dsa/b-tree) du Red Black Tree
+* [Code C++](https://github.com/tinaserra/ft_containers/blob/main/links/rbtree.cpp)
+
+
+## Utils
 
 | container                 | description | plus |
 | :------------------------ | :---------- | :--- |
@@ -106,35 +127,3 @@ Cet objet conteneur est une copie de l'argument `ctnr `passé au constructeur, l
 | `pair`                    | www | [exemple](https://www.cplusplus.com/reference/utility/pair/pair/) et [utility](https://www.cplusplus.com/reference/utility/pair/?kw=pair) |
 | `make_pair`               | www | [std::make_pair](https://www.cplusplus.com/reference/utility/make_pair/?kw=make_pair) |
 
-
-### reverse iterator
-
-c'est un peu l'inverse d'un iterator classique, mais attention il y a quelques subtilites, lis bien le man : [reverse_iterator](http://www.cplusplus.com/reference/iterator/reverse_iterator/).
-
-**les fonctions a implementer:**
-| member functions | non-member overloads |
-| :--------------- | :------------------- |
-| [reverse_iterator::base](http://www.cplusplus.com/reference/iterator/reverse_iterator/base/) | [operator==] |
-| [reverse_iterator::operator*](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator*/) | [operator!=] |
-| [reverse_iterator::operator+](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator+/) | [operator<] |
-| [reverse_iterator::operator++](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator++/) (1) & (2) | [operator<=] |
-| [reverse_iterator::operator+=](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator+=/) | [operator>] |
-| [reverse_iterator::operator-](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator-/) | [operator>=] |
-| [reverse_iterator::operator--](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator--/) | [operator-] |
-| [reverse_iterator::operator-=](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator+-=/) | [operator+] |
-| [reverse_iterator::operator->](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator-%3E/) | |
-| [reverse_iterator::operator=](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator=/) | |
-| [reverse_iterator::operator[]](http://www.cplusplus.com/reference/iterator/reverse_iterator/operator[]/) | |
-
-**Le tips:**
-
-Pour les non-member overloads,l'un des deux iterateurs peut etre const et l'autre non. Et cela le compilateur c++ n'aime pas donc tu peux prototyper les operateurs non membres comme ceci:
-
-```c++
-template <class InputIterator1, class InputIterator2>
-bool	operator==(const reverseIterator<InputIterator1>& lhs,
-					const reverseIterator<InputIterator2>& rhs)
-{
-	return (lhs.base() == rhs.base());
-}
-```

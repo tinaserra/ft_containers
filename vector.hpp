@@ -112,9 +112,9 @@ class vector
 			_start = NULL;
 			_size = x._size;
 			_capacity = x._size;
-			if (x._capacity)
-				_start = _alloc.allocate(_size);
-			if (x._capacity)
+			if (x._size)
+				_start = _alloc.allocate(x._size);
+			if (x._size)
 				std::uninitialized_copy(x._start, x._start + x._size, _start);
 		}
 
